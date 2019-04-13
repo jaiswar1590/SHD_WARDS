@@ -1,0 +1,95 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+<style>
+.subtitle
+{
+background-color:#F0E68C;
+width: 100%;
+}
+.spnhead{
+  font-size: 20px;
+  font-weight: bold;
+}
+.spndata{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+		.container{
+			width: 100%;
+      padding-right: 0px;
+      padding-left: 0px;
+      margin-right: auto;
+      margin-left: auto;
+		}
+
+
+
+		ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			display: inline-block;
+			padding: 8px 15px;
+      padding-right:100px;
+      cursor: pointer;
+      color: #222;
+      font-size: 18px;
+		}
+
+		ul.tabs li.current{
+			background: #F0FFFF;
+			color: #222;
+      font-weight: bold;
+		}
+
+		.tab-content{
+			display: none;
+			background: #F0FFFF;
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
+</style>
+
+
+<div class="col12">
+  <div id="content">
+    <div class="titlebox">General Ward</div>
+    <div class="row myrow subtitle">
+      <div class="col-2"><span class="spnhead">Regno:</span><span class="spndata">2019SHD123</span></div>
+      <div class="col-2"><span class="spnhead">Name:</span><span class="spndata">Iron Man</span></div>
+      <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata">Male</span></div>
+      <div class="col-2"><span class="spnhead">Age:</span><span class="spndata">25 year</span></div>
+    </div>
+    <div class="row" style="padding-bottom:2px;"></div>
+      <div class="col-12">
+      <div class="col-3">
+        <span class="texttule">Bed No:</span>
+            <select>
+            <option value="bed1">---Select---</option>
+            <option value="bed1">B1</option>
+            <option value="bed2">B2</option>
+            <option value="bed3">B3</option>
+            <option value="bed4">B4</option>
+            <option value="bed5">B5</option>
+            <option value="bed6">B6</option>
+            <option value="bed7">B7</option>
+          </select>
+      </div>
+      <div class="col-3">
+      <div><input type="submit" value="Submit"></div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,474 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+<style>
+.subtitle
+{
+background-color:#F0E68C;
+width: 100%;
+}
+.spnhead{
+  font-size: 20px;
+  font-weight: bold;
+}
+.spndata{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+		.container{
+			width: 100%;
+      padding-right: 0px;
+      padding-left: 0px;
+      margin-right: auto;
+      margin-left: auto;
+		}
+
+
+
+		ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			display: inline-block;
+			padding: 8px 15px;
+      padding-right:100px;
+      cursor: pointer;
+      color: #222;
+      font-size: 18px;
+		}
+
+		ul.tabs li.current{
+			background: #F0FFFF;
+			color: #222;
+      font-weight: bold;
+		}
+
+		.tab-content{
+			display: none;
+			background: #F0FFFF;
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
+</style>
+
+
+<div class="col12">
+  <div id="content">
+    <div class="titlebox">Delivery Ward</div>
+    <br>
+    <div class="row myrow subtitle">
+      <div class="col-2"><span class="spnhead">Regno:</span><span class="spndata">2019SHD123</span></div>
+      <div class="col-2"><span class="spnhead">Name:</span><span class="spndata">KUSUM BAI</span></div>
+      <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata">FEMALE</span></div>
+      <div class="col-2"><span class="spnhead">Age:</span><span class="spndata">28 year</span></div>
+    </div>
+    <div class="row" style="padding-bottom:2px;"></div>
+      <div class="row myrow">
+        <div class="col-3">
+          <span class="texttule">Mothe Education:</span>
+          <input type="text" name="m_edu">
+        </div>
+
+        <div class="col-3" >
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Father Education:</span>
+          <input type="text" name="f_edu">
+        </div>
+
+        <div class="col-3">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Gravida:</span>
+          <input type="text" name="gravida">
+        </div>
+
+        <div class="col-3">
+          <span class="texttule">No of Live Childs:</span>
+          <input type="text" name="livechild">
+        </div>
+      </div>
+
+      <div class="row myrow">
+        <div class="col-3">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">UT Height:</span>
+          <input type="text" name="ut_height">
+        </div>
+
+        <div class="col-3">
+          <span class="texttule">Mother Death Reason:</span>
+          <input type="text" name="bcaredby">
+        </div>
+
+        <div class="col-3">
+          <span class="texttule">Type of Delivery:</span>
+          <select>
+        		<option value="">--Select--</option>
+        		<option value="Normal">Normal</option>
+        		<option value="Tear Normal">Tear Normal</option>
+        		<option value="Episiotomy">Episiotomy</option>
+        		<option value="Episiotomy,forcep">Episiotomy,forcep</option>
+        		<option value="forcep">forcep</option>
+        		<option value="lscs">lscs</option>
+        		<option value="premature">premature</option>
+        	</select>
+        </div>
+
+        <div class="col-3">
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Baby Cared By:</span>
+          <input type="text" name="bcaredby">
+        </div>
+
+        <div class="col-3">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Sister Name:</span>
+          <input type="text" name="sistername">
+        </div>
+
+        <div class="col-3">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Doctor Name:</span>
+          <input type="text" name="doctorname">
+        </div>
+
+        <div class="col-3">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Enter By:</span>
+          <input type="text" name="enterby">
+        </div>
+
+        <div class="col-3">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">No of Baby:</span>
+          <input type="text" name="no_of_baby" onkeyup="insertRow(this.value);" onkeydown="insertRow(this.value);">
+        </div>
+      </div>
+
+        <div class="row"><div class="col-1"></div></div>
+        <div style="width:100%;height:auto;line-height:1em;overflow:auto;">
+        <table border=1 id="myTable" style="width:140%;">
+        	<tr>
+        		<th style="width:1%;text-align:center;">SN</th>
+        		<th style="text-align:center;width:1%;">Born Date</th>
+        		<th style="text-align:center;width:1%;">Born Time</th>
+        		<th style="text-align:center;width:1%;">Child sex</th>
+        		<th style="text-align:center;width:2%;">Child Weight</th>
+        		<th style="text-align:center;width:2%;">Status of Child</th>
+        		<th style="text-align:center;width:2%;">Live Child</th>
+        		<th style="text-align:center;width:2%;">Child Death Reason</th>
+        		<th style="text-align:center;width:2%;">Presenting Part</th>
+        		<th style="text-align:center;width:5%;">APGAR Scores</th>
+        	</tr>
+        </table>
+
+        <div class="col-3">
+          <input type="submit" value="Submit">
+        </div>
+    </div>
+
+
+  </div>
+
+
+  </div><!----------CONTENT END------------>
+</div><!------------COL12 END------------>
+<script>
+function insertRow(e){
+    var table=document.getElementById("myTable");
+    var r =  table.rows.length;
+    while(r > 1) {
+        table.deleteRow(r-1);
+        r--;
+    }
+
+    for(var i=1;i<=e;i++)
+    {
+        var count = 0;
+        var row=table.insertRow(table.rows.length);
+            var cell=row.insertCell(count);
+            var t=document.createElement("input");
+                t.id = "r"+i+"d"+(count);
+                t.name= "r"+i+"d"+(count);
+                t.value = i;
+                t.style = "width:90%;text-align:center;";
+                t.setAttribute("readonly", "true");
+                cell.appendChild(t);
+
+                count++;
+            var cell=row.insertCell(count);
+            var t=document.createElement("input");
+            	t.setAttribute("type","date");
+                t.id = "r"+i+"d"+(count);
+                t.name= "r"+i+"d"+(count);
+				t.required = true;
+                cell.appendChild(t);
+
+                count++;
+            var cell=row.insertCell(count);
+            var t=document.createElement("input");
+				t.setAttribute("type","time");
+                t.id = "r"+i+"d"+(count);
+                t.name= "r"+i+"d"+(count);
+                t.required = true;
+                cell.appendChild(t);
+
+                count++;
+            var cell=row.insertCell(count);
+            var t=document.createElement("SELECT");
+                t.id = "r"+i+"d"+(count);
+                t.name= "r"+i+"d"+(count);
+                t.required = true;
+                var z = document.createElement("option");
+				z.setAttribute("value","");
+				var opt = document.createTextNode("");
+                z.appendChild(opt);
+                t.appendChild(z);
+				var z = document.createElement("option");
+				z.setAttribute("value","male");
+				var opt = document.createTextNode("Male");
+                z.appendChild(opt);
+                t.appendChild(z);
+                var z = document.createElement("option");
+                z.setAttribute("value","female");
+				var opt = document.createTextNode("Female");
+                z.appendChild(opt);
+                t.appendChild(z);
+                var z = document.createElement("option");
+				z.setAttribute("value","Interminate");
+				var opt = document.createTextNode("Interminate");
+                z.appendChild(opt);
+                t.appendChild(z);
+                cell.appendChild(t);
+
+                count++;
+            var cell=row.insertCell(count);
+            var t=document.createElement("input");
+                t.id = "r"+i+"d"+(count);
+                t.name= "r"+i+"d"+(count);
+                t.style.width="50px";
+				t.required = true;
+                cell.appendChild(t);
+
+
+                count++;
+            var cell=row.insertCell(count);
+            var t=document.createElement("SELECT");
+                t.id = "r"+i+"d"+(count);
+                t.name= "r"+i+"d"+(count);
+                t.required = true;
+                var z = document.createElement("option");
+				z.setAttribute("value","");
+				var opt = document.createTextNode(" ");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+				var z = document.createElement("option");
+				z.setAttribute("value","live");
+				var opt = document.createTextNode("Live");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+                var z = document.createElement("option");
+                z.setAttribute("value","death");
+				var opt = document.createTextNode("Death");
+                z.appendChild(opt);
+                t.appendChild(z);
+                cell.appendChild(t);
+
+				count++;
+            	var cell=row.insertCell(count);
+            	var t=document.createElement("SELECT");
+                t.id = "r"+i+"d"+(count);
+                t.name= "r"+i+"d"+(count);
+
+
+                var z = document.createElement("option");
+				z.setAttribute("value","Normal");
+				var opt = document.createTextNode("Normal");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+
+                var z = document.createElement("option");
+				z.setAttribute("value","premature");
+				var opt = document.createTextNode("Premature");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+
+                var z = document.createElement("option");
+				z.setAttribute("value","LBW	");
+				var opt = document.createTextNode("LBW");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+				var z = document.createElement("option");
+				z.setAttribute("value","Asphyxialed");
+				var opt = document.createTextNode("Asphyxialed");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+                var z = document.createElement("option");
+                z.setAttribute("value","Meconium Stained");
+				var opt = document.createTextNode("Meconium Stained");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+               var z = document.createElement("option");
+				z.setAttribute("value","Thin Meconium");
+				var opt = document.createTextNode("Thin Meconium");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+                var z = document.createElement("option");
+				z.setAttribute("value","Thick Meconium");
+				var opt = document.createTextNode("Thick Meconium");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+                var z = document.createElement("option");
+				z.setAttribute("value","Deep Meconium");
+				var opt = document.createTextNode("Deep Meconium");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+                var z = document.createElement("option");
+				z.setAttribute("value","Light Meconium");
+				var opt = document.createTextNode("Light Meconium");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+
+				var z = document.createElement("option");
+                z.setAttribute("value","Conjental Abnormality");
+				var opt = document.createTextNode("Conjental Abnormality");
+                z.appendChild(opt);
+                t.appendChild(z);
+                cell.appendChild(t);
+
+
+
+                count++;
+            var cell=row.insertCell(count);
+            var t=document.createElement("input");
+                t.id = "r"+i+"d"+(count);
+                t.name= "r"+i+"d"+(count);
+
+                cell.appendChild(t);
+
+                //Presenting part
+
+                count++;
+
+            	var cell=row.insertCell(count);
+            	var t=document.createElement("SELECT");
+                t.id = "r"+i+"d"+(count);
+                t.name= "r"+i+"d"+(count);
+
+
+                var z = document.createElement("option");
+				z.setAttribute("value","Part Vertex");
+				var opt = document.createTextNode("Part Vertex");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+
+                var z = document.createElement("option");
+				z.setAttribute("value","Brow");
+				var opt = document.createTextNode("Brow");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+
+                var z = document.createElement("option");
+				z.setAttribute("value","Face");
+				var opt = document.createTextNode("Face");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+				var z = document.createElement("option");
+				z.setAttribute("value","Chin");
+				var opt = document.createTextNode("Chin");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+                var z = document.createElement("option");
+                z.setAttribute("value","Breech");
+				var opt = document.createTextNode("Breech");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+               var z = document.createElement("option");
+				z.setAttribute("value","Shoulder");
+				var opt = document.createTextNode("Shoulder");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+                var z = document.createElement("option");
+				z.setAttribute("value","Compound Presentation");
+				var opt = document.createTextNode("Compound Presentation");
+                z.appendChild(opt);
+                t.appendChild(z);
+
+				cell.appendChild(t);
+
+
+                count++;
+				var cell=row.insertCell(count);
+
+				var p=document.createElement("p");
+				p = document.createTextNode("0 Min. 1 Min. 5 Min.");
+				cell.appendChild(p);
+
+				var t=document.createElement("SELECT");
+                t.id = "r"+i+"d"+(count);
+                t.name= "r"+i+"d"+(count);
+
+               for(a=0;a<=10;a++){
+				var z = document.createElement("option");
+				z.setAttribute("value",a);
+				var opt = document.createTextNode(a);
+                z.appendChild(opt);
+                t.appendChild(z);
+               }
+               t.appendChild(z);
+               cell.appendChild(t);
+
+				count++;
+               var t=document.createElement("SELECT");
+                t.id = "r"+i+"d"+(count);
+                t.name= "r"+i+"d"+(count);
+
+
+               for(a=0;a<=10;a++){
+				var z = document.createElement("option");
+				z.setAttribute("value",a);
+				var opt = document.createTextNode(a);
+                z.appendChild(opt);
+                t.appendChild(z);
+               }
+               t.appendChild(z);
+               cell.appendChild(t);
+
+               count++;
+
+               var t=document.createElement("SELECT");
+                t.id = "r"+i+"d"+(count);
+                t.name= "r"+i+"d"+(count);
+
+               for(a=0;a<=10;a++){
+				var z = document.createElement("option");
+				z.setAttribute("value",a);
+				var opt = document.createTextNode(a);
+                z.appendChild(opt);
+                t.appendChild(z);
+               }
+
+                t.appendChild(z);
+                cell.appendChild(t);
+
+    }
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,422 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+<style>
+.subtitle
+{
+background-color:#F0E68C;
+width: 100%;
+}
+.spnhead{
+  font-size: 20px;
+  font-weight: bold;
+}
+.spndata{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+		.container{
+			width: 100%;
+      padding-right: 0px;
+      padding-left: 0px;
+      margin-right: auto;
+      margin-left: auto;
+		}
+
+
+
+		ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			display: inline-block;
+			padding: 8px 15px;
+      padding-right:100px;
+      cursor: pointer;
+      color: #222;
+      font-size: 18px;
+		}
+
+		ul.tabs li.current{
+			background: #F0FFFF;
+			color: #222;
+      font-weight: bold;
+		}
+
+		.tab-content{
+			display: none;
+			background: #F0FFFF;
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
+</style>
+
+<script>
+$(document).ready(function(){
+	$('ul.tabs li').click(function(){
+		var tab_id = $(this).attr('data-tab');
+
+		$('ul.tabs li').removeClass('current');
+		$('.tab-content').removeClass('current');
+
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+	})
+
+})
+
+function changeDoctor()
+{
+  if(document.getElementById('hospital').value=='other'){
+    document.getElementById('shd').style.display='none';
+    document.getElementById('ohd').style.display='block';
+    document.getElementById('ohosname').required=true;
+    document.getElementById('odocname').required=true;
+  }
+  else{
+    document.getElementById('shd').style.display='block';
+    document.getElementById('ohd').style.display='none';
+    document.getElementById('ohosname').required=false;
+    document.getElementById('odocname').required=false;
+  }
+}
+
+var c=0;
+$(document).ready(function(){
+    $(".add-row").click(function(){
+        mark = "";
+        var pd = $("#pdiagno").val();
+        var name = "pd"+c;
+        var chk = "<tr><td><input type='checkbox' name='record'></td>";
+        mark = mark + chk
+        var name = "<td><input type='text' name='"+name+"' value='"+pd+"' placeholder='Name'></td>";
+        mark = mark + name;
+        $("table tbody").append(mark);
+        c=c+1;
+        document.getElementById('pdiagno').value='';
+    });
+
+    // Find and remove selected table rows
+    $(".delete-row").click(function(){
+        $("table tbody").find('input[name="record"]').each(function(){
+          if($(this).is(":checked")){
+                $(this).parents("tr").remove();
+            }
+        });
+    });
+});
+
+</script>
+
+<div class="col12">
+  <div id="content">
+    <div class="titlebox">Consultation
+    <span align="right">Dr. ABD </span>
+    </div>
+    <div class="row" style="padding-bottom:2px;"></div>
+    <div class="row myrow subtitle">
+      <div class="col-2"><span class="spnhead">Regno:</span><span class="spndata">2019SHD123</span></div>
+      <div class="col-2"><span class="spnhead">Name:</span><span class="spndata">Iron Man</span></div>
+      <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata">Male</span></div>
+      <div class="col-2"><span class="spnhead">Age:</span><span class="spndata">25 year</span></div>
+    </div>
+    <div class="row" style="padding-bottom:2px;"></div>
+    <div class="container">
+
+    	<ul class="tabs">
+    		<li class="tab-link current" data-tab="tab-1">Medicine Chart</li>
+        <li class="tab-link" data-tab="tab-2">TPR Chart</li>
+        <li class="tab-link" data-tab="tab-3">Intake Output Chart</li>
+        <li class="tab-link" data-tab="tab-4">Sugar Chart</li>
+    		<li class="tab-link" data-tab="tab-5">Poision Chart</li>
+    		<li class="tab-link" data-tab="tab-6">LAB </li>
+        <li class="tab-link" data-tab="tab-6">X-RAY </li>
+        <li class="tab-link" data-tab="tab-6">Dressing </li>
+    	</ul>
+
+
+<!------------------ Medicine Chart Start----------->
+
+<div id="tab-1" class="tab-content">
+  <form>
+    <div class="row myrow">
+      <div class="col-3" >
+        <span class="texttule">Date:</span>
+        <input type="date" name="date">
+      </div>
+
+      <div class="col-3"><span class="texttule">Medicine Type:</span>
+        <select name="hospital" id="hospital" onclick="changeDoctor()">
+          <option value="SHD">Tablet</option>
+          <option value="other">Syrup</option>
+        </select>
+      </div>
+
+      <div class="col-3" id="shd">
+        <span class="texttule">Medicine Name:</span>
+        <input type="text" name="mname">
+      </div>
+
+      <div class="col-3"><span class="texttule">Medicine Duration:</span>
+        <select name="hospital" id="hospital" onclick="changeDoctor()">
+          <option value="select">---Select---</option>
+          <option value="ods">ODS</option>
+          <option value="bds">BDS</option>
+          <option value="tds">TDS</option>
+          <option value="qds">QDS</option>
+          <option value="ead">EAD</option>
+          <option value="sos">SOS</option>
+          <option value="hs">HS</option>
+          <option value="start">START</option>
+          <option value="hours">5 HOURS</option>
+        </select>
+      </div>
+    </div>
+
+      <div class="row myrow">
+      <div class="col-3" id="shd">
+        <span class="texttule">Time:</span>
+        <input type="time" name="time">
+      </div>
+      <div class="col-3" id="shd">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Given by:</span>
+        <input type="text" name="givenby">
+      </div>
+    <div class="row myrow"><input type="submit" value="Save"></div>
+  </div>
+</form>
+</div>
+
+<!------------------ Medicine Chart End----------->
+
+
+<!------------------ TPR Chart start------------>
+    	<div id="tab-2" class="tab-content">
+        <form>
+          <div class="row myrow">
+            <div class="col-3" >
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Date:</span>
+              <input type="date" name="date">
+            </div>
+
+            <div class="col-3">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Time:</span>
+              <input type="time" name="time">
+            </div>
+
+            <div class="col-3" id="shd">
+              <span class="texttule">Temperature:</span>
+              <input type="text" name="temp">
+            </div>
+
+            <div class="col-3" id="shd">
+              <span class="texttule">Pulse:</span>
+              <input type="text" name="pulse">
+            </div>
+          </div>
+
+          <div class="row myrow">
+            <div class="col-3" id="shd">
+              <span class="texttule">BP-Systolic:</span>
+              <input type="text" name="systolic">
+            </div>
+
+            <div class="col-3" id="shd">
+              <span class="texttule">BP-Diastolic:</span>
+              <input type="text" name="diastolic">
+            </div>
+
+            <div class="col-3" id="shd">
+              &nbsp;&nbsp;<span class="texttule">Respiration:</span>
+              <input type="text" name="respiration">
+            </div>
+
+            <div class="col-3" id="shd">
+              &nbsp;&nbsp;&nbsp;<span class="texttule">FHS:</span>
+              <input type="text" name="fhs">
+            </div>
+          </div>
+
+          <div class="row myrow">
+            <div class="col-3" id="shd">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">SPO<sub>2</sub>:</span>
+              <input type="text" name="spo2">
+          </div>
+
+            <div class="col-3" id="shd">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Given By:</span>
+              <input type="text" name="givenby">
+            </div>
+            <div class="col-4"><input type="submit" value="Save"></div>
+          </div>
+
+        </form>
+    	</div>
+<!------------------ TPR Output Chart End----------------->
+
+
+
+<!------------------ Intake Output Chart Start------------>
+    	<div id="tab-3" class="tab-content">
+        <form>
+          <div class="row myrow">
+            <div class="col-3" >
+              &nbsp;&nbsp;<span class="texttule">Date:</span>
+              <input type="date" name="date">
+            </div>
+
+            <div class="col-3">
+              &nbsp;&nbsp;<span class="texttule">Time:</span>
+              <input type="time" name="time">
+            </div>
+
+            <div class="col-3" id="shd">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">IVF :</span>
+              <input type="text" name="ivf">
+            </div>
+
+            <div class="col-3" id="shd">
+              <span class="texttule">Amount :</span>
+              <input type="text" name="amnt">
+            </div>
+          </div>
+
+          <div class="row myrow">
+            <div class="col-3" id="shd">
+              <span class="texttule">Time :</span>
+              <input type="time" name="time">
+            </div>
+
+            <div class="col-3" id="shd">
+              <span class="texttule">Urine :</span>
+              <input type="text" name="time">
+            </div>
+
+            <div class="col-3" id="shd">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Time :</span>
+              <input type="time" name="time">
+            </div>
+
+            <div class="col-3" id="shd">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">NGS :</span>
+              <input type="text" name="ngs">
+            </div>
+          </div>
+
+          <div class="row myrow">
+            <div class="col-3" id="shd">
+              <span class="texttule">Time :</span>
+              <input type="time" name="time">
+            </div>
+
+            <div class="col-3" id="shd">
+              <span class="texttule">Drain :</span>
+              <input type="text" name="drain">
+            </div>
+
+            <div class="col-3" id="shd">
+              <span class="texttule">givenby :</span>
+              <input type="text" name="givenby">
+            </div>
+
+            <div class="row myrow"><input type="submit" value="Save"></div>
+          </div>
+      </form>
+    	</div>
+<!---------------- Intake Output Chart End------------>
+
+<!---------------- Sugar Chart start------------------>
+<div id="tab-4" class="tab-content">
+  <form>
+    <div class="row myrow">
+        <div class="col-3" id="shd">
+          <span class="texttule">Date :</span>
+          <input type="date" name="givenby">
+        </div>
+
+        <div class="col-3" id="shd">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Time :</span>
+          <input type="time" name="time">
+        </div>
+
+        <div class="col-3" id="shd">
+          <span class="texttule">Sugar Level :</span>
+          <input type="text" name="sugarlevel">
+        </div>
+
+        <div class="col-3" id="shd">
+          <span class="texttule">Insuline :</span>
+          <input type="text" name="insuline">
+        </div>
+      </div>
+
+      <div class="row myrow">
+          <div class="col-3" id="shd">
+            <span class="texttule">Unit :</span>
+            <input type="text" name="unit">
+          </div>
+
+          <div class="col-3" id="shd">
+            <span class="texttule">Injection :</span>
+            <input type="text" name="injection">
+          </div>
+
+          <div class="col-3" id="shd">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Given By:</span>
+            <input type="text" name="givenby">
+        </div>
+        <div class="row myrow"><input type="submit" value="Save"></div>
+      </div>
+    </form>
+  </div>
+
+<!---------------- Sugar Chart End--------------->
+
+<!---------------Poision charts start------------>
+<div id="tab-5" class="tab-content">
+  <form>
+  <div clas="row myrow">
+    <div class="col-3" id="shd">
+      <span class="texttule">Date :</span>
+      <input type="date" name="date">
+    </div>
+
+    <div class="col-3" id="shd">
+      <span class="texttule">Time :</span>
+      <input type="time" name="time">
+    </div>
+
+    <div class="col-3" id="shd">
+      <span class="texttule">Injection :</span>
+      <input type="text" name="injection">
+    </div>
+
+    <div class="col-3" id="shd">
+      <span class="texttule">Given By :</span>
+      <input type="text" name="givenby">
+    </div>
+
+    </div>
+      <div class="row myrow"><input type="submit" value="Save"></div>
+    </div>
+
+</form>
+</div>
+<!---------------Poision charts End-------------->
+
+
+
+    </div><!-- container -->
+
+  </div> <!--- Content --->
+</div><!--- col-12 --->
+
+{% endblock %}

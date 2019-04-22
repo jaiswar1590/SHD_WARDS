@@ -1,0 +1,27 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+
+
+
+
+<div class="col12">
+  <div id="content">
+    <div class="titlebox">Login To Charts</div>
+    <br>
+    <form action="charts" method="POST">
+    <div class="row myrow">
+        <div class="col-3">
+            <span class="texttule">RegNo:</span>
+            <input type="text" name="regno" style="width:120px;" required>
+            <input type="submit" value="Search">
+        </div>
+      </form>
+    <br>
+  </div>
+</div> <!--- Content --->
+</div><!--- col-12 --->
+
+
+
+{%endblock%}

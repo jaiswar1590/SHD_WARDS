@@ -1,0 +1,41 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+<div class="col12">
+  <div id="content">
+    <div class="titlebox"  align="center">Login To Ward</div>
+    <br/>
+    <div class="row myrow">
+    <form action="reginward" method="POST">
+      <div class="col-12"  align="center">
+        <span class="texttule">Select Ward :</span>
+        <select required>
+          <option value="">-----Select-----</option>
+          <option value="Male Ward">Male Ward</option>
+          <option value="Female Ward">Female Ward</option>
+          <option value="General Ward">General Ward</option>
+          <option value="Surgical Ward">Surgical Ward</option>
+          <option value="Child Ward">Child Ward</option>
+          <option value="Delivery Ward">Delivery Ward</option>
+          <option value="K-2 Ward">K-2 Ward</option>
+          <option value="Nursery Ward">Nursery Ward</option>
+          <option value="Medicine Ward">Medicine Ward</option>
+          <option value="T.B. Ward">T.B. Ward</option>
+          <option value="Special Ward">Special Ward</option>
+          <option value="Counter-3 Ward">Counter-3 Ward</option>
+          <option value="Private Ward">Private Ward</option>
+          <option value="Ground Ward">Ground Ward</option>
+        </select>
+
+          <input type="submit" value="Submit">
+        </div>
+      </form>
+    </div>
+  </div>
+  </div> <!--- Content --->
+</div><!--- col-12 --->
+<br>
+
+
+
+{% endblock %}

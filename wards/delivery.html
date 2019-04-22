@@ -60,17 +60,17 @@ width: 100%;
 </style>
 
 
-<div class="col12">
+<div class="col-12">
+  <form action="delivery" method="POST">
   <div id="content">
-    <div class="titlebox">Delivery Ward</div>
-    <br>
-    <div class="row myrow subtitle">
+    <div class="titlebox" align="center">Delivery Ward</div>
+    <div class="col-12 subtitle">
       <div class="col-2"><span class="spnhead">Regno:</span><span class="spndata">2019SHD123</span></div>
       <div class="col-2"><span class="spnhead">Name:</span><span class="spndata">KUSUM BAI</span></div>
       <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata">FEMALE</span></div>
       <div class="col-2"><span class="spnhead">Age:</span><span class="spndata">28 year</span></div>
     </div>
-    <div class="row" style="padding-bottom:2px;"></div>
+    <div class="row" style="padding-bottom:1px;"></div>
       <div class="row myrow">
         <div class="col-3">
           <span class="texttule">Mothe Education:</span>
@@ -145,7 +145,7 @@ width: 100%;
       </div>
 
         <div class="row"><div class="col-1"></div></div>
-        <div style="width:100%;height:auto;line-height:1em;overflow:auto;">
+        <div style="width:100%;height:auto;line-height:2em;overflow:auto;">
         <table border=1 id="myTable" style="width:140%;">
         	<tr>
         		<th style="width:1%;text-align:center;">SN</th>
@@ -160,9 +160,10 @@ width: 100%;
         		<th style="text-align:center;width:5%;">APGAR Scores</th>
         	</tr>
         </table>
+        <br/>
 
         <div class="col-3">
-          <input type="submit" value="Submit">
+          <input type="submit" value="Submit" style="font-size:13px;font-family: Arial;letter-spacing: 0.008em;color:#5d5656;margin-top:20px;width:120px;height:40px;font-weight:bold">
         </div>
     </div>
 
@@ -171,6 +172,7 @@ width: 100%;
 
 
   </div><!----------CONTENT END------------>
+</form>
 </div><!------------COL12 END------------>
 <script>
 function insertRow(e){

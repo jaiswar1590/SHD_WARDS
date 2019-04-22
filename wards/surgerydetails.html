@@ -1,0 +1,155 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+<style>
+.subtitle
+{
+background-color:#F0E68C;
+width: 100%;
+}
+.spnhead
+{
+  font-size: 20px;
+  font-weight: bold;
+}
+.spndata{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+		.container{
+			width: 100%;
+      padding-right: 0px;
+      padding-left: 0px;
+      margin-right: auto;
+      margin-left: auto;
+		}
+
+		ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			display: inline-block;
+			padding: 8px 15px;
+      padding-right:100px;
+      cursor: pointer;
+      color: #222;
+      font-size: 18px;
+		}
+
+		ul.tabs li.current{
+			background: #F0FFFF;
+			color: #222;
+      font-weight: bold;
+		}
+
+		.tab-content{
+			display: none;
+			background: #F0FFFF;
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
+</style>
+
+<div class="col12">
+  <div id="content">
+    <div class="titlebox"  align="center">Surgery Details</div>
+    <div class="row" style="padding-bottom:1px;"></div>
+    <div class="col-12 subtitle">
+      <div class="col-2"><span class="spnhead">Regno:</span><span class="spndata">&nbsp;2019SHD123</span></div>
+      <div class="col-3"><span class="spnhead">Name:</span><span class="spndata">&nbsp;Sandeep Singh</span></div>
+      <div class="col-3"><span class="spnhead">Father/Husband Name:</span><span class="spndata">&nbsp;Vijay singh</span></div>
+      <div class="col-3"><span class="spnhead">Age:</span><span class="spndata">&nbsp;25 year</span></div>
+      <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata">&nbsp;Male</span></div>
+      <div class="col-3"><span class="spnhead">Education:</span><span class="spndata">&nbsp;10</span></div>
+      <div class="col-3"><span class="spnhead">Date of Admission:</span><span class="spndata">&nbsp;21/04/2019</span></div>
+      <div class="col-3"><span class="spnhead">Address:</span><span class="spndata">&nbsp;Balod</span></div>
+    </div>
+        <form action="surgerylogin" method="POST">
+
+        <div class="row myrow">
+          <div class="col-3">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Date:</span>
+            <input type="date" name="date">
+          </div>
+
+          <div class="col-3">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Time :</span>
+            <input type="time" name="time">
+          </div>
+
+          <div class="col-3">
+            <span class="texttule">Surgen Name:</span>
+            <input type="text" name="surgrnname">
+          </div>
+
+          <div class="col-3">
+            <span class="texttule">Anesthesiologist:</span>
+            <input type="text" name="anesthesiologist">
+          </div>
+        </div>
+
+        <div class="row myrow">
+
+          <div class="col-3">
+            <span class="texttule">Kind of Surgery:</span>
+            <select style="width:120px;">
+              <option value="bed1">---Select---</option>
+              <option value="major">Major</option>
+              <option value="minor">Minor</option>
+            </select>
+          </div>
+
+          <div class="col-3">
+            <span class="texttule">Surgery Type :</span>
+            <select style="width:120px;">
+              <option value="bed1">---Select---</option>
+              <option value="major">General</option>
+              <option value="minor">Orthopedic</option>
+              <option value="minor">Gynaecology</option>
+              <option value="minor">Urology</option>
+              <option value="minor">ENT</option>
+            </select>
+          </div>
+
+          <div class="col-3">
+            <span class="texttule">Anesthesia Type:</span>
+            <select style="width:120px;">
+            <option value="bed1">---Select---</option>
+            <option value="minor">General</option>
+            <option value="minor">Spinal</option>
+            <option value="minor">Local</option>
+          </select>
+          </div>
+
+          <div class="col-3">
+            <span class="texttule">Procedure Of Surgery:</span>
+            <select style="width:120px;">
+            <option value="bed1">---Select---</option>
+            <option value="minor">P1</option>
+            <option value="minor">P2</option>
+            <option value="minor">P3</option>
+            <option value="minor">P4</option>
+            <option value="minor">P5</option>
+          </select>
+          </div>
+        </div>
+
+      <div class="row myrow">
+      <div class="col-3">
+        <div><input type="submit" value="Submit"></div>
+      </div>
+    </div>
+  </form>
+    </div><!----------titlebox-------->
+  </div><!----------Content-------->
+</div><!----------COl-12-------->
+
+
+{% endblock %}

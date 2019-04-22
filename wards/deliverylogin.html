@@ -1,0 +1,79 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+<style>
+.subtitle
+{
+background-color:#F0E68C;
+width: 100%;
+}
+.spnhead
+{
+  font-size: 20px;
+  font-weight: bold;
+}
+.spndata{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+		.container{
+			width: 100%;
+      padding-right: 0px;
+      padding-left: 0px;
+      margin-right: auto;
+      margin-left: auto;
+		}
+
+		ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			display: inline-block;
+			padding: 8px 15px;
+      padding-right:100px;
+      cursor: pointer;
+      color: #222;
+      font-size: 18px;
+		}
+
+		ul.tabs li.current{
+			background: #F0FFFF;
+			color: #222;
+      font-weight: bold;
+		}
+
+		.tab-content{
+			display: none;
+			background: #F0FFFF;
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
+</style>
+
+<form action="delivery" method="POST">
+<div class="col12">
+  <div id="content">
+    <div class="titlebox" align="center">Delivery Ward</div>
+    <div class="row" style="padding-bottom:1px;"></div>
+
+      <div class="col-12"  align="center">
+        <span class="texttule">Enter RegNo :</span>
+        <input type="text" value="regno">
+        <input type="submit" value="Search">
+      </div>
+    </div>
+</form>
+    </div><!----------titlebox-------->
+  </div><!----------Content-------->
+</div><!----------COl-12-------->
+
+
+{% endblock %}

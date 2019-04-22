@@ -116,13 +116,13 @@ $(document).ready(function(){
 
 </script>
 
-<div class="col12">
+<div class="col-12">
   <div id="content">
     <div class="titlebox">Consultation
     <span align="right">Dr. ABD </span>
     </div>
-    <div class="row" style="padding-bottom:2px;"></div>
-    <div class="row myrow subtitle">
+    <div class="row" style="padding-bottom:1px;"></div>
+    <div class="col-12 subtitle">
       <div class="col-2"><span class="spnhead">Regno:</span><span class="spndata">2019SHD123</span></div>
       <div class="col-2"><span class="spnhead">Name:</span><span class="spndata">Iron Man</span></div>
       <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata">Male</span></div>
@@ -138,8 +138,8 @@ $(document).ready(function(){
         <li class="tab-link" data-tab="tab-4">Sugar Chart</li>
     		<li class="tab-link" data-tab="tab-5">Poision Chart</li>
     		<li class="tab-link" data-tab="tab-6">LAB </li>
-        <li class="tab-link" data-tab="tab-6">X-RAY </li>
-        <li class="tab-link" data-tab="tab-6">Dressing </li>
+        <li class="tab-link" data-tab="tab-7">X-RAY </li>
+        <li class="tab-link" data-tab="tab-8">Dressing </li>
     	</ul>
 
 
@@ -149,23 +149,24 @@ $(document).ready(function(){
   <form>
     <div class="row myrow">
       <div class="col-3" >
-        <span class="texttule">Date:</span>
+        &nbsp;<span class="texttule">Date :</span>
         <input type="date" name="date">
       </div>
 
-      <div class="col-3"><span class="texttule">Medicine Type:</span>
+      <div class="col-3"><span class="texttule">Medicine Type :</span>
         <select name="hospital" id="hospital" onclick="changeDoctor()">
+          <option value="select">---Select---</option>
           <option value="SHD">Tablet</option>
           <option value="other">Syrup</option>
         </select>
       </div>
 
       <div class="col-3" id="shd">
-        <span class="texttule">Medicine Name:</span>
-        <input type="text" name="mname">
+        <span class="texttule">Medicine Name :</span>
+        <input type="text" name="mname" placeholder="Medicine Name">
       </div>
 
-      <div class="col-3"><span class="texttule">Medicine Duration:</span>
+      <div class="col-3"><span class="texttule">Medicine Duration :</span>
         <select name="hospital" id="hospital" onclick="changeDoctor()">
           <option value="select">---Select---</option>
           <option value="ods">ODS</option>
@@ -183,12 +184,12 @@ $(document).ready(function(){
 
       <div class="row myrow">
       <div class="col-3" id="shd">
-        <span class="texttule">Time:</span>
+        <span class="texttule">Time :</span>
         <input type="time" name="time">
       </div>
       <div class="col-3" id="shd">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Given by:</span>
-        <input type="text" name="givenby">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Given by :</span>
+        <input type="text" name="givenby" placeholder="Given By">
       </div>
     <div class="row myrow"><input type="submit" value="Save"></div>
   </div>
@@ -203,57 +204,60 @@ $(document).ready(function(){
         <form>
           <div class="row myrow">
             <div class="col-3" >
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Date:</span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span class="texttule">Date :</span>
               <input type="date" name="date">
             </div>
 
             <div class="col-3">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Time:</span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span class="texttule">Time :</span>
               <input type="time" name="time">
             </div>
 
             <div class="col-3" id="shd">
-              <span class="texttule">Temperature:</span>
-              <input type="text" name="temp">
+              <span class="texttule">Temperature :</span>
+              <input type="text" name="temp" placeholder="Temperature">
             </div>
 
             <div class="col-3" id="shd">
-              <span class="texttule">Pulse:</span>
-              <input type="text" name="pulse">
-            </div>
-          </div>
-
-          <div class="row myrow">
-            <div class="col-3" id="shd">
-              <span class="texttule">BP-Systolic:</span>
-              <input type="text" name="systolic">
-            </div>
-
-            <div class="col-3" id="shd">
-              <span class="texttule">BP-Diastolic:</span>
-              <input type="text" name="diastolic">
-            </div>
-
-            <div class="col-3" id="shd">
-              &nbsp;&nbsp;<span class="texttule">Respiration:</span>
-              <input type="text" name="respiration">
-            </div>
-
-            <div class="col-3" id="shd">
-              &nbsp;&nbsp;&nbsp;<span class="texttule">FHS:</span>
-              <input type="text" name="fhs">
+              &nbsp;&nbsp;<span class="texttule">Pulse :</span>
+              <input type="text" name="pulse" placeholder="Pulse">
             </div>
           </div>
 
           <div class="row myrow">
             <div class="col-3" id="shd">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">SPO<sub>2</sub>:</span>
-              <input type="text" name="spo2">
+              <span class="texttule">BP-Systolic :</span>
+              <input type="text" name="systolic" placeholder="BP-Systolic">
+            </div>
+
+            <div class="col-3" id="shd">
+              <span class="texttule">BP-Diastolic :</span>
+              <input type="text" name="diastolic" placeholder="BP-Diastolic">
+            </div>
+
+            <div class="col-3" id="shd">
+              &nbsp;&nbsp;<span class="texttule">Respiration :</span>
+              <input type="text" name="respiration" placeholder="Respiration">
+            </div>
+
+            <div class="col-3" id="shd">
+              &nbsp;&nbsp;&nbsp;<span class="texttule">F.H.S :</span>
+              <input type="text" name="fhs" placeholder="F.H.S.">
+            </div>
+          </div>
+
+          <div class="row myrow">
+            <div class="col-3" id="shd">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span class="texttule">SPO<sub>2</sub> :</span>
+              <input type="text" name="spo2" placeholder="SPO2">
           </div>
 
             <div class="col-3" id="shd">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Given By:</span>
-              <input type="text" name="givenby">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Given By :</span>
+              <input type="text" name="givenby" placeholder="Given By">
             </div>
             <div class="col-4"><input type="submit" value="Save"></div>
           </div>
@@ -269,62 +273,62 @@ $(document).ready(function(){
         <form>
           <div class="row myrow">
             <div class="col-3" >
-              &nbsp;&nbsp;<span class="texttule">Date:</span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Date :</span>
               <input type="date" name="date">
             </div>
 
             <div class="col-3">
-              &nbsp;&nbsp;<span class="texttule">Time:</span>
-              <input type="time" name="time">
+              <span class="texttule">I.V.F. Time:</span>
+              &nbsp;&nbsp;<input type="time" name="time">
             </div>
 
             <div class="col-3" id="shd">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">IVF :</span>
-              <input type="text" name="ivf">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">I.V.F :</span>
+              <input type="text" name="ivf" placeholder="I.V.F.">
             </div>
 
             <div class="col-3" id="shd">
-              <span class="texttule">Amount :</span>
-              <input type="text" name="amnt">
-            </div>
-          </div>
-
-          <div class="row myrow">
-            <div class="col-3" id="shd">
-              <span class="texttule">Time :</span>
-              <input type="time" name="time">
-            </div>
-
-            <div class="col-3" id="shd">
-              <span class="texttule">Urine :</span>
-              <input type="text" name="time">
-            </div>
-
-            <div class="col-3" id="shd">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Time :</span>
-              <input type="time" name="time">
-            </div>
-
-            <div class="col-3" id="shd">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">NGS :</span>
-              <input type="text" name="ngs">
+              &nbsp;&nbsp;<span class="texttule">Amount :</span>
+              &nbsp;&nbsp;<input type="text" name="amnt" placeholder="Amount">
             </div>
           </div>
 
           <div class="row myrow">
             <div class="col-3" id="shd">
-              <span class="texttule">Time :</span>
+              <span class="texttule">Urine Time :</span>
               <input type="time" name="time">
             </div>
 
             <div class="col-3" id="shd">
-              <span class="texttule">Drain :</span>
-              <input type="text" name="drain">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Urine :</span>
+              &nbsp;&nbsp;&nbsp;<input type="text" name="time" placeholder="Urine">
             </div>
 
             <div class="col-3" id="shd">
-              <span class="texttule">givenby :</span>
-              <input type="text" name="givenby">
+              <span class="texttule">N.G.S. Time :</span>
+              <input type="time" name="time">
+            </div>
+
+            <div class="col-3" id="shd">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">N.G.S :</span>
+              &nbsp;&nbsp;&nbsp;<input type="text" name="ngs" placeholder="N.G.S.">
+            </div>
+          </div>
+
+          <div class="row myrow">
+            <div class="col-3" id="shd">
+              <span class="texttule">Drain Time :</span>
+              <input type="time" name="time">
+            </div>
+
+            <div class="col-3" id="shd">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Drain :</span>
+              &nbsp;&nbsp;&nbsp;<input type="text" name="drain" placeholder="Drain">
+            </div>
+
+            <div class="col-3" id="shd">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Given By :</span>
+              &nbsp;<input type="text" name="givenby" placeholder="Given By">
             </div>
 
             <div class="row myrow"><input type="submit" value="Save"></div>
@@ -348,30 +352,30 @@ $(document).ready(function(){
         </div>
 
         <div class="col-3" id="shd">
-          <span class="texttule">Sugar Level :</span>
-          <input type="text" name="sugarlevel">
+          &nbsp;&nbsp;<span class="texttule">Sugar Level :</span>
+          <input type="text" name="sugarlevel" placeholder="Sugar Level">
         </div>
 
         <div class="col-3" id="shd">
           <span class="texttule">Insuline :</span>
-          <input type="text" name="insuline">
+          <input type="text" name="insuline" placeholder="Insuline">
         </div>
       </div>
 
       <div class="row myrow">
           <div class="col-3" id="shd">
-            <span class="texttule">Unit :</span>
-            <input type="text" name="unit">
+            <span class="texttule">Unit  :</span>
+            &nbsp;<input type="text" name="unit" placeholder="Unit">
           </div>
 
           <div class="col-3" id="shd">
             <span class="texttule">Injection :</span>
-            <input type="text" name="injection">
+            <input type="text" name="injection" placeholder="Injection">
           </div>
 
           <div class="col-3" id="shd">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Given By:</span>
-            <input type="text" name="givenby">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Given By :</span>
+            <input type="text" name="givenby" placeholder="Given By">
         </div>
         <div class="row myrow"><input type="submit" value="Save"></div>
       </div>
@@ -384,24 +388,24 @@ $(document).ready(function(){
 <div id="tab-5" class="tab-content">
   <form>
   <div clas="row myrow">
-    <div class="col-3" id="shd">
+    <div class="col-3">
       <span class="texttule">Date :</span>
-      <input type="date" name="date">
+      <input type="date" name="date" placeholder="Date">
     </div>
 
-    <div class="col-3" id="shd">
+    <div class="col-3">
       <span class="texttule">Time :</span>
-      <input type="time" name="time">
+      <input type="time" name="time" placeholder="Time">
     </div>
 
-    <div class="col-3" id="shd">
+    <div class="col-3">
       <span class="texttule">Injection :</span>
-      <input type="text" name="injection">
+      <input type="text" name="injection" placeholder="Injection">
     </div>
 
-    <div class="col-3" id="shd">
+    <div class="col-3">
       <span class="texttule">Given By :</span>
-      <input type="text" name="givenby">
+      <input type="text" name="givenby" placeholder="Given By">
     </div>
 
     </div>
@@ -411,6 +415,24 @@ $(document).ready(function(){
 </form>
 </div>
 <!---------------Poision charts End-------------->
+
+<!---------------X-RAY charts start------------>
+<div id="tab-7" class="tab-content">
+  <form>
+  <div clas="row myrow">
+
+    <div class="col-3">
+      <span class="texttule">Registration No:</span>
+      <input type="text" name="regno" placeholder="Registration No">
+    </div>
+
+    </div>
+        <input type="submit" value="Save"></div>
+    </div>
+
+</form>
+</div>
+<!---------------X-RAY charts End-------------->
 
 
 

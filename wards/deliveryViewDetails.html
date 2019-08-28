@@ -1,0 +1,182 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+<style>
+/* GENERAL CODE */
+#mainTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#mainTable td, #mainTable th {
+  padding: 8px;
+}
+
+#mainTable td{
+  padding: 8px;
+  font-size: 15px;
+}
+#mainTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#mainTable tr:hover {background-color: #ddd;}
+
+#mainTable thead,th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: white;
+  font-size: 17px;
+
+}
+
+/* GENERAL CODE */
+
+
+/* SEPERATE CODE */
+#mainTable thead,th {
+
+  background-color:#778899;
+}
+/* SEPERATE CODE */
+
+</style>
+
+
+<div class="col12">
+  <div id="content">
+    <div class="titlebox" style="text-align:center;">Delivery Ward</div>
+    <div class="row myrow">
+    <form action="deliveryViewDetailsByregno" method="POST">
+      <div class="col-2">
+        <span class="texttule">RegNo:</span>
+        <input type="text" name="regno" class="alphanumeric" style="width:95px;" required>
+        <input type="submit" value="Search">
+      </div>
+    </form>
+    <form action="deliveryviewDetailsByfname" method="POST">
+      <div class="col-3">
+        <span class="texttule">First Name:</span>
+        <input type="text" name="pfname" class="alphaonly" style="width:90px;"required>
+        <input type="submit" value="Search">
+      </div>
+    </form>
+    <form action="deliveryviewDetailsBydate" method="POST">
+      <div class="col-3">
+        <span class="texttule">Date:</span>
+        <input type="date" name="deliverydate" required>
+        <input type="submit" value="Search">
+      </div>
+    </form>
+  <form action="deliveryviewDetailsbwdate" method="POST">
+      <div class="col-4">
+        <span class="texttule">From:</span>
+        <input type="date" name="fdate" required>
+        <span class="texttule">To:</span>
+        <input type="date" name="tdate" required>
+        <input type="submit" value="Search">
+        {%if msg == 'Excel Sheet Generated Successfully'%}
+        <a href="static/DeliveryUploads/delivery.xlsx" download>
+          <img src="static/icon4/excel6.png" width="40px" height="40px"></a>
+          {%endif%}
+      </div>
+    </form>
+</div>
+</div> <!--- Content --->
+</div><!--- col-12 --->
+<div class="col-12" style="text-align: center;"><span class="texttule">{{msg}}</span></div>
+  <div class="row myrow">
+  <div class="col-11" style="width:100%;height:500px;overflow:scroll;">
+    <table  id="mainTable">
+    <thead>
+      <th>Regno</th>
+      <th>Patient Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>Date of Admission</th>
+      <th>Ward Name</th>
+      <th>Delivery Date</th>
+      <th>Mother Education</th>
+      <th>Father Education</th>
+      <th>Gravida</th>
+      <th>No. of Live Child</th>
+      <th>UT Height</th>
+      <th>Delivery Type</th>
+      <th>Mother Status</th>
+      <th>Death Reason</th>
+      <th>Death Time</th>
+      <th>Death Date</th>
+      <th>Doctor Name</th>
+      <th>Sister Name</th>
+      <th>Baby Care By</th>
+      <th>Enter By</th>
+      <th>No. of Baby</th>
+      <th>Placenta Delivered</th>
+      <th>PPH</th>
+      <th>PPH Status</th>
+      <th>Born Date</th>
+      <th>Born Time</th>
+      <th>Baby sex</th>
+      <th>Baby Weight</th>
+      <th>Live/Dead</th>
+      <th>Live Baby Status</th>
+      <th>Baby Death Time</th>
+      <th>Baby Death Date</th>
+      <th>Baby Death Reason</th>
+      <th>Presenting Part</th>
+      <th>APGAR 0min</th>
+      <th>APGAR 1min</th>
+      <th>APGAR 5min</th>
+      <th>Congenital Anamolies </th>
+
+    </thead>
+    {%for row in ds1%}
+    <tr>
+      <td style="color:red;font-weight:bold;"><b>{{row[0]}}</b></td>
+      <td>{{row[1]}} {{row[2]}} {{row[3]}}</td>
+      <td>{{row[4]}} </td>
+      <td>{{row[5]}}</td>
+      <td><b>{{row[6]}}</b></td>
+      <td>{{row[7]}}</td>
+      <td><b>{{row[8]}}</b></td>
+      <td>{{row[9]}}</td>
+      <td>{{row[10]}}</td>
+      <td>{{row[11]}}</td>
+      <td>{{row[12]}}</td>
+      <td>{{row[13]}}</td>
+      <td>{{row[14]}}</td>
+      <td><b>{{row[15]}}</b></td>
+      <td>{{row[16]}}</td>
+      <td>{{row[17]}}</td>
+      <td>{{row[18]}}</td>
+      <td><b>{{row[19]}}</b></td>
+      <td>{{row[20]}}</td>
+      <td>{{row[21]}}</td>
+      <td><b>{{row[22]}}</b></td>
+      <td>{{row[23]}}</td>
+      <td>{{row[24]}}</td>
+      <td>{{row[25]}}</td>
+      <td>{{row[26]}}</td>
+      <td>{{row[27]}}</td>
+      <td>{{row[28]}}</td>
+      <td>{{row[29]}}</td>
+      <td>{{row[30]}}</td>
+      <td><b>{{row[31]}}</b></td>
+      <td>{{row[32]}}</td>
+      <td>{{row[33]}}</td>
+      <td>{{row[34]}}</td>
+      <td><b>{{row[35]}}</b></td>
+      <td><b>{{row[36]}}</b></td>
+      <td style="color:red;font-weight:bold;">{{row[37]}}</td>
+      <td style="color:green;font-weight:bold;">{{row[38]}}</td>
+      <td style="color:purple;font-weight:bold;">{{row[39]}}</td>
+      <td>{{row[40]}}</td>
+    </tr>
+    {%endfor%}
+  </table>
+</div>
+</div>
+
+
+
+{% endblock %}

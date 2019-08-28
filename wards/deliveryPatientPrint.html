@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Shaheed Hospital</title>
+    <meta name ="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="static/css/homework.css">
+    <link rel="icon" type="image/jpeg" href="static/img/cross.png">
+
+
+</style>
+	<style type="text/css" media="print">
+  @media print {
+    @page {margin:0;}
+    body {margin:1.6;}
+  }
+
+.border {
+  position: fixed;
+  border: 0px solid ;
+  width: 95%;
+  height: 97.5%;
+  margin-left: 5%;
+  margin-top: 2.5%;
+  box-sizing: border-box;
+}
+</style>
+<style>
+#patientdata{
+border-collapse: collapse;
+}
+#patientdata td{
+  border: 1px solid;
+  padding: 1px;
+}
+
+#testdata{
+border-collapse: collapse;
+border: 1px solid;
+}
+#testdata th{
+  border: 1px solid;
+  border-right: 0px solid;
+  border-left: 0px solid;
+}
+#testdata td{
+
+  padding: 1px;
+}
+
+.spnhead{
+  font-size: 14px;
+  font-weight: bold;
+  color:black;
+}
+.spndata{
+  font-size: 12px;
+  font-weight: normal;
+  color:black;
+}
+</style>
+<script language="JavaScript">
+function display_c(){
+var refresh=1000; // Refresh rate in milli seconds
+mytime=setTimeout('display_ct()',refresh)
+}
+
+function display_ct(){
+
+var today = new Date();
+var h = today.getHours();
+var m = today.getMinutes();
+var s = today.getSeconds();
+var dd = today.getDate();
+var mm = today.getMonth();
+var yy = today.getFullYear();
+m = checkTime(m);
+s = checkTime(s);
+
+dd = checkTime(dd);
+mm = checkTime(mm);
+
+document.getElementById('date').innerHTML = dd + "/" + mm + "/" + yy;
+document.getElementById('time').innerHTML = h + ":" + m + ":" + s;
+
+tt=display_c();
+}
+function checkTime(i){
+    if(i<10){i = "0" + i};
+    return i;
+}
+
+</script>
+
+</head>
+  <body onload="display_c();">
+    <div class="border">
+    </div>
+    <br>
+      <div class="row" style="margin-left:7%;">
+        <div class="col-12">
+          <div class="col-1">
+            <img src="static/icon4/slogo.jpg">
+          </div>
+          <div class="col-4" style="text-align:center;margin-left:23%;">
+            <h1>शहीद अस्पताल</h1>
+            <h3>दल्ली राजहरा , जिला-बालोद </h3>
+            <h3>( छत्तीसगढ़ )</h3>
+            <h4>फ़ोन : (07748)216088</h4>
+            <br>
+            <h2>Delivery Report</h2>
+          </div>
+          <div class="col-4" style="text-align:right;font-size:20px;">
+            Date:<p id="date" style="display:inline;font-size:20px;"></p>
+            Time:<p id="time" style="display:inline;font-size:20px;"></p>
+          </div>
+          <div class="col-12">
+            <table id="testdata" style="width:98%;" >
+              <thead><b>Patient Details:</b></thead>
+              {%for row in ds3%}
+              <tr>
+                <td><span class="spnhead">Regno:</span><span class="spndata"><b>{{row[1]}}</b></span></td>
+                <td ><span class="spnhead">Name:</span><span class="spndata"><b>{{row[2]}} {{row[3]}} {{row[4]}}</b></span></td>
+                <td><span class="spnhead">Gender:</span><span class="spndata">{{row[5]}}</span></td>
+                <td><span class="spnhead">Age:</span><span class="spndata">{{row[6]}} {{row[7]}}</span></td>
+
+              </tr>
+              <tr>
+
+                <td><span class="spnhead">Date OF Delivery:</span><span class="spndata">{{ row[16].strftime('%d/%m/%Y')}}</span></td>
+                <td ><span class="spnhead">Address:</span><span class="spndata">{{ row[9]}}</span></td>
+                <td ><span class="spnhead">Phone No.:</span><span class="spndata">{{row[10]}}</span></td>
+                <td><span class="spnhead">Patient From:</span><span class="spndata">{{row[12]}}</span></td>
+
+              </tr>
+              <tr>
+                <td><span class="spnhead">Gov Scheme:</span><span class="spndata"><b>{{row[11]}}</b></span></td>
+                <td ><span class="spnhead">Ward Name:</span><span class="spndata">{{row[14]}}</span></td>
+                <td ><span class="spnhead">Bed No.:</span><span class="spndata"><b>{{row[15]}}</b></span></td>
+                <td></td>
+
+
+              </tr>
+            </table>
+          </div>
+          <div class="col-12">
+            <table id="testdata" style="width:98%;">
+              <thead><b>Mother's Details:</b></thead>
+              <tr>
+                <td><span class="spnhead">Mother Education:</span><span class="spndata">{{row[17]}}</span></td>
+                <td ><span class="spnhead">Father Education:</span><span class="spndata">{{row[18]}}</span></td>
+                <td><span class="spnhead">Mode OF Delivery:</span><span class="spndata"><b>{{row[22]}}</b></span></td>
+                <td><span class="spnhead">Mother Status:</span><span class="spndata">{{row[23]}}</span></td>
+
+
+              </tr>
+              <tr>
+              <td><span class="spnhead">Placenta Delivered:</span><span class="spndata">{{row[33]}}</span></td>
+                <td><span class="spnhead">PPH:</span><span class="spndata">{{row[34]}}</span></td>
+                <td ><span class="spnhead">PPH Type:</span><span class="spndata">{{row[35]}}</span></td>
+                <td ><span class="spnhead">Doctor Name:</span><span class="spndata"><b>{{row[27]}}</b></span></td>
+              <tr>
+                <td ><span class="spnhead">Sister Name:</span><span class="spndata"><b>{{row[28]}}</b></span></td>
+                <td ><span class="spnhead">Baby Care By:</span><span class="spndata">{{row[29]}}</span></td>
+                <td ><span class="spnhead">Enter By:</span><span class="spndata"><b>{{row[30]}}</b></span></td>
+                <td ><span class="spnhead">No Of Baby:</span><span class="spndata"><b>{{row[31]}}</b></span></td>
+
+              </tr>
+
+              </tr>
+              {%endfor%}
+            </table>
+        </div>
+        <div class="col-12">
+        <table id="testdata" style="width:98%;">
+          <thead><b>Child's Details:</b></thead>
+          <th>Baby</th>
+          <th>Born Date</th>
+          <th>Born Time</th>
+          <th>Child Sex</th>
+          <th>Child Weight</th>
+          <th>Child Status</th>
+
+          {%for row in ds4%}
+          <tr>
+            <td style="text-align:center;color:black;">Baby_{{loop.index}}.</td>
+            <td style="text-align:center;color:black;">{{row[1].strftime('%d/%m/%Y')}}</td>
+            <td style="text-align:center;color:black;">{{row[2]}}</td>
+            <td style="text-align:center;color:black;">{{row[3]}}</td>
+            <td style="text-align:center;color:black;">{{row[4]}}</td>
+            <td style="text-align:center;color:black;">{{row[5]}}</td>
+          </tr>
+          {%endfor%}
+
+          <th>Baby</th>
+          <th>Live Child Status</th>
+          <th>Child Death Reason</th>
+          <th>Presenting Part</th>
+          <th>Congenital Anomalies</th>
+          <th>APGAR Score(min)</th>
+
+          {%for row in ds4%}
+          <tr>
+            <td style="text-align:center;color:black;">Baby_{{loop.index}}.</td>
+            <td style="text-align:center;color:black;"><b>{{row[6]}}</b></td>
+            <td style="text-align:center;color:black;">{{row[9]}}</td>
+            <td style="text-align:center;color:black;"><b>{{row[10]}}</b></td>
+            <td style="text-align:center;color:black;">{{row[15]}}</td>
+            <td style="text-align:center;color:black;"><b>{{row[11]}}/{{row[12]}}/{{row[13]}}<b></td>
+          </tr>
+          {%endfor%}
+        </table>
+        </div>
+        <div class="col-12">
+              <table id="testdata" style="width:98%;">
+                <tr style="border-bottom:1px solid"><td colspan="5" style="text-align:center;color:black"><b>Immunization Details</b></td></tr>
+
+                <tr style="border-bottom:1px solid">
+                  <td style="text-align:center;border-left:1px solid;color:black"><b>Baby</b></td>
+                  <td style="text-align:center;border-left:1px solid;width:40%;color:black"><b>Date</b></td>
+                  <td style="text-align:center;border-left:1px solid;color:black"><b>OPV-O</b></td>
+                  <td style="text-align:center;border-left:1px solid;color:black"><b>HEPB-O</b></td>
+                  <td style="text-align:center;border-left:1px solid;color:black"><b>BCG</b></td>
+                </tr>
+
+                {%for row in ds4%}
+                <tr style="border-bottom:1px solid">
+                  <td style="text-align:center;border-left:1px solid;color:black">Baby_{{loop.index}}.</td>
+                  <td style="text-align:center;border-left:1px solid;width:40%;"></td>
+                  <td style="text-align:center;font-weight:bold;color:black;border-left:1px solid;">&#9634;</td>
+                  <td style="text-align:center;font-weight:bold;color:black;border-left:1px solid;">&#9634;</td>
+                  <td style="text-align:center;font-weight:bold;color:black;border-left:1px solid;">&#9634;</td>
+                </tr>
+                {%endfor%}
+              </table>
+            </div>
+
+            <div class="col-12">
+              <table id="testdata" style="width:98%;">
+                {%if flag>0%}
+                <tr style="border-bottom:1px solid;">
+                  <td style="border-right:1px solid;text-align:center;color:black"><b>Asphyxiated</b></td>
+                  <td style="border-right:1px solid;text-align:center;color:black"><b>Oropheryngeal Suction</b></td>
+                  <td style="border-right:1px solid;text-align:center;color:black"><b>CPR given with Ambu+O<sub>2</sub></b></td>
+                  <td style="border-right:1px solid;text-align:center;color:black"><b>Improved</b></td>
+                  <td style="border-right:1px solid;text-align:center;color:black"><b>Not Improved</b></td>
+                </tr>
+                {%endif%}
+                {%for row in ds4%}
+                {%if row[6]=='Asphyxiated'%}
+                <tr style="border-bottom:1px solid;">
+                  <td style="text-align:center;border-left:1px solid;color:black">Baby_{{loop.index}}.</td>
+                  <td style="text-align:center;font-weight:bold;border-left:1px solid;color:black">&#9634;</td>
+                  <td style="text-align:center;font-weight:bold;border-left:1px solid;color:black">&#9634;</td>
+                  <td style="text-align:center;font-weight:bold;border-left:1px solid;color:black">&#9634;</td>
+                  <td style="text-align:center;font-weight:bold;border-left:1px solid;color:black">&#9634;</td>
+                </tr>
+                {%endif%}
+                {%endfor%}
+              </table>
+              <br>
+              <p style="font-weight:bold;color:black"><u>Diagnosis:</u></p>
+              <br><br><br><br><br><br><br><br><br>
+            </div>
+
+
+
+
+        </div><!---main DIV--->
+      </div>
+
+  </body>
+</html>

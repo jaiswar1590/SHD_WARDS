@@ -1,0 +1,1781 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+
+<style>
+.subtitle
+{
+background-color:#F0E68C;
+width: 100%;
+}
+.subtitlebox{
+  font-weight: bold;
+  font-size: 20px;
+  font-family: Times New Roman;
+  padding:5px;
+  background:#80DFFF;
+  width:101%;
+}
+.spnhead{
+  font-size: 20px;
+  font-weight: bold;
+}
+.spndata{
+  font-size: 18px;
+  font-weight: bold;
+}
+.container{
+  width: 100%;
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+ul.tabs{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+ul.tabs li{
+  background: none;
+  display: inline-block;
+  padding: 8px 15px;
+  padding-right:30px;
+  cursor: pointer;
+  color: #222;
+  font-size: 18px;
+}
+ul.tabs li.current{
+  background: #F0FFFF;
+  color: #222;
+  font-weight: bold;
+}
+.tab-content{
+  display: none;
+  background: #F0FFFF;
+  padding: 15px;
+}
+.tab-content.current{
+  display: inherit;
+}
+
+/* TABLE CSS FOR MEDICINE START */
+/* GENERAL CODE */
+#wardmedicine {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+#wardmedicine td, #wardmedicine th {
+  padding: 8px;
+}
+#wardmedicine td{
+  padding: 8px;
+  font-size: 15px;
+}
+#wardmedicine tr:nth-child(even){background-color: #f2f2f2;}
+
+#wardmedicine tr:hover {background-color: #ddd;}
+
+#wardmedicine thead,th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  color: white;
+  font-size: 17px;
+}
+
+/* GENERAL CODE */
+
+/* SEPERATE CODE */
+#wardmedicine thead,th {
+  background-color:#778899;
+}
+/* SEPERATE CODE */
+
+/* TABLE CSS FOR MEDICINE END */
+
+/* TABLE CSS FOR INTAKE OUTPUT CHART START*/
+
+/* GENERAL CODE */
+#intakeouputchart {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  }
+
+#intakeouputchart td, #intakeouputchart th {
+  padding: 8px;
+  }
+
+#intakeouputchart td{
+  padding: 8px;
+  font-size: 15px;
+  }
+#intakeouputchart tr:nth-child(even){background-color: #f2f2f2;}
+
+#intakeouputchart tr:hover {background-color: #ddd;}
+
+#intakeouputchart thead,th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: white;
+  font-size: 17px;
+  }
+
+/* GENERAL CODE */
+/* SEPERATE CODE */
+#intakeouputchart thead,th {
+    background-color:#778899;
+}
+/* SEPERATE CODE */
+/* TABLE CSS FOR INTAKE OUTPUT CHART END*/
+
+
+
+/* TABLE CSS FOR CONSUMABLE CHART START*/
+
+/* GENERAL CODE */
+#conchart {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  }
+
+#conchart td, #conchart th {
+  padding: 8px;
+  }
+
+#conchart td{
+  padding: 8px;
+  font-size: 15px;
+  }
+#conchart tr:nth-child(even){background-color: #f2f2f2;}
+
+#conchart tr:hover {background-color: #ddd;}
+
+#conchart thead,th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: white;
+  font-size: 17px;
+  }
+
+/* GENERAL CODE */
+
+
+/* SEPERATE CODE */
+#conchart thead,th {
+    background-color:#778899;
+}
+/* SEPERATE CODE */
+
+/* TABLE CSS FOR CONSUMABLE CHART END*/
+
+
+/* GENERAL CODE */
+#mainTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#mainTable td, #mainTable th {
+  padding: 8px;
+}
+
+#mainTable td{
+  padding: 8px;
+  font-size: 16px;
+  text-align: center;
+}
+#mainTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#mainTable tr:hover {background-color: #ddd;}
+
+#mainTable thead,th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+}
+
+/* GENERAL CODE */
+
+/* SEPERATE CODE */
+#mainTable thead,th {
+  background-color:#778899;
+}
+/* SEPERATE CODE */
+
+
+/* TABLE CSS FOR DRESSING START */
+/* GENERAL CODE */
+#warddressing {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+  margin-left:20%;
+  margin-right:20%;
+}
+#warddressing td, #warddressing th {
+  padding: 5px;
+  margin-left:5%;
+  margin-right:5%;
+}
+#warddressing td{
+  padding: 5px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 15px;
+  text-align: center;
+}
+#warddressing tr:nth-child(even){background-color: #f2f2f2;}
+
+#warddressing tr:hover {background-color: #ddd;}
+
+#warddressing thead,th {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  margin-left:5%;
+  margin-right:5%;
+}
+
+/* GENERAL CODE */
+
+/* SEPERATE CODE */
+#warddressing thead,th {
+  background-color:#778899;
+}
+/* SEPERATE CODE */
+
+/* TABLE CSS FOR DRESSING END */
+
+/* TABLE CSS FOR THERAPY START */
+/* GENERAL CODE */
+#wardtherapy {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+  margin-left:20%;
+  margin-right:20%;
+}
+#wardtherapy td, #wardtherapy th {
+  padding: 5px;
+  margin-left:5%;
+  margin-right:5%;
+}
+#wardtherapy td{
+  padding: 5px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 15px;
+  text-align: center;
+}
+#wardtherapy tr:nth-child(even){background-color: #f2f2f2;}
+
+#wardtherapy tr:hover {background-color: #ddd;}
+
+#wardtherapy thead,th {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  margin-left:5%;
+  margin-right:5%;
+}
+
+/* GENERAL CODE */
+
+/* SEPERATE CODE */
+#wardtherapy thead,th {
+  background-color:#778899;
+}
+/* SEPERATE CODE */
+
+/* TABLE CSS FOR THERAPY END */
+
+</style>
+
+<script>
+$(document).ready(function(){
+	$('ul.tabs li').click(function(){
+		var tab_id = $(this).attr('data-tab');
+
+		$('ul.tabs li').removeClass('current');
+		$('.tab-content').removeClass('current');
+
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+	});
+});
+
+
+// INSERT DATA USING AJAX
+$(document).ready(function () {
+$('form').submit(function (e) {
+  var formurl = $(this).attr('action');
+        $.ajax({
+            type: "POST",
+            url: $(this).attr('action'), // url to post to, from the forms action
+            data: $(this).serialize(),
+            success: function (data) {
+
+              if (formurl == 'updateNurSheet' && data['ack']=='DATA SUCCESSFULLY STORED!'){
+                document.getElementById('nsack').innerHTML = data['ack'];
+                $("#nsupdate").attr("disabled", true);
+              }
+              else if(formurl == 'updateWardMedicine' && data['ack']=='DATA SUCCESSFULLY STORED!'){
+                $("#mdate").val('');
+                $("#givenby").val('');
+                document.getElementById('wmack').innerHTML = data['ack'];
+                $("#wmupdate").attr("disabled", true);
+              }
+              else if (formurl == 'updateNurTPR' && data['ack']=='DATA SUCCESSFULLY STORED!'){
+                document.getElementById('tprack').innerHTML = data['ack'];
+                $("#tprupdate").attr("disabled", true);
+              }
+              else if (formurl == 'updateWardIntake' && data['ack']=='DATA SUCCESSFULLY STORED!'){
+                document.getElementById('inack').innerHTML = data['ack'];
+                $("#inupdate").attr("disabled", true);
+              }
+              else if(formurl == 'updateWardConsume' && data['ack']=='DATA SUCCESSFULLY STORED!'){
+                document.getElementById('cack').innerHTML = data['ack'];
+                $("#cupdate").attr("disabled", true);
+              }
+              else if(formurl == 'updateWardSugar' && data['ack']=='DATA SUCCESSFULLY STORED!'){
+                $("#sdate").val('');
+                $("#stime").val('');
+                $("#sugarlevel").val('');
+                $("#insuline").val('');
+                $("#sdose").val('');
+                $("#sgivenby").val('');
+                document.getElementById('sack').innerHTML = data['ack'];
+              }
+              else if(formurl == 'updateWardDressing' && data['ack']=='DATA SUCCESSFULLY STORED!'){
+                document.getElementById('dressingack').innerHTML = data['ack'];
+              }
+              else if(formurl == 'updateNurTherapy' && data['ack']=='DATA SUCCESSFULLY STORED!'){
+                document.getElementById('therapyack').innerHTML = data['ack'];
+              }
+            alert(data['ack']);
+            }
+        });
+        e.preventDefault(); // block the traditional submission of the form.
+    });
+  });
+
+function RestrictSpace() {
+  if (event.keyCode == 32) {
+    event.returnValue = false;
+    return false;
+  }
+}
+
+</script>
+
+<div class="col-12">
+  <div id="content">
+    <div style="text-align:center" class="titlebox">{{ds1[0][19]}}<div style="text-align:right;display:inline;border:2px solid #000080;padding:6px;border-radius:3px;"><a href="WardLogin" style="text-decoration:none;color:green;font-size:30px;color:#000080"><img src="static/icon4/home.svg" height="40px" width="40px"></a></div>
+  </div>
+    <div class="row" style="padding-bottom:1px;"></div>
+    <div class="col-12 subtitle">
+      {%for row in ds1%}
+      <div class="col-2"><span class="spnhead">Regno:</span><span class="spndata"> {{row[0]}}</span></div>
+      <div class="col-3"><span class="spnhead">Name:</span><span class="spndata"> {{row[1]}} {{row[2]}} {{row[3]}}</span></div>
+      <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata"> {{row[7]}}</span></div>
+      <div class="col-2"><span class="spnhead">Age:</span><span class="spndata"> {{row[5]}} {{row[6]}}</span></div>
+      <div class="col-2"><span class="spnhead">Bed No:</span><span class="spndata"> {{row[16]}}</span></div>
+      {%endfor%}
+    </div>
+
+    <div class="row" style="padding-bottom:2px;"></div>
+    <div class="container">
+      <ul class="tabs">
+        <li class="tab-link current" data-tab="tab-0">Nursery Sheet</li>
+        <li class="tab-link" data-tab="tab-1">Medicine Chart</li>
+        <li class="tab-link" data-tab="tab-2">TPR Chart</li>
+        <li class="tab-link" data-tab="tab-3">Intake Output Chart</li>
+        <li class="tab-link" data-tab="tab-4">Consumable</li>
+        <li class="tab-link" data-tab="tab-5">Sugar Chart</li>
+        <li class="tab-link" data-tab="tab-6">Dressing</li>
+        <li class="tab-link" data-tab="tab-7">Therapy</li>
+      </ul>
+    </div>
+
+<!--------------------- Nursery Sheet Starts ---------------------------------->
+
+    <div id="tab-0" class="tab-content current" >
+      {%for ns in ds2%}
+      <form action="updateNurSheet" method="POST">
+        <input type="text" name="ns_id" value="{{ns[0]}}" style="display:none;">
+
+          <div class="row myrow">
+            <div class="col-2"></div>
+          <div class="col-2"><span class="texttule">Mother's Name:</span>
+            <input type="text" name="ns_mother_name" class="alphaonly" value="{{ns[3]}}">
+          </div>
+
+          <div class="col-2"><span class="texttule">Mother's Reg No:</span>
+            <input type="text" name="ns_mother_regno" value="{{ns[4]}}">
+          </div>
+
+          <div class="col-2"><span class="texttule">Mother's Bed No:</span><br>
+            <input type="text" style="max-width:120px" name="ns_mother_bedno" value="{{ns[5]}}">
+          </div>
+
+          <div class="col-2">
+            <span class="texttule">Date of Admission:</span>
+            <input type="date" style="max-width:68%" name="ns_doa" value="{{ns[6]}}">
+          </div>
+        </div> <!-- row -->
+
+        <br>
+
+        <div class="row myrow">
+          <div class="col-2"></div>
+
+          <div class="col-2"><span class="texttule">Time of Admission:</span><br>
+            <input type="time" name="ns_toa" value="{{ns[7]}}">
+          </div>
+
+          <div class="col-2"><span class="texttule">Weight on Admission:</span><br>
+            <input type="text" style="max-width:90px" name="ns_wt_adm" value="{{ns[8]}}">
+          </div>
+
+          <div class="col-2"><span class="texttule">Date of Birth:</span>
+            <input type="date" style="max-width:68%" name="ns_dob" value="{{ns[9]}}">
+          </div>
+
+          <div class="col-2"><span class="texttule">Time of Birth:</span><br>
+          <input type="time" name="ns_tob" value="{{ns[10]}}">
+        </div>
+
+        </div> <!-- row -->
+
+
+        <br>
+
+        <div class="row myrow">
+            <div class="col-2"></div>
+
+
+          <div class="col-2"><span class="texttule">Weight at Birth:</span><br>
+            <input type="text" style="max-width:60px" name="ns_wt_birth" value="{{ns[11]}}">
+          </div>
+
+          <div class="col-2"><span class="texttule">EDD:</span><br>
+            <input type="date" style="max-width:68%" name="ns_edd" value="{{ns[12]}}">
+          </div>
+
+          <div class="col-2"><span class="texttule">Delivery from:</span>
+            <input type="text" style="max-width:60%" name="ns_delivery_from" value="{{ns[16]}}">
+          </div>
+
+          <div class="col-3" style="text-align:center;margin-left:-100px ">
+          <span class="texttule">APGAR SCORE at Birth:</span><br>
+
+              <B>0 min </B><input type="text" name="ns_apgar0" style="width:40px;border:2px solid red;font-weight:bold;text-align:center" value="{{ns[13]}}">
+
+              <B>1 min </B><input type="text" name="ns_apgar1" style="width:40px;border:2px solid green;font-weight:bold;text-align:center" value="{{ns[14]}}">
+
+              <B>5 min </B><input type="text" name="ns_apgar5" style="width:40px;border:2px solid blue;font-weight:bold;text-align:center" value="{{ns[15]}}">
+
+          </div>
+
+
+        </div> <!-- row -->
+
+        <br>
+
+        <div class="row myrow">
+          <div class="col-2"></div>
+          <div class="col-2"><span class="texttule">Mode of Delivery:</span><br>
+            <select name="ns_mod" id="ns_mod" onchange="ns_modType()">
+              <option style="font-weight:bold;" value="{{ns[17]}}"><b>{{ns[17]}}</b></option>
+              <option value="">--Select--</option>
+              <option value="Normal">Normal</option>
+              <option value="Forcep">Forcep</option>
+              <option value="Lscs">LSCS</option>
+              <option value="Others">Others</option>
+            </select>
+
+            <br>
+            <div class="col-3" id="othersdiv" style="display:none;">
+              <input type="text" class="alphaonly" name="other_ns_mod" id="othertype">
+            </div>
+          </div>
+
+          <div class="col-3" style="text-align:center;margin-left:-100px;">
+            <span class="texttule">Complications During Delivery:</span>
+            <select name="ns_cdd" id="ns_cdd" onchange="ns_cddType()">
+              <option style="font-weight:bold;" value="{{ns[18]}}"><b>{{ns[18]}}</b></option>
+              <option value="">--Select--</option>
+              <option value="None">None</option>
+              <option value="Hydroamnios">Hydroamnios</option>
+              <option value="Oligohydroamnios">Oligohydroamnios</option>
+              <option value="Meconiumstain">Meconium Stain</option>
+              <option value="Others">Others</option>
+            </select>
+            <br>
+            <div class="col-3" id="othersdivtwo" style="display:none;">
+              <input type="text" class="alphaonly" name="other_ns_cdd" id="othercddtype">
+            </div>
+          </div>
+
+          <div class="col-2"><span class="texttule">Baby:</span><br>
+            <select name="ns_baby" id="ns_baby" onchange="ns_babyType()">
+              <option style="font-weight:bold;" value="{{ns[19]}}"><b>{{ns[19]}}</b></option>
+              <option value="">--Select--</option>
+              <option value="Term">Term</option>
+              <option value="Preterm">Pre term</option>
+              <option value="Postterm">Post term</option>
+              <option value="Others">Others</option>
+            </select>
+            <br>
+            <div class="col-3" id="othersdivthree" style="display:none;">
+              <input type="text" class="alphaonly" name="other_ns_baby" id="otherbabytype">
+            </div>
+          </div>
+
+          <div class="col-2"><span class="texttule">Colour:</span><br>
+            <select name="ns_color" id="ns_color" onchange="ns_colorType()">
+              <option style="font-weight:bold;" value="{{ns[20]}}"><b>{{ns[20]}}</b></option>
+              <option value="">--Select--</option>
+              <option value="Pink">Pink</option>
+              <option value="Pallor">Pallor</option>
+              <option value="Blue">Blue</option>
+              <option value="Others">Others</option>
+            </select>
+            <br>
+            <div class="col-3" id="othersdivfour" style="display:none;">
+              <input type="text" class="alphaonly" name="other_ns_color" id="othercolortype">
+            </div>
+          </div>
+
+        </div> <!-- row -->
+
+        <br>
+
+        <div class="row myrow">
+          <div class="col-2"></div>
+
+          <div class="col-2"><span class="texttule">Thrive:</span><br>
+              <select name="ns_thrive" id="ns_thrive" onchange="ns_thriveType()">
+                <option style="font-weight:bold;" value="{{ns[21]}}"><b>{{ns[21]}}</b></option>
+                <option value="">--Select--</option>
+                <option value="Good">Good</option>
+                <option value="Sluggish">Sluggish</option>
+                <option value="Very_Sluggish">Very Sluggish</option>
+                <option value="Others">Others</option>
+              </select>
+              <br>
+              <div class="col-3" id="othersdivfive" style="display:none;">
+                <input type="text" class="alphaonly" name="other_ns_thrive" id="otherthrivetype">
+              </div>
+            </div>
+
+            <div class="col-2"><span class="texttule">Sucking:</span><br>
+              <select name="ns_sucking" id="ns_sucking" onchange="ns_suckingType()">
+                <option style="font-weight:bold;" value="{{ns[22]}}"><b>{{ns[22]}}</b></option>
+                <option value="">--Select--</option>
+                <option value="No">No</option>
+                <option value="Poor">Poor</option>
+                <option value="Good">Good</option>
+                <option value="Others">Others</option>
+              </select>
+              <br>
+              <div class="col-3" id="othersdivsix" style="display:none;">
+                <input type="text" class="alphaonly" name="other_ns_sucking" id="othersuckingtype">
+              </div>
+            </div>
+
+        </div> <!-- row -->
+
+          <br>
+          <br>
+
+        <div class="row myrow">
+          <div class="col-5">
+            <div class="subtitlebox" style="width:53%;margin-left:40%;margin-right:10%;">Chief Complaints on Admission</div>
+            <br>
+            <textarea name="ns_complaints" rows="5" cols="25" style="margin-left:45%;border:2px solid red;font-weight:bold" onkeypress="return RestrictSpace()">{{ns[23]}}</textarea>
+          </div>
+
+          <div class="col-3">
+            <div class="subtitlebox" style="width:70%;margin-left:10%; ">Others:</div>
+            <br>
+            <textarea name="ns_others" rows="5" cols="25" style="margin-left:10%;border:2px solid blue;font-weight:bold">{{ns[24]}}</textarea>
+          </div>
+
+          <div class="col-3">
+            <div class="subtitlebox" style="width:70%;">Diagnosis:</div>
+            <br>
+            <textarea name="ns_diagnosis" rows="5" cols="25" style="border:2px solid yellow;font-weight:bold">{{ns[25]}}</textarea>
+          </div>
+
+
+        </div> <!-- row -->
+
+        <br>
+
+        <div class="row myrow">
+          <div class="col-4"></div>
+            <div class="col-2" style="text-align:center;margin-left:120px;"><span class="texttule">Registered By:</span>
+            <input type="text" name="ns_registered_by" style="border:2px solid green;font-weight:bold" value="{{ns[26]}}" required>
+          </div>
+        </div> <!-- row -->
+
+        <br>
+        <br>
+
+        <div class="row myrow">
+          <div class="col-12" align="center">
+            <input type="submit" value="Update" id="nsupdate" style="font-size:16px;font-family: Arial;letter-spacing: 0.008em;color:#5d5656;margin-top:20px;width:120px;height:40px;font-weight:bold;"></div>
+          <br>
+          <br>
+          <p id="nsack" style="font-weight:bold;display:inline;"></p>
+        </div>
+
+        </form>
+        {%endfor%}
+      </div> <!-- tab -->
+
+
+<script>
+  function ns_modType()
+  {
+    var ns_mod = document.getElementById('ns_mod').value;
+    if(ns_mod=='Others')
+    {
+      document.getElementById('othersdiv').style.display = 'block';
+      document.getElementById('othertype').required = true;
+    }
+    else
+    {
+      document.getElementById('othersdiv').style.display = 'none';
+      document.getElementById('othertype').required = false;
+    }
+  }
+
+      function ns_cddType()
+      {
+        var ns_cdd = document.getElementById('ns_cdd').value;
+        if(ns_cdd=='Others')
+        {
+          document.getElementById('othersdivtwo').style.display = 'block';
+          document.getElementById('othercddtype').required = true;
+        }
+        else
+        {
+          document.getElementById('othersdivtwo').style.display = 'none';
+          document.getElementById('othercddtype').required = false;
+        }
+      }
+
+      function ns_babyType()
+      {
+        var ns_baby = document.getElementById('ns_baby').value;
+        if(ns_baby=='Others')
+        {
+          document.getElementById('othersdivthree').style.display = 'block';
+          document.getElementById('otherbabytype').required = true;
+        }
+        else
+        {
+          document.getElementById('othersdivthree').style.display = 'none';
+          document.getElementById('otherbabytype').required = false;
+        }
+      }
+
+      function ns_colorType()
+      {
+        var ns_color = document.getElementById('ns_color').value;
+        if(ns_color=='Others')
+        {
+          document.getElementById('othersdivfour').style.display = 'block';
+          document.getElementById('othercolortype').required = true;
+        }
+        else
+        {
+          document.getElementById('othersdivfour').style.display = 'none';
+          document.getElementById('othercolortype').required = false;
+        }
+      }
+
+      function ns_thriveType()
+      {
+        var ns_thrive = document.getElementById('ns_thrive').value;
+        if(ns_thrive=='Others')
+        {
+          document.getElementById('othersdivfive').style.display = 'block';
+          document.getElementById('otherthrivetype').required = true;
+        }
+        else
+        {
+          document.getElementById('othersdivfive').style.display = 'none';
+          document.getElementById('otherthrivetype').required = false;
+        }
+      }
+
+      function ns_suckingType()
+      {
+        var ns_sucking = document.getElementById('ns_sucking').value;
+        if(ns_sucking=='Others')
+        {
+          document.getElementById('othersdivsix').style.display = 'block';
+          document.getElementById('othersuckingtype').required = true;
+        }
+        else
+        {
+          document.getElementById('othersdivsix').style.display = 'none';
+          document.getElementById('othersuckingtype').required = false;
+        }
+      }
+
+</script>
+
+
+
+<!--------------------- Nursery Sheet Ends ------------------------------------>
+
+
+
+<!---------------------- Medicine Chart Starts -------------------------------->
+<script>
+	$(function()
+	  {
+	      $("#drugname").autocomplete
+	      ({
+	          source: function(request,response )
+	          {
+	            var drugname=document.getElementById('drugname').value;
+	              $.ajax
+	              ({
+	                  type:"POST",
+	                  url: "UpdateMedicineChart",
+	                  data:'drugname='+drugname,
+	                  success: function( data )
+	                  {
+											$("#drugtype").val(data[2]);
+
+	                    //alert(data['d'][2]);
+	                    response(data);
+
+
+	                  }
+	              });
+	          },
+	      });
+	  });
+
+    function showData(idval)
+    {
+    var idval = idval.value;
+    var arr = idval.split(">");
+    $('#drugname').val(arr[0]);
+    temp=arr[1];
+
+    $('#drugtype').prepend("<option value='"+temp.substring(2,temp.length-1)+"' selected='selected'>"+temp.substring(2,temp.length-1)+"</option>");
+    temp = arr[2];
+
+    $('#medicineid').val(temp.substring(7,temp.length));
+    }
+
+</script>
+
+<div id="tab-1" class="tab-content">
+
+    <table border="1" id="wardmedicine">
+      <tr>
+        <th>Action</th>
+        <th>Date</th>
+        <th>Drug Name</th>
+        <th>Drug Type</th>
+        <th>Schedule</th>
+        <th>Time_Dose</th>
+        <th>Unit</th>
+        <th>Given By</th>
+        <th>Quantity</th>
+        <th>Amount</th>
+      </tr>
+      <tr>
+        {%for row in ds8%}
+        <form action="updateWardMedicine" method="POST">
+          <td><input type="submit" value="Update" id="wmupdate"></td>
+
+          <input type="text" name="wmcid" value="{{row[0]}}">
+
+          <td><input type="date" name="wmcdate" value="{{row[3]}}" style="max-width:80%;"></td>
+
+          <td><div class="ui-widget"><input type="text" name="drugname" placeholder="Medicine Name" value="{{row[10]}}" id="drugname{{loop.index}}" onblur="showData(this)" onfocus="showDrugtype(this,{{loop.index}})" style="max-width:60%;">
+          <input type="text" name="meddet_id" value="{{row[2]}}" style="display:none;"></div></td>
+
+          <td><select name="drugtype" id="drugtype{{loop.index}}" >
+            <option value="">--Select--</option>
+           {%for row in drugtype%}
+           <option value="{{row[0]}}">{{row[0]}}</option>
+           {%endfor%}
+         </select>
+       </td>
+
+       <td><select name="dschedule" id="schedule" onchange="ShowDoseUnit()">
+            <option style="font-weight:bold;" value="{{row[4]}}">{{row[4]}}</option>
+            <option value=" ">---Select---</option>
+            <option value="Immediate">START</option>
+            <option value="ODS">ODS</option>
+            <option value="BDS">BDS</option>
+            <option value="TDS">TDS</option>
+            <option value="QDS">QDS</option>
+            <option value="EAD">EAD</option>
+            <option value="SOS">SOS</option>
+            <option value="HS">HS</option>
+            <option value="5HOURS">5 HOURS</option>
+          </select></td>
+
+          <td><input type="text" name="time_dose" style="max-width:60px;" value={{row[5]}}></td>
+
+          <td><input type="text" name="unit" style="max-width:60px;" value="{{row[6]}}"></td>
+
+          <td><input type="text" name="givenby" style="max-width:60px;" value="{{row[7]}}"></td>
+
+          <td><input type="text" name="quantity" style="max-width:60px;" value="{{row[8]}}"></td>
+
+          <td><input type="text" name="amount" style="max-width:60px;" value="{{row[9]}}"></td>
+        </form>
+      </tr>
+      {%endfor%}
+    </table>
+    <br>
+    <p id="wmack" style="font-weight:bold;color:green;display:inline;"></p>
+    </div><!-- tab -->
+
+<!------------------------- Medicine Chart Ends ------------------------------->
+
+<!------------------------ TPR CHART STARTS ----------------------------------->
+
+<div id="tab-2" class="tab-content">
+
+  <table border="1" id="mainTable">
+    <tr>
+      <th>Action</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Temperature</th>
+      <th>Respiration</th>
+      <th>Urine Passed</th>
+      <th>Stool Passed</th>
+      <th>SPO2</th>
+      <th>Weight</th>
+      <th>Registered By</th>
+    </tr>
+    <tr>
+      {%for tpr in ds3%}
+      <form action="updateNurTPR" method="POST">
+        <td><input type="submit" value="Update" id="tprupdate"></td>
+        <input type="text" name="ns_tpr_id" value="{{tpr[0]}}" style="display:none;">
+        <td><input type="date" name="tpr_date" style="max-width:80%" value="{{tpr[2]}}"></td>
+        <td><input type="time" name="tpr_time" value="{{tpr[4]}}"></td>
+        <td><input type="text" name="tpr_temp" style="max-width:50px" value="{{tpr[5]}}"></td>
+        <td><input type="text" name="tpr_respiration" style="max-width:50px" value="{{tpr[6]}}"></td>
+        <td><select name="tpr_urine">
+          <option style="font-weight:bold;" value="{{tpr[7]}}">{{tpr[7]}}</option>
+          <option value="">--Select--</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select></td>
+        <td><select name="tpr_stool">
+          <option style="font-weight:bold;" value="{{tpr[8]}}">{{tpr[8]}}</option>
+          <option value="">--Select--</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select></td>
+        <td><input type="text" name="tpr_spo2" style="max-width:50px" value="{{tpr[9]}}"></td>
+        <td><input type="text" name="tpr_weight" style="max-width:50px" value="{{tpr[10]}}"></td>
+        <td><input type="text" name="tpr_givenby" value="{{tpr[3]}}"></td>
+      </form>
+    </tr>
+    {%endfor%}
+  </table>
+  <br>
+  <p id="tprack" style="font-weight:bold;color:green;display:inline;"></p>
+</div><!-- tab -->
+
+<!------------------------ TPR Chart Ends ------------------------------------->
+
+
+
+
+
+
+<!----------------------- Intake Output Chart Starts -------------------------->
+<script>
+// GET DRUG NAMES BY AJAX FOR IVF
+$(document).ready(function(){
+$(function(){
+  $("#intakename").autocomplete({
+      source: function(request,response )
+        {
+          var intake=document.getElementById('intakename').value;
+          wardid=$("#wardid").val();
+            $.ajax({
+                type:"POST",
+                url:"getMedicineWardIntake",
+                data:{"intake":intake,"wardid":wardid},
+                success: function(data)
+                {
+                  if (data=="")
+                    $("#imsg").text('Requested Intake Is Not Issued To You Or Quantity Is Zero.');
+                  else{
+                      response(data);
+                      $("#imsg").text(' ');
+                    }
+                }
+              });
+          },
+    });
+});
+});
+
+function showIntake(idval)
+{
+  var idval = idval.value;
+  console.log(idval);
+  if(idval=="URINE COLLECTED" || idval=="DRAIN COLLECTED" || idval == "N.G.S. COLLECTED" || idval == "MILK")
+  {
+    $('#med_id').val(0);
+    $('#iuprice').val(0);
+  }
+  else{
+    var arr = idval.split(">");
+    $('#intakename').val(arr[0]);
+    $('#med_id').val(arr[4]);
+    $('#iuprice').val(arr[3]);
+    $('#Ihqty').val(arr[2]);
+  }
+}
+
+function resetIntake(intakeid)
+{
+  var intakeid = intakeid.id;
+  $("#"+intakeid).val('');
+  $("#imsg").text('');
+}
+
+</script>
+
+<div id="tab-3" class="tab-content" >
+  <form action="updateWardIntake" method="POST">
+          <div class="row myrow">
+            <div class="col-3"></div>
+            <div class="col-2" >
+              <span class="texttule">Date:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <input type="date" name="idate" id="indate">
+            </div>
+            <div class="col-2">
+              <span class="texttule">Given By:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <input type="text" name="igivenby" placeholder="Given By">
+            </div>
+            <div class="col-2">
+              <span class="texttule">Select Intake:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <select name="iintakechart" id="intakechart" onchange="changeIntake()">
+                <option value=" ">--Select--</option>
+                <option value="IVF">I.V.F</option>
+                <option value="Milk">Milk</option>
+                <option value="Urine">Urine</option>
+                <option value="Drain">Drain</option>
+                <option value="NGS">N.G.S</option>
+              </select>
+            </div>
+          </div>
+
+          <!--- CHART FOR I.V.F --->
+          <div class="row myrow" id="ivf" style="display:none;">
+            <div class="col-3"></div>
+            <div class="col-2">
+              <span class="texttule">Time:</span><br>
+              <input type="time" name="itime" id="intime">
+            </div>
+
+            <div class="col-2" >
+              <div class="ui-widget">
+                <span class="texttule" id="intakenamespn1" >Intake Name:</span><input type="hidden" size="5" id="intaketype">
+                <input type="text" name="dintakeout" id="intakename">
+                <p id="imsg" style="color:red;font-weight:bold;"></p>
+              </div>
+            </div>
+            <div class="col-2" style="width:12%">
+              <span class="texttule">Dose/Unit:</span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <select id="idose" >
+                <option value="">Select</option>
+                {%for i in range(1,1001,1)%}
+                  <option value="{{i}}">{{i}}</option>
+                {%endfor%}
+              </select>
+              <input type="text" id="unit" value="ML" size=2>
+            </div>
+            <div class="col-1">
+              <span class="texttule">Quantity:</span>
+              <input type="text"  id="Iqty" size=5 >
+            </div>
+            <div class="col-1" style="text-align:center;">
+              <span class="texttule" >ADD</span><br>
+              <div class="add-row" id="add-row-inout"  style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/plus.png" title="Insert"></div>
+            </div>
+            &nbsp;&nbsp;
+            <div class="col-1" style="text-align:center;">
+              <span class="texttule">Remove</span><br>
+              <div class="delete-row" id="delete-row-inout"  style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/minus.png" title="Remove"></div>
+            </div>
+          </div>
+
+          <!---CHART END--->
+
+          <!--- CHART FOR MILK AND OTHERS --->
+          <div class="row myrow" id="milk" style="display:none;">
+            <div class="col-3"></div>
+            <div class="col-2">
+              <span class="texttule">Time:</span><br>
+              <input type="time" name="itime" id="intime1">
+            </div>
+
+            <div class="col-2" >
+              <div class="ui-widget">
+                <span class="texttule" id="intakenamespn2" >Intake Name:</span><input type="hidden" size="5" id="intaketype">
+                <input type="text" name="dintakeout" id="intakename" onblur="showIntake(this);"onfocus="resetIntakeintakenamespn2(this)">
+                <p id="imsg" style="color:red;font-weight:bold;"></p>
+              </div>
+            </div>
+            <div class="col-2" style="width:12%">
+              <span class="texttule">Dose/Unit:</span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <select id="idose1" >
+                <option value="">Select</option>
+                {%for i in range(1,1001,1)%}
+                  <option value="{{i}}">{{i}}</option>
+                {%endfor%}
+              </select>
+              <input type="text" id="unit1" value="ML" size=2>
+            </div>
+
+            <div class="col-1" style="text-align:center;">
+              <span class="texttule" >ADD</span><br>
+              <div class="add-row" id="add-row-inout-milk"  style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/plus.png" title="Insert"></div>
+            </div>
+            &nbsp;&nbsp;
+            <div class="col-1" style="text-align:center;">
+              <span class="texttule">Remove</span><br>
+              <div class="delete-row" id="delete-row-inout-milk"  style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/minus.png" title="Remove"></div>
+            </div>
+          </div>
+
+          <!---CHART END--->
+
+          <div style="display:none;">
+            WARD MAIN ID:<input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}">
+            MEDDET_ID:<input type="text"  id="med_id">
+            PRICE:<input type="text"  id="iuprice">
+            HandQty:<input type="text"  id="Ihqty">
+          </div>
+
+          <div class="row"><div class="col-3" ></div></div>
+          <div class="row">
+            <div class="col-12">
+              <table id="intakeouputchart">
+                  <thead>
+                      <tr>
+                          <th style="width:5px;"></th>
+                          <th>Time</th>
+                          <th>Intake Type</th>
+                          <th>Intake Name</th>
+                          <th>Dose/Quantity</th>
+                          <th>Unit</th>
+                          <th style="display:none;"></th>
+                          <th style="display:none;"></th>
+                      </tr>
+                  </thead>
+
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-5"></div>
+            <input type="submit" value="Update" id="inupdate" style="width:100px;height:40px;font-weight:bold;">
+          </div>
+          <div class="row">
+            <div class="col-5"></div>
+            <p id="inack" style="font-weight:bold;color:green;display:inline;"></p>
+          </div>
+</form>
+</div>
+
+<script>
+function changeIntake()
+{
+  var intake = $("#intakechart").val();
+  if(intake==' '){
+    $("#ivf").hide();
+    $('#intaketype').val('');
+  }
+  else if(intake=='IVF'){
+    $("#ivf").show();
+    $("#intakenamespn").html("I.V.F.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+    $("#intakename").val('');
+    $('#intaketype').val('I.V.F.');
+    $("#milk").hide();
+  }
+  else if(intake=='Milk'){
+    $("#milk").show();
+    $("#intakenamespn").html("Milk:");
+    $("#intakename").val('Milk');
+    $('#intaketype').val('MILK');
+    $('#med_id').val(0);
+    $('#iuprice').val(0);
+    $("#ivf").hide();
+  }
+  else if(intake=='Urine'){
+    $("#milk").show();
+    $("#intakenamespn").html("Urine:");
+    $("#intakename").val("URINE COLLECTED");
+    $('#intaketype').val('URINE');
+    $('#med_id').val(0);
+    $('#iuprice').val(0);
+    $("#ivf").hide();
+  }
+  else if(intake=='Drain'){
+    $("#milk").show();
+    $("#intakenamespn").html("Drain:");
+    $("#intakename").val("DRAIN COLLECTED");
+    $('#intaketype').val('DRAIN');
+    $('#med_id').val(0);
+    $('#iuprice').val(0);
+    $("#ivf").hide();
+  }
+  else if(intake=='NGS'){
+    $("#milk").show();
+    $("#intakenamespn").html("N.G.S:");
+    $("#intakename").val("N.G.S. COLLECTED");
+    $('#intaketype').val('N.G.S.');
+    $('#med_id').val(0);
+    $('#iuprice').val(0);
+    $("#ivf").hide();
+  }
+
+}
+
+$(document).ready(function(){
+  $("#add-row-inout").click(function(){
+
+    var intime = $("#intime").val();
+    var intaketype = $("#intaketype").val();
+    var intakename = $("#intakename").val();
+    var idose = $("#idose").val();
+    var iunit = $("#unit").val();
+    var med_id = $("#med_id").val();
+    var iuprice = $("#iuprice").val();
+    var remqty = parseFloat($("#Ihqty").val())-parseFloat($("#Iqty").val());
+
+
+      mark = "";
+      var chk = "<tr><td><input type='checkbox' name='record' style='width:30px;height:30px;'></td>";
+      mark = mark + chk
+
+      var intime = "<td><input type='time' name='intime' value='"+intime+"' readonly></td>";
+      mark = mark + intime;
+      var intaketype = "<td><input type='text' name='intaketype' value='"+intaketype+"'  readonly></td>";
+      mark = mark + intaketype;
+      var intakename = "<td><input type='text' name='intakename' value='"+intakename+"'  readonly></td>";
+      mark = mark + intakename;
+      var idose = "<td><input type='text' name='idose' value='"+idose+"' readonly></td>";
+      mark = mark + idose;
+      var iunit = "<td><input type='text' name='iunit' value='"+iunit+"'  readonly></td>";
+      mark = mark + iunit;
+      var med_id = "<td style='display:none;'><input type='text' name='med_id' value='"+med_id+"' size=3 readonly></td>";
+      mark = mark + med_id;
+      var iuprice = "<td style='display:none;'><input type='text' name='iamount' value='"+iuprice+"' size=4 readonly></td>";
+      mark = mark + iuprice;
+      var remqty = "<td style='display:none;'><input type='text' name='remqty' value='"+remqty+"' size=4 readonly></td></tr>";
+      mark = mark + remqty;
+
+      $("#intakeouputchart tbody").append(mark);
+      $("#intime").val(' ');
+      $("#intakename").val(' ');
+      $("#amnt").val(' ');
+  });
+
+$("#delete-row-inout").click(function(){
+      $("#intakeouputchart tbody").find('input[name="record"]').each(function(){
+        if($(this).is(":checked")){
+              $(this).parents("tr").remove();
+          }
+      });
+  });
+});
+
+$(document).ready(function(){
+  $("#add-row-inout-milk").click(function(){
+
+    var intime = $("#intime1").val();
+    var intaketype = $("#intaketype").val();
+    var intakename = $("#intakename").val();
+    var idose = $("#idose1").val();
+    var iunit = $("#unit1").val();
+    var med_id = $("#med_id").val();
+    var iuprice = $("#iuprice").val();
+    var remqty = parseFloat($("#Ihqty").val())-parseFloat($("#Iqty").val());
+
+
+      mark = "";
+      var chk = "<tr><td><input type='checkbox' name='record' style='width:30px;height:30px;'></td>";
+      mark = mark + chk
+
+      var intime = "<td><input type='time' name='intime' value='"+intime+"' readonly></td>";
+      mark = mark + intime;
+      var intaketype = "<td><input type='text' name='intaketype' value='"+intaketype+"'  readonly></td>";
+      mark = mark + intaketype;
+      var intakename = "<td><input type='text' name='intakename' value='"+intakename+"'  readonly></td>";
+      mark = mark + intakename;
+      var idose = "<td><input type='text' name='idose' value='"+idose+"' readonly></td>";
+      mark = mark + idose;
+      var iunit = "<td><input type='text' name='iunit' value='"+iunit+"'  readonly></td>";
+      mark = mark + iunit;
+      var med_id = "<td style='display:none;'><input type='text' name='med_id' value='"+med_id+"' size=3 readonly></td>";
+      mark = mark + med_id;
+      var iuprice = "<td style='display:none;'><input type='text' name='iamount' value='"+iuprice+"' size=4 readonly></td>";
+      mark = mark + iuprice;
+      var remqty = "<td style='display:none;'><input type='text' name='remqty' value='"+remqty+"' size=4 readonly></td></tr>";
+      mark = mark + remqty;
+
+      $("#intakeouputchart tbody").append(mark);
+      $("#intime").val(' ');
+      $("#intakename").val(' ');
+      $("#amnt").val(' ');
+  });
+
+$("#delete-row-inout-milk").click(function(){
+      $("#intakeouputchart tbody").find('input[name="record"]').each(function(){
+        if($(this).is(":checked")){
+              $(this).parents("tr").remove();
+          }
+      });
+  });
+});
+
+
+</script>
+<!--------------------- Intake Output Chart Ends ------------------------------>
+
+
+<!---------------------- Consumable charts starts ----------------------------->
+<script>
+// GET DRUG NAMES BY AJAX FOR consume
+$(document).ready(function(){
+$(function(){
+  $("#consume").autocomplete({
+      source: function(request,response )
+        {
+          var consume=document.getElementById('consume').value;
+          var wardid=$("#wardid").val();
+            $.ajax({
+                type:"POST",
+                url:"getMedicineWardConsume",
+                data:{"consume":consume,"wardid":wardid},
+                success: function(data)
+                {
+                  if (data=="")
+                    $("#cmsg").text('Requested Consumable Is Not Issued To You Or Quantity Is Zero.');
+                    else{
+                      $("#cmsg").text(' ');
+                      response(data);
+                    }
+                }
+              });
+          },
+    });
+});
+});
+
+function showConsume(idval)
+{
+  var idval = idval.value;
+  var arr = idval.split(">");
+  $('#consume').val(arr[0]);
+  $('#cmed_id').val(arr[4]);
+  $('#cprice').val(arr[3]);
+  $('#chqty').val(arr[2]);
+  }
+
+  function resetConsume(conid)
+  {
+    var conid = conid.id;
+    $("#"+conid).val('');
+    $("#cmsg").text('');
+  }
+</script>
+
+
+
+<div id="tab-4" class="tab-content">
+  <form action="updateWardConsume" method="POST">
+    <input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}" style="display:none;">
+  <div class="row myrow">
+    <div class="col-3"></div>
+    <div class="col-2">
+      <span class="texttule">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <input type="date" name="cdate" id="cdate" placeholder="Date">
+    </div>
+
+    <div class="col-2">
+      <span class="texttule">Given By :</span>
+      <input type="text" name="cgivenby"  placeholder="Given By">
+    </div>
+  </div>
+  <div class="row myrow">
+    <div class="col-3"></div>
+    <div class="col-1">
+      <span class="texttule">Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <input type="time"  id="ctime" placeholder="Time">
+    </div>
+    <div class="col-2" >
+      <div class="ui-widget">
+        <span class="texttule">Consumable Service:</span>
+        <input type="text"  id="consume" placeholder="consume" onblur="showConsume(this)" onfocus="resetConsume(this)">
+          <p id="cmsg" style="color:red;font-weight:bold;"></p>
+      </div>
+    </div>
+
+    <div class="col-1">
+      <span class="texttule">Quantity:</span>
+      <input type="text"  id="cqty" size=5 >
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="col-1" style="text-align:center;">
+      <span class="texttule">ADD</span>
+      <div class="add-row" id="add-row-con"  style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/plus.png" title="Insert"></div>
+    </div>
+    &nbsp;&nbsp;
+    <div class="col-1" style="text-align:center;">
+      <span class="texttule">Remove</span>
+      <div class="delete-row" id="delete-row-con"  style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/minus.png" title="Remove"></div>
+    </div>
+  </div>
+    <div class="row myrow">
+      <div class="col-5"></div>
+      <div class="col-1"><p id="pack" style="font-weight:bold;color:green;display:inline;"></p></div>
+    </div>
+    <input type="text"  id="cmed_id" style="display:none;">
+    <input type="text"  id="cprice" style="display:none;">
+    <input type="text"  id="chqty" style="display:none;">
+
+    <div class="row"><div class="col-3" ></div></div>
+    <div class="row">
+      <div class="col-12">
+        <table id="conchart">
+            <thead>
+                <tr>
+                    <th style="width:5px;"></th>
+                    <th>Time</th>
+                    <th>Consumable Service Name</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-5"></div>
+      <input type="submit" value="Update" id="cupdate" style="width:100px;height:40px;font-weight:bold;">
+    </div>
+    <div class="row">
+      <div class="col-5"></div>
+      <p id="cack" style="font-weight:bold;color:green;display:inline;"></p>
+    </div>
+</form>
+</div>
+<script>
+$(document).ready(function(){
+  $("#add-row-con").click(function(){
+    var ctime = $("#ctime").val();
+    var consume= $("#consume").val();
+    var cqty = parseFloat($("#cqty").val());
+    var cmed_id = $("#cmed_id").val();
+    var cprice = $("#cprice").val();
+    var chqty = parseFloat($("#chqty").val());
+    var remqty = chqty-cqty;
+    if(cqty>chqty)
+    {
+        alert("You Have Only "+chqty+" Consumable You Are Entering "+cqty);
+        return false;
+    }
+      mark = "";
+      var chk = "<tr><td><input type='checkbox' name='record' style='width:30px;height:30px;'></td>";
+      mark = mark + chk
+
+      var ctime = "<td><input type='time' name='contime' value='"+ctime+"' readonly></td>";
+      mark = mark + ctime;
+
+      var consume = "<td><input type='text' name='consume' value='"+consume+"'  readonly></td>";
+      mark = mark + consume;
+
+      var qty = "<td><input type='text' name='conqty' value='"+cqty+"'  readonly></td>";
+      mark = mark + qty;
+
+      var med_id = "<td style='display:none;'><input type='text' name='conmed_id' value='"+cmed_id+"' size=3 readonly></td>";
+      mark = mark + med_id;
+      var iuprice = "<td style='display:none;'><input type='text' name='conprice' value='"+cprice+"' size=4 readonly></td>";
+      mark = mark + iuprice;
+      var remqty = "<td style='display:none;'><input type='text' name='remqty' value='"+remqty+"' size=4 readonly></td></tr>";
+      mark = mark + remqty;
+      $("#conchart tbody").append(mark);
+
+      $("#ctime").val('');
+      $("#consume").val('');
+      $("#cqty").val('');
+  });
+
+$("#delete-row-con").click(function(){
+      $("#conchart tbody").find('input[name="record"]').each(function(){
+        if($(this).is(":checked")){
+              $(this).parents("tr").remove();
+          }
+      });
+  });
+});
+
+</script>
+
+<!-------------------- Consumable chart Ends ---------------------------------->
+
+<!--------------------- Sugar Chart starts ------------------------------------>
+<div id="tab-5" class="tab-content">
+  <form action="updateWardSugar" method="POST">
+    <div class="row myrow">
+      <div class="col-2" ></div>
+        <div class="col-2" >
+          &nbsp;&nbsp;<span class="texttule">Sugar Level :</span>
+          <input type="text" name="sugarlevel" id="sugarlevel" placeholder="Sugar Level">
+        </div>
+        <div class="col-2" >
+          <div class="ui-widget">
+            <span class="texttule">Medicine Name:</span>
+            <input type="text" name="insuline" id="insuline" placeholder="Medicine Name" onblur="showSugar(this);"onfocus="resetSugar(this);">
+            <p id="smsg" style="color:red;font-weight:bold;"></p>
+          </div>
+        </div>
+
+          <div class="col-2" >
+            <span class="texttule">Dose/Unit:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <select name="sdose" id="sdose">
+              <option value="">Select</option>
+              {%for i in range(1,1001,1)%}
+                <option value="{{i}}">{{i}}</option>
+              {%endfor%}
+            </select>
+            <input type="text" name="sunit" size=3 value="ML">
+          </div>
+
+          <div class="col-1" >
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Quantity:</span>
+            <input type="text" id="suqty" onblur="calQty()">
+        </div>
+      </div> <!-- row -->
+
+      <div class="row myrow">
+        <div class="col-2" ></div>
+      <div class="col-2" >
+        <span class="texttule">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <input type="date" name="sdate" id="sdate">
+      </div>
+
+      <div class="col-1" >
+        <span class="texttule">Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <input type="time" name="stime" id="stime">
+      </div>
+      <div class="col-2" >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Given By :</span>
+        <input type="text" name="givenby" name="sgivenby" placeholder="Given By">
+      </div>
+    </div><!-- row -->
+    <br>
+
+      <input type="text" name="remqty" id="cremqty" style="display:none;">
+      <input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}" style="display:none;">
+      <input type="text" name="med_id" id="smed_id" style="display:none;">
+      <input type="text" name="sprice" id="sprice" style="display:none;">
+      <input type="text" name="hqty" id="hcqty" style="display:none;">
+
+    <div class="row myrow">
+      <div class="col-11"style="text-align:center;">
+        <input type="submit" value="Update" id="supdate" style="width:100px;height:40px;font-weight:bold;">
+      </div>
+      <br>
+      <br>
+      <div class="col-1"><p id="sack" style="font-weight:bold;color:green;display:inline;"></p>
+      </div>
+    </div><!-- row -->
+
+  </form>
+  </div> <!-- tab -->
+
+
+
+
+<script>
+// GET DRUG NAMES BY AJAX FOR Sugar
+$(document).ready(function(){
+$(function(){
+  $("#insuline").autocomplete({
+      source: function(request,response )
+        {
+          var insuline=document.getElementById('insuline').value;
+          wardid=$("#wardid").val();
+            alert(wardid);
+            $.ajax({
+                type:"POST",
+                url:"getMedicineWardSugar",
+                data:{"insuline":insuline,"wardid":wardid},
+
+                success: function(data)
+                {
+                  if (data=="")
+                    $("#smsg").text('Requested Insulin Is Not Issued To You Or Quantity Is Zero.');
+                    else{
+                      response(data);
+                      $("#smsg").text('');
+                    }
+                }
+              });
+          },
+    });
+});
+});
+
+function calQty(){
+  qty = parseFloat($('#suqty').val());
+  hcqty=parseFloat($('#hcqty').val());
+  if(qty>hcqty){
+    alert("You Have "+qty+" You Are Entering "+hcqty);
+    return false;
+  }
+  else {
+    $("#cremqty").val(hcqty-qty);
+  }
+}
+
+function showSugar(idval)
+{
+  var idval = idval.value;
+  console.log(idval);
+    var arr = idval.split(">");
+    $('#insuline').val(arr[0]);
+    $('#smed_id').val(arr[4]);
+    $('#sprice').val(arr[3]);
+    $('#hcqty').val(arr[2]);
+  }
+
+  function resetSugar(suid)
+  {
+    var suid = suid.id;
+    $("#"+suid).val('');
+    $("#smsg").text('');
+  }
+</script>
+
+<!------------------------- Sugar Chart Ends ---------------------------------->
+
+
+<!----------------------- DRESSING charts starts ------------------------------>
+<div id="tab-6" class="tab-content">
+
+  <br>
+
+  <table border="1" id="warddressing">
+    <tr>
+      <th>Action</th>
+      <th>Date</th>
+      <th>Dressing Name</th>
+      <th>Done By</th>
+
+    </tr>
+
+    {%for dd in ds4%}
+    <tr>
+      <form action="updateWardDressing" method="POST">
+
+        <input type="text" name="dressing_id" value="{{dd[2]}}" style="display:none;">
+
+        <td><input type="submit" value="Update" id="dressingupdate" style="max-width:80px;"></td>
+
+        <td><input type="date" name="dressing_date" value="{{dd[4]}}"></td>
+
+        <td><select  id="drsname{{loop.index}}" name="dname" onchange="getAllDressingName(this,{{loop.index}})" required>
+          <option style="font-weight:bold;" value="{{dd[0]}}">{{dd[1]}}</option>
+          <option value="">--Select--</option>
+          {%for row in ds5%}
+          <option value="{{row[0]}}">{{row[1]}}</option>
+          {%endfor%}
+        </select></td>
+
+        <td><input type="text" name="dressing_doneby" value="{{dd[7]}}"></td>
+
+        <td style="display:none;"><input type="text" name="dressing_amount" style="max-width:60px;" id="amount{{loop.index}}" value="{{dd[6]}}"></td>
+      </form>
+    </tr>
+    {%endfor%}
+  </table>
+  <br>
+  <p id="dressingack" style="font-weight:bold;color:green;display:inline;"></p>
+
+</div><!-- tab -->
+
+
+<script>
+function getAllDressingName(drsname,s)
+{
+  //var val = $("#drsname").val();
+  val=drsname.value;
+  amount="amount"+s;
+  $.ajax({
+    type: "POST",
+    url: "/getDressing",
+    data:"dname=" + val,
+    success: function(string){
+      var data = JSON.parse(string)['data'];
+      $("#"+amount).val(data[0]);
+    }
+  });
+};
+</script>
+
+
+
+<!------------------------- DRESSING Chart Ends ------------------------------->
+
+
+<!----------------------- Therapy Starts -------------------------------------->
+
+<script>
+function CalTime(g)
+{
+  var tim1=$("#therapy_starttime"+g).val();
+  var tim2=$("#therapy_endtime"+g).val();
+
+  var w= isNaN(tim1);
+  console.log(w);
+  var t= isNaN(tim2);
+  console.log(t);
+
+  if (w == true && t == true)
+  {
+    var ary1=tim1.split(':');
+    var ary2=tim2.split(':');
+    var minsdiff=parseInt(ary2[0],10)*60+parseInt(ary2[1],10)-parseInt(ary1[0],10)*60-parseInt(ary1[1],10);
+    var x = (String(100+Math.floor(minsdiff/60)).substr(1)+':'+String(100+minsdiff%60).substr(1));
+    var a = x.split(":");
+    var minut=(parseInt(a[0])*60)+parseInt(a[1]);
+    $("#therapy_duration"+g).val(minut);
+  }
+}
+
+function getAllTherapyName(adm_therapyname,d)
+{
+  //var val = $("#adm_therapyname").val();
+  val = adm_therapyname.value;
+  tamount = "tamount"+d;
+  $.ajax({
+    type: "POST",
+    url: "/getTherapy",
+    data:"tname=" + val,
+    success: function(string){
+      var data = JSON.parse(string)['data'];
+      $("#"+tamount).val(data[0]);
+
+    }
+  });
+};
+
+function CalcTotalAmount(s)
+
+{
+  var a = $("#tamount"+s).val();
+  var b = $("#therapy_duration"+s).val();
+  var c = a * b;
+  $("#therapy_amount"+s).val(c);
+}
+
+</script>
+
+<div id="tab-7" class="tab-content">
+  <br>
+  <table border="1" id="wardtherapy">
+    <tr>
+      <th>Action</th>
+      <th>Date</th>
+      <th>Therapy Name</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Duration (in Mins)</th>
+      <th>Given By</th>
+    </tr>
+
+      {%for thera in ds6%}
+    <tr>
+      <form action = "updateNurTherapy" method = "POST">
+
+        <td><input type="submit" value="Update" id="therapyupdate"></td>
+
+        <input type="text" name="therapy_id" value="{{thera[2]}}" style="display:none;">
+
+        <td><input type="date" name="therapy_date" value="{{thera[4]}}"></td>
+
+        <td><select  id="adm_therapyname{{loop.index}}" name="tname" onchange="getAllTherapyName(this,{{loop.index}})" required>
+          <option style="font-weight:bold;" value="{{thera[0]}}">{{thera[1]}}</option>
+          <option value="">--Select--</option>
+          {%for row in ds7%}
+          <option value="{{row[0]}}">{{row[1]}}</option>
+          {%endfor%}
+        </select></td>
+
+        <td><input type="time" name="therapy_starttime" id="therapy_starttime{{loop.index}}" onblur="CalTime({{loop.index}})" value="{{thera[6]}}"></td>
+
+        <td><input type="time" name="therapy_endtime" id="therapy_endtime{{loop.index}}" onblur="CalTime({{loop.index}})" value="{{thera[7]}}"></td>
+
+        <td><input type="text" name="therapy_duration" style="max-width:60px;" id="therapy_duration{{loop.index}}" onblur="CalcTotalAmount({{loop.index}})" value="{{thera[8]}}"readonly></td>
+
+        <td><input type="text" name="therapy_givenby" value="{{thera[10]}}"></td>
+
+        <td style="display:none;"><input type="text" style="max-width:60px;" name="tamount" id="tamount{{loop.index}}" onblur="CalcTotalAmount({{loop.index}})" readonly></td>
+
+        <td style="display:none;"><input type="text" style="max-width:60px;display:none;" name="therapy_amount" id="therapy_amount{{loop.index}}" value="{{thera[9]}}" onblur="CalcTotalAmount({{loop.index}})" readonly></td>
+      </form>
+    </tr>
+    {%endfor%}
+  </table>
+  <br>
+  <p id="therapyack" style="font-weight:bold;color:green;display:inline;"></p>
+
+</div> <!-- tab -->
+
+
+
+<!------------------------- Therapy Ends -------------------------------------->
+
+    </div><!-- container -->
+  </div> <!--- Content --->
+</div><!--- col-12 --->
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+<style>
+#lab td, #lab th {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align:center
+}
+</style>
+
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-5">
+<table id="lab" style="width:100%">
+  <tr>
+    <td colspan="2" style="color:green;background-color:pink"><b>DELIVERY ADMINISTRATION</b></td>
+  </tr>
+  <tr>
+    <td><b>Add</b></td>
+    <td><b>View/Edit</b></td>
+  </tr>
+  <tr>
+    <td><a href="{{ url_for('Insertnewdeliverytype') }}"> Add Delivery Type</a></td>
+    <td><a href="{{ url_for('Viewdeliverytype') }}"> View Delivery Type</a></td>
+  </tr>
+</table>
+</div>
+</div>
+
+{%if flag==1%}
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-5">
+<table id="lab" style="width:100%">
+  <tr>
+    <td colspan="3" style="color:white;background-color:#008080"><b>INSERT NEW DELIVERY TYPE</b></td>
+  </tr>
+  <tr>
+    <td colspan="3"><b>{{ack}}</b></td>
+  </tr>
+  <tr>
+    <td><b>Delivery Type</b></td>
+    <td><b>Amount</b></td>
+    <td><b>Save</b></td>
+  </tr>
+  <tr>
+    <form action="InsertDelType" method="POST">
+    <td><input type="text" name="deltype" class="alphaonly"></td>
+    <td><input type="text" name="dtamount" class="numeric"></td>
+    <td><input type="submit" value="Save"></td>
+  </form>
+  </tr>
+</table>
+</div>
+</div>
+{%endif%}
+
+{%if flag==2%}
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-5">
+<table id="lab" style="width:100%">
+  <tr>
+    <td colspan="3" style="color:white;background-color:#4169E1"><b>UPDATE DELIVERY TYPE</b></td>
+  </tr>
+  <tr>
+    <td colspan="3"><b>{{ack}}</b></td>
+  </tr>
+  <tr>
+    <td><b>Delivery Type</b></td>
+    <td><b>Amount</b></td>
+    <td><b>Update</b></td>
+  </tr>
+  {%for row in data%}
+  <form action="UpdateDelType" method="POST">
+  <tr>
+    <td><input type="text" name="deltype" class="alphaonly" value="{{row[1]}}"></td>
+    <td><input type="text" name="dtamount" class="numeric" value="{{row[2]}}"></td>
+    <td><input type="hidden" name="dtid" value="{{row[0]}}"><input type="submit" value="Update"></td>
+  </tr>
+</form>
+  {%endfor%}
+</table>
+</div>
+</div>
+{%endif%}
+
+{% endblock %}

@@ -7,6 +7,15 @@
 background-color:#F0E68C;
 width: 100%;
 }
+
+.subtitlebox{
+  font-weight: bold;
+  font-size: 20px;
+  font-family: Times New Roman;
+  padding:5px;
+  background:#80DFFF;
+}
+
 .spnhead
 {
   font-size: 20px;
@@ -58,49 +67,402 @@ width: 100%;
 		}
 </style>
 
-<div class="col12">
+<div class="col-12">
   <div id="content">
-    <div class="titlebox"  align="center">General Ward</div>
+    <div class="titlebox"  align="center">{{wname}}</div>
     <div class="row" style="padding-bottom:1px;"></div>
     <div class="col-12 subtitle">
-      <div class="col-2"><span class="spnhead">Regno:</span><span class="spndata">2019SHD123</span></div>
-      <div class="col-2"><span class="spnhead">Name:</span><span class="spndata">Iron Man</span></div>
-      <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata">Male</span></div>
-      <div class="col-2"><span class="spnhead">Age:</span><span class="spndata">25 year</span></div>
+      {%for row in pdetails%}
+      <div class="col-2"><span class="spnhead">Regno:</span><span class="spndata">{{row[1]}}</span></div>
+      <div class="col-3"><span class="spnhead">Name:</span><span class="spndata">{{row[2]}}&nbsp;{{row[3]}}&nbsp;{{row[4]}}</span></div>
+      <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata">{{row[13]}}</span></div>
+      <div class="col-2"><span class="spnhead">Age:</span><span class="spndata">{{row[11]}} {{row[12]}}</span></div>
+      {%endfor%}
     </div>
-      <div class="row myrow">
-        <form action="reginward" method="POST">
+
+    {%if wid!='8'%}
+    <div class="row myrow">
+    <form action="insertInWard" method="POST">
       <div class="col-2">
         <span class="texttule">Bed No:</span>
-            <select style="width:120px;">
-            <option value="bed1">---Select---</option>
-            <option value="bed1">B1</option>
-            <option value="bed2">B2</option>
-            <option value="bed3">B3</option>
-            <option value="bed4">B4</option>
-            <option value="bed5">B5</option>
-            <option value="bed6">B6</option>
-            <option value="bed7">B7</option>
+            <select name="bedno" style="width:120px;" required>
+            <option value="" >---Select---</option>
+            {% for row in beds%}
+            <option value="{{row[1]}}">{{row[0]}}</option>
+            {%endfor%}
           </select>
       </div>
+      <input type="text" name="wardname" value="{{wname}}" style="display:none;">
+      <input type="text" name="wid" value="{{wid}}" style="display:none;">
+      {%for row in pdetails%}
+      <input type="text" name="regno" value="{{row[1]}}" style="display:none;">
+      <input type="text" name="ipdid" value="{{row[25]}}" style="display:none;">
+      {%endfor%}
       <div class="col-2">
-        <div><input type="submit" value="Submit"></div>
+        <div><input type="submit" value="Submit" ></div>
+        <p style="display:inline;">{{ack1}}</p>
       </div>
+      </form>
     </div>
-  </form>
-    </div><!----------titlebox-------->
-  </div><!----------Content-------->
-</div><!----------COl-12-------->
+    {%endif%}
 
-<table border="2" width="100%">
-<thead>
-  <td>Bed No.</td>
-  <td>Regno</td>
-  <td>Patient Name</td>
-  <td>Admission Date</td>
-  <td>Edit</td>
-  <td>Discharge</td>
-</thead>
-</table>
+
+    <!----------------------- Nursery Sheet --------------------------------------->
+
+    <div class="col-12">
+      <div class="content">
+        <div class="container">
+          {%if wid=='6'%}
+          <form action="insertNursery" method='POST'>
+            <input type="text" name="wardname" value="{{wname}}" style="display:none;">
+            <input type="text" name="wid" value="{{wid}}" style="display:none;">
+            {%for row in pdetails%}
+            <input type="text" name="regno" value="{{row[1]}}" style="display:none;">
+            <input type="text" name="ipdid" value="{{row[25]}}" style="display:none;">
+            {%endfor%}
+
+
+            <div class="row myrow">
+              <div class="col-2"></div>
+              <div class="col-2">
+                <span class="texttule">Bed No:</span><br>
+                <select name="bedno" style="width:120px;" required>
+                  <option value="" >---Select---</option>
+                  {% for row in beds%}
+                  <option value="{{row[1]}}">{{row[0]}}</option>
+                  {%endfor%}
+                </select>
+              </div>
+
+            <div class="row myrow">
+              <input type="text" name="wrd_id" style="display:none;">
+              <input type="text" name="regno" style="display:none;">
+
+              <div class="col-2"><span class="texttule">Mother's Name:</span>
+                <input type="text" name="ns_mother_name" class="alphaonly" placeholder="Mother's Name">
+              </div>
+
+              <div class="col-2"><span class="texttule">Mother's Reg No:</span>
+                <input type="text" name="ns_mother_regno" class="spalphanum" placeholder="Mother's Reg No">
+              </div>
+
+              <div class="col-2"><span class="texttule">Mother's Bed No:</span><br>
+                <input type="text" style="max-width:120px" name="ns_mother_bedno" class="spalphanum" placeholder="Mother's Bed No">
+              </div>
+            </div> <!-- row -->
+
+            <br>
+
+            <div class="row myrow">
+              <div class="col-2"></div>
+              <div class="col-2">
+                <span class="texttule">Date of Admission:</span>
+                <input type="date" style="max-width:68%" name="ns_doa" required>
+              </div>
+
+              <div class="col-2"><span class="texttule">Time of Admission:</span><br>
+                <input type="time" name="ns_toa" required>
+              </div>
+
+              <div class="col-2"><span class="texttule">Weight on Admission:</span><br>
+                <input type="text" style="max-width:90px" name="ns_wt_adm" class="numeric" placeholder="Weight on Admission">
+              </div>
+
+              <div class="col-2"><span class="texttule">Date of Birth:</span>
+                <input type="date" style="max-width:68%" name="ns_dob" >
+              </div>
+
+            </div> <!-- row -->
+            </div>
+
+            <br>
+
+            <div class="row myrow">
+                <div class="col-2"></div>
+                <div class="col-2"><span class="texttule">Time of Birth:</span><br>
+                <input type="time" name="ns_tob">
+              </div>
+
+              <div class="col-2"><span class="texttule">Weight at Birth:</span><br>
+                <input type="text" style="max-width:60px" name="ns_wt_birth" class="numeric" placeholder="Weight at Birth">
+              </div>
+
+              <div class="col-2"><span class="texttule">EDD:</span><br>
+                <input type="date" style="max-width:68%" name="ns_edd">
+              </div>
+
+              <div class="col-2"><span class="texttule">Delivery From:</span>
+                <input type="text" style="max-width:60%" name="ns_delivery_from" placeholder="Delivery From">
+              </div>
+
+
+            </div> <!-- row -->
+
+            <br>
+
+            <div class="row myrow">
+              <div class="col-2"></div>
+              <div class="col-2"><span class="texttule">Mode of Delivery:</span><br>
+                <select name="ns_mod" id="ns_mod" onchange="ns_modType()">
+                  <option value="">--Select--</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Forcep">Forcep</option>
+                  <option value="Lscs">LSCS</option>
+                  <option value="Others">Others</option>
+                </select>
+
+                <br>
+                <div class="col-3" id="othersdiv" style="display:none;">
+                  <input type="text" class="alphaonly" name="other_ns_mod" id="othertype" placeholder="Others">
+                </div>
+              </div>
+
+              <div class="col-3" style="text-align:center;"><span class="texttule">Complications During Delivery:</span>
+
+                <select name="ns_cdd" id="ns_cdd" onchange="ns_cddType()">
+                  <option value="">--Select--</option>
+                  <option value="None">None</option>
+                  <option value="Hydroamnios">Hydroamnios</option>
+                  <option value="Oligohydroamnios">Oligohydroamnios</option>
+                  <option value="Meconiumstain">Meconium Stain</option>
+                  <option value="Others">Others</option>
+                </select>
+                <br>
+                <div class="col-3" id="othersdivtwo" style="display:none;">
+                  <input type="text" class="alphaonly" name="other_ns_cdd" id="othercddtype" placeholder="Others">
+                </div>
+              </div>
+
+
+              <div class="col-3" style="text-align:center;">
+              <span class="texttule">APGAR SCORE at Birth:</span><br>
+
+                  <B>0 min </B><input type="text" name="ns_apgar0" style="width:40px;border:2px solid red;font-weight:bold;text-align:center" class="numeric" placeholder="APGAR at 0 min">
+
+                  <B>1 min </B><input type="text" name="ns_apgar1" style="width:40px;border:2px solid green;font-weight:bold;text-align:center" class="numeric" placeholder="APGAR at 1 min">
+
+                  <B>5 min </B><input type="text" name="ns_apgar5" style="width:40px;border:2px solid blue;font-weight:bold;text-align:center" class="numeric" placeholder="APGAR at 5 min">
+
+              </div>
+            </div> <!-- row -->
+            <br>
+            <div class="row myrow">
+              <div class="col-2"></div>
+              <div class="col-2"><span class="texttule">Baby:</span><br>
+                <select name="ns_baby" id="ns_baby" onchange="ns_babyType()">
+                  <option value="">--Select--</option>
+                  <option value="Term">Term</option>
+                  <option value="Preterm">Pre term</option>
+                  <option value="Postterm">Post term</option>
+                  <option value="Others">Others</option>
+                </select>
+                <br>
+                <div class="col-3" id="othersdivthree" style="display:none;">
+                  <input type="text" class="alphaonly" name="other_ns_baby" id="otherbabytype" placeholder="Others">
+                </div>
+              </div>
+
+              <div class="col-2"><span class="texttule">Colour:</span><br>
+                <select name="ns_color" id="ns_color" onchange="ns_colorType()">
+                  <option value="">--Select--</option>
+                  <option value="Pink">Pink</option>
+                  <option value="Pallor">Pallor</option>
+                  <option value="Blue">Blue</option>
+                  <option value="Others">Others</option>
+                </select>
+                <br>
+                <div class="col-3" id="othersdivfour" style="display:none;">
+                  <input type="text" class="alphaonly" name="other_ns_color" id="othercolortype" placeholder="Others">
+                </div>
+              </div>
+
+
+                <div class="col-2"><span class="texttule">Thrive:</span><br>
+                  <select name="ns_thrive" id="ns_thrive" onchange="ns_thriveType()">
+                    <option value="">--Select--</option>
+                    <option value="Good">Good</option>
+                    <option value="Sluggish">Sluggish</option>
+                    <option value="Very_Sluggish">Very Sluggish</option>
+                    <option value="Others">Others</option>
+                  </select>
+                  <br>
+                  <div class="col-3" id="othersdivfive" style="display:none;">
+                    <input type="text" class="alphaonly" name="other_ns_thrive" id="otherthrivetype" placeholder="Others">
+                  </div>
+                </div>
+
+                <div class="col-2"><span class="texttule">Sucking:</span><br>
+                  <select name="ns_sucking" id="ns_sucking" onchange="ns_suckingType()">
+                    <option value="">--Select--</option>
+                    <option value="No">No</option>
+                    <option value="Poor">Poor</option>
+                    <option value="Good">Good</option>
+                    <option value="Others">Others</option>
+                  </select>
+                  <br>
+                  <div class="col-3" id="othersdivsix" style="display:none;">
+                    <input type="text" class="alphaonly" name="other_ns_sucking" id="othersuckingtype" placeholder="Others">
+                  </div>
+                </div>
+
+            </div> <!-- row -->
+              <br>
+
+            <div class="row myrow">
+              <div class="col-5"></div>
+              <div class="col-3"><span class="texttule"><u>Chief Complaints on Admission</u></span></div>
+
+            <div class="col-12" style="margin-left:15%">
+              <input type="checkbox" name="ns_complaints" id="ns_complaints" value="Respiratory_Distress" style="width:18px;height:18px;vertical-align:middle;position:relative;bottom:2px;">&nbsp;<span class="texttule">Respiratory Distress</span>
+
+              <input type="checkbox" name="ns_complaints" id="ns_complaints" value="Seizure" style="width:18px;height:18px;vertical-align:middle;position:relative;bottom:2px;">&nbsp;<span class="texttule">Seizure</span>
+
+              <input type="checkbox" name="ns_complaints" id="ns_complaints" value="Fever" style="width:18px;height:18px;vertical-align:middle;position:relative;bottom:2px;">&nbsp;<span class="texttule">Fever</span>
+
+              <input type="checkbox" name="ns_complaints" id="ns_complaints" value="Abdominal_Distension" style="width:18px;height:18px;vertical-align:middle;position:relative;bottom:2px;">&nbsp;<span class="texttule">Abdominal Distension</span>
+
+              <input type="checkbox" name="ns_complaints" id="ns_complaints" value="Vomiting" style="width:18px;height:18px;vertical-align:middle;position:relative;bottom:2px;">&nbsp;<span class="texttule">Vomiting</span>
+
+              <input type="checkbox" name="ns_complaints" id="ns_complaints" value="Cyanosis" style="width:18px;height:18px;vertical-align:middle;position:relative;bottom:2px;">&nbsp;<span class="texttule">Cyanosis</span>
+
+              <input type="checkbox" name="ns_complaints" id="ns_complaints" value="Pallor" style="width:18px;height:18px;vertical-align:middle;position:relative;bottom:2px;">&nbsp;<span class="texttule">Pallor</span>
+
+              <input type="checkbox" name="ns_complaints" id="ns_complaints" value="Dehydration" style="width:18px;height:18px;vertical-align:middle;position:relative;bottom:2px;">&nbsp;<span class="texttule">Dehydration</span>
+
+              <input type="checkbox" name="ns_complaints" id="ns_complaints" value="Jaundice" style="width:18px;height:18px;vertical-align:middle;position:relative;bottom:2px;">&nbsp;<span class="texttule">Jaundice</span>
+              </div>
+
+            </div> <!-- row -->
+
+            <br>
+
+            <div class="row myrow">
+              <div class="col-3">
+                <div class="subtitlebox" style="width:70%;margin-left:60%">Others:</div>
+                <br>
+                <textarea name="ns_others" rows="5" cols="25" style="margin-left:60%;border:2px solid blue;font-weight:bold" class="spalphanum" placeholder="Enter Other Details Here"></textarea>
+              </div>
+
+              <div class="col-3">
+                <div class="subtitlebox" style="width:70%;margin-left:150%">Diagnosis:</div>
+                <br>
+                <textarea name="ns_diagnosis" rows="5" cols="25" style="margin-left:150%;border:2px solid yellow;font-weight:bold" class="spalphanum" placeholder="Enter Diagnosis Here"></textarea>
+              </div>
+
+            </div> <!-- row -->
+            <br>
+            <div class="row myrow">
+              <div class="col-5"></div>
+                <div class="col-2" style="text-align:center;"><span class="texttule">Registered By:</span>
+                <input type="text" name="ns_registered_by" style="border:2px solid green;font-weight:bold" class="alphaonly" placeholder="Registered By" required>
+              </div>
+            </div> <!-- row -->
+
+            <br>
+            <br>
+
+            <div class="col-12" align="center">
+            <input type="submit" value="Submit" style="font-size:13px;font-family: Arial;letter-spacing: 0.008em;color:#5d5656;margin-top:20px;width:120px;height:40px;font-weight:bold">
+            </div>
+
+            </form>
+            {%endif%}
+          </div> <!-- container -->
+        </div><!----------Content-------->
+    </div><!----------COl-12-------->
+
+
+<script>
+function ns_modType()
+{
+  var ns_mod = document.getElementById('ns_mod').value;
+  if(ns_mod=='Others')
+  {
+    document.getElementById('othersdiv').style.display = 'block';
+    document.getElementById('othertype').required = true;
+  }
+  else
+  {
+    document.getElementById('othersdiv').style.display = 'none';
+    document.getElementById('othertype').required = false;
+  }
+}
+
+function ns_cddType()
+{
+  var ns_cdd = document.getElementById('ns_cdd').value;
+  if(ns_cdd=='Others')
+  {
+    document.getElementById('othersdivtwo').style.display = 'block';
+    document.getElementById('othercddtype').required = true;
+  }
+  else
+  {
+    document.getElementById('othersdivtwo').style.display = 'none';
+    document.getElementById('othercddtype').required = false;
+  }
+}
+
+function ns_babyType()
+{
+  var ns_baby = document.getElementById('ns_baby').value;
+  if(ns_baby=='Others')
+  {
+    document.getElementById('othersdivthree').style.display = 'block';
+    document.getElementById('otherbabytype').required = true;
+  }
+  else
+  {
+    document.getElementById('othersdivthree').style.display = 'none';
+    document.getElementById('otherbabytype').required = false;
+  }
+}
+
+function ns_colorType()
+{
+  var ns_color = document.getElementById('ns_color').value;
+  if(ns_color=='Others')
+  {
+    document.getElementById('othersdivfour').style.display = 'block';
+    document.getElementById('othercolortype').required = true;
+  }
+  else
+  {
+    document.getElementById('othersdivfour').style.display = 'none';
+    document.getElementById('othercolortype').required = false;
+  }
+}
+
+function ns_thriveType()
+{
+  var ns_thrive = document.getElementById('ns_thrive').value;
+  if(ns_thrive=='Others')
+  {
+    document.getElementById('othersdivfive').style.display = 'block';
+    document.getElementById('otherthrivetype').required = true;
+  }
+  else
+  {
+    document.getElementById('othersdivfive').style.display = 'none';
+    document.getElementById('otherthrivetype').required = false;
+  }
+}
+
+function ns_suckingType()
+{
+  var ns_sucking = document.getElementById('ns_sucking').value;
+  if(ns_sucking=='Others')
+  {
+    document.getElementById('othersdivsix').style.display = 'block';
+    document.getElementById('othersuckingtype').required = true;
+  }
+  else
+  {
+    document.getElementById('othersdivsix').style.display = 'none';
+    document.getElementById('othersuckingtype').required = false;
+  }
+}
+
+</script>
 
 {% endblock %}

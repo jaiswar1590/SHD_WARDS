@@ -1,0 +1,693 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+
+<style>
+.subtitle
+{
+background-color:#F0E68C;
+width: 100%;
+}
+.spnhead{
+  font-size: 20px;
+  font-weight: bold;
+}
+.spndata{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+		.container{
+			width: 100%;
+      padding-right: 0px;
+      padding-left: 0px;
+      margin-right: auto;
+      margin-left: auto;
+		}
+
+
+
+		ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			display: inline-block;
+			padding: 8px 15px;
+      padding-right:30px;
+      cursor: pointer;
+      color: #222;
+      font-size: 18px;
+		}
+
+		ul.tabs li.current{
+			background: #F0FFFF;
+			color: #222;
+      font-weight: bold;
+		}
+
+		.tab-content{
+			display: none;
+			background: #F0FFFF;
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
+
+/* TABLE CSS FOR MEDICINE START */
+
+    /* GENERAL CODE */
+    #wardmedicine {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    #wardmedicine td, #wardmedicine th {
+      padding: 8px;
+    }
+
+    #wardmedicine td{
+      padding: 8px;
+      font-size: 15px;
+    }
+    #wardmedicine tr:nth-child(even){background-color: #f2f2f2;}
+
+    #wardmedicine tr:hover {background-color: #ddd;}
+
+    #wardmedicine thead,th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: center;
+      color: white;
+      font-size: 17px;
+    }
+
+    /* GENERAL CODE */
+
+
+    /* SEPERATE CODE */
+    #wardmedicine thead,th {
+      background-color:#778899;
+    }
+    /* SEPERATE CODE */
+
+/* TABLE CSS FOR MEDICINE END */
+
+
+/* TABLE CSS FOR TPR START */
+
+    /* GENERAL CODE */
+    #wardtpr {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+      }
+
+    #wardtpr td, #wardtpr th {
+      padding: 8px;
+      }
+
+    #wardtpr td{
+      padding: 8px;
+      font-size: 15px;
+      }
+    #wardtpr tr:nth-child(even){background-color: #f2f2f2;}
+
+    #wardtpr tr:hover {background-color: #ddd;}
+
+    #wardtpr thead,th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: center;
+      color: white;
+      font-size: 17px;
+      }
+
+    /* GENERAL CODE */
+
+
+    /* SEPERATE CODE */
+    #wardtpr thead,th {
+        background-color:#778899;
+    }
+    /* SEPERATE CODE */
+
+/* TABLE CSS FOR TPR START */
+
+/* TABLE CSS FOR INTAKE OUTPUT CHART START*/
+
+/* GENERAL CODE */
+#intakeouputchart {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  }
+
+#intakeouputchart td, #intakeouputchart th {
+  padding: 8px;
+  }
+
+#intakeouputchart td{
+  padding: 8px;
+  font-size: 15px;
+  }
+#intakeouputchart tr:nth-child(even){background-color: #f2f2f2;}
+
+#intakeouputchart tr:hover {background-color: #ddd;}
+
+#intakeouputchart thead,th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: white;
+  font-size: 17px;
+  }
+
+/* GENERAL CODE */
+
+
+/* SEPERATE CODE */
+#intakeouputchart thead,th {
+    background-color:#778899;
+}
+/* SEPERATE CODE */
+
+/* TABLE CSS FOR INTAKE OUTPUT CHART END*/
+
+
+/* TABLE CSS FOR TPR START */
+
+/* TABLE CSS FOR INTAKE OUTPUT CHART START*/
+
+/* GENERAL CODE */
+#conchart {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  }
+
+#conchart td, #conchart th {
+  padding: 8px;
+  }
+
+#conchart td{
+  padding: 8px;
+  font-size: 15px;
+  }
+#conchart tr:nth-child(even){background-color: #f2f2f2;}
+
+#conchart tr:hover {background-color: #ddd;}
+
+#conchart thead,th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: white;
+  font-size: 17px;
+  }
+
+/* GENERAL CODE */
+
+
+/* SEPERATE CODE */
+#conchart thead,th {
+    background-color:#778899;
+}
+/* SEPERATE CODE */
+
+/* TABLE CSS FOR INTAKE OUTPUT CHART END*/
+
+#warddressing {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+  margin-left:20%;
+  margin-right:20%;
+}
+#warddressing td, #warddressing th {
+  padding: 5px;
+  margin-left:5%;
+  margin-right:5%;
+}
+#warddressing td{
+  padding: 5px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 15px;
+  text-align: center;
+}
+#warddressing tr:nth-child(even){background-color: #f2f2f2;}
+
+#warddressing tr:hover {background-color: #ddd;}
+
+#warddressing thead,th {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  margin-left:5%;
+  margin-right:5%;
+}
+
+/* GENERAL CODE */
+
+/* SEPERATE CODE */
+#warddressing thead,th {
+  background-color:#778899;
+}
+
+</style>
+<script>
+$(document).ready(function(){
+	$('ul.tabs li').click(function(){
+		var tab_id = $(this).attr('data-tab');
+
+		$('ul.tabs li').removeClass('current');
+		$('.tab-content').removeClass('current');
+
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+	});
+});
+// INSERT DATA USING AJAX
+$(document).ready(function () {
+$('form').submit(function (e) {
+  var formurl = $(this).attr('action');
+        $.ajax({
+            type: "POST",
+            url: $(this).attr('action'), // url to post to, from the forms action
+            data: $(this).serialize(),
+            success: function (data) {
+              if (formurl == 'updatePatientTPR' && data['ack']=='DATA SUCCESSFULLY STORED!'){
+                document.getElementById('tprack').innerHTML = data['ack'];
+                $("#tprPatientUpdate").attr("disabled", true);
+              }
+              else if(formurl == 'updateWardPatientDressing' && data['ack']=='DATA SUCCESSFULLY STORED!'){
+                document.getElementById('dressingack').innerHTML = data['ack'];
+                $("#dressingupdate").attr("disabled", true);
+              }
+              else if(formurl == 'updatePhysioData' && data['ack']=='DATA SUCCESSFULLY STORED!'){
+                document.getElementById('physioack').innerHTML = data['ack'];
+                $("#phyupdate").attr("disabled", true);
+              }
+            alert(data['ack']);
+            }
+        });
+        e.preventDefault(); // block the traditional submission of the form.
+    });
+  });
+
+</script>
+
+
+<div class="col-12">
+  <div id="content">
+    <div style="text-align:center" class="titlebox">{{wname}}</div>
+    <div class="row" style="padding-bottom:1px;"></div>
+    <div class="col-12 subtitle">
+      {%for row in pdata%}
+      <div class="col-2"><span class="spnhead">Regno:</span><span class="spndata"> {{row[0]}}</span></div>
+      <div class="col-3"><span class="spnhead">Name:</span><span class="spndata"> {{row[1]}} {{row[2]}} {{row[3]}}</span></div>
+      <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata"> {{row[6]}}</span></div>
+      <div class="col-2"><span class="spnhead">Age:</span><span class="spndata"> {{row[4]}} {{row[5]}}</span></div>
+      <div class="col-3"><span class="spnhead">Admission Date:</span><span class="spndata"> {{row[7]}}</span></div>
+      <div class="col-2"><span class="spnhead">Complaint:</span><span class="spndata"> {{row[8]}}</span></div>
+      {%endfor%}
+    </div>
+
+    <div class="row" style="padding-bottom:2px;"></div>
+    <div class="container">
+    	<ul class="tabs">
+    		<li class="tab-link current" data-tab="tab-0">Medicine Chart</li>
+        <li class="tab-link" data-tab="tab-1">TPR Chart</li>
+        <li class="tab-link" data-tab="tab-2">Intake Output Chart</li>
+        <li class="tab-link" data-tab="tab-3">Consumable</li>
+        <li class="tab-link" data-tab="tab-4">Sugar Chart</li>
+    		<li class="tab-link" data-tab="tab-5">Poision Chart</li>
+        <li class="tab-link" data-tab="tab-6">Dressing </li>
+        <li class="tab-link" data-tab="tab-7">Physiotherapy</li>
+    	</ul>
+
+<div id="tab-0" class="tab-content current">
+  <form action="getPatientMedData" method="POST">
+    <input type="text" name="wrd_id" value="{{wmid}}" style="display:block">
+    <div class="row myrow">
+      <div class="col-3" ></div>
+      <div class="col-2" >
+        <span class="texttule">From Date:</span>
+        <input type="date" name="fdate" id='mdate'>
+      </div>
+
+      <div class="col-1" >
+      <span class="texttule">To Date:</span>
+      <input type="date" name="tdate" id='mdate'>
+      </div>
+      <br>
+      <div class="col-1" ></div>
+      <div class="col-2">
+        <input type="submit" name="submit" value="Search">
+      </div>
+      </div>
+  </form>
+</div>
+
+<div id="tab-1" class="tab-content">
+  <input type="text" name="wrd_id" value="{{wmid}}" style="display:none">
+      <div class="row">
+        <div class="col-12">
+          <table id="wardtpr">
+            <thead>
+                <tr >
+                    <th style="width:5px;padding:0px;">Action</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Temperature</th>
+                    <th>Pulse</th>
+                    <th>Systolic</th>
+                    <th>Diastolic</th>
+                    <th>Respiration</th>
+                    <th>F.H.S</th>
+                    <th>SPO-2</th>
+                    <th>Given By</th>
+                </tr>
+            </thead>
+            {%for row in tprd%}
+                <tr>
+                  <form action="updatePatientTPR" method="POST">
+                    <td><input type="submit" name="tprupdate" id="tprPatientUpdate" value="Update"></td>
+                    <input type="text" name="tpr_id" value="{{row[0]}}" style="display:none">
+                    <td><input type="date" name="tdate" value="{{row[2]}}"></td>
+                    <td><input type="time" name="ttime" value="{{row[3]}}"></td>
+                    <td><input type="text" name="ttemp" size="5" value="{{row[4]}}"></td>
+                    <td><input type="text" name="tpulse" size="5" value="{{row[5]}}"></td>
+                    <td><input type="text" name="tsystolic" size="5" value="{{row[6]}}"></td>
+                    <td><input type="text" name="tdiastolic" size="5" value="{{row[7]}}"></td>
+                    <td><input type="text" name="trespiration" size="5" value="{{row[8]}}"></td>
+                    <td><input type="text" name="tfhs" size="5" value="{{row[9]}}"></td>
+                    <td><input type="text" name="tspo2" size="5" value="{{row[10]}}"></td>
+                    <td><input type="text" name="tgivenby" value="{{row[11]}}"></td>
+                  </form>
+                </tr>
+                {%endfor%}
+          </table>
+          <br>
+          <p id="tprack" style="font-weight:bold;color:green;display:inline;"></p>
+        </div>
+        <div style="width:100%;height:auto;line-height:1em;overflow:auto;"></div>
+      </div>
+</div>
+
+<div id="tab-2" class="tab-content">
+  <form action="" method="POST">
+    <div class="row myrow">
+      <div class="col-3" ></div>
+      <div class="col-2" >
+        <span class="texttule">From Date:</span>
+        <input type="date" name="fdate" id='mdate'>
+      </div>
+
+      <div class="col-1" >
+      <span class="texttule">To Date:</span>
+      <input type="date" name="tdate" id='mdate'>
+      </div>
+      <br>
+      <div class="col-1" ></div>
+      <div class="col-2">
+        <input type="submit" name="submit" value="Search">
+      </div>
+      </div>
+  </form>
+<div class="row"><div class="col-3" ></div></div>
+    <div class="row">
+      <div class="col-12">
+        <table id="wardtpr">
+          <thead>
+              <tr >
+                  <th style="width:5px;padding:0px;"></th>
+                  <th>Time</th>
+                  <th>Temperature</th>
+                  <th>Pulse</th>
+                  <th>Systolic/Diastolic</th>
+                  <th>Respiration</th>
+                  <th>F.H.S</th>
+                  <th>SPO-2</th>
+              </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<div id="tab-3" class="tab-content">
+</div>
+
+<div id="tab-4" class="tab-content">
+</div>
+
+<!----------------------------------------- Poison Chart update Starts ----------------------------------------->
+
+<div id="tab-5" class="tab-content">
+  <div>
+    <table id="warddressing" border="1">
+    <tr>
+      <th>Action</th>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Injection</th>
+      <th>Dose/Unit</th>
+      <th>Quantity</th>
+      <th>Given By</th>
+    </tr>
+    {%for row in poison%}
+    <tr>
+      <form>
+      <div style="display:none">
+      <input type="text" name="wardid" id="wardid" value="{{wardid}}" style="display:none">
+      <input type="text" name="wrd_id" value="{{wmid}}" style="display:none">
+      <input type="text" name="pos_id" value="{{row[0]}}" style="display:none;">
+      </div>
+      <td><input type="submit" value="Update" id="poisonUpdate"></td>
+      <td><input type="date" name="pois_date" value="{{row[2]}}" required></td>
+      <td><input type="time" name="pois_time" value="{{row[3]}}" required></td>
+      <td><input type="text" name="pinjection" id="injection" value="{{row[4]}}" onblur="showPoison(this);" placeholder="Injection"  onfocus="resetPoison(this)"></td>
+      <p id="pmsg" style="color:red;font-weight:bold; text-align:center"></p>
+      <td><select name="pdose" id="pdose" required>
+        <option value="{{row[5]}}">{{row[5]}}</option>
+        <option value="">Select</option>
+        {%for i in range(5,2005,5)%}
+          <option value="{{i}}">{{i}}</option>
+        {%endfor%}
+      </select>
+      <input type="text" name="punit" size=3 value="ML" readonly>
+      </td>
+      <td><input type="text" name="poison_qty" size=7 id="poqty" onblur="calPoQty()" placeholder="Quantity" required></td>
+      <td><input type="text" name="p_givenby" value="{{row[7]}}" placeholder="Given by" required></td>
+      <div style="display:none">
+      WmId<input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}">
+      <input type="text" name="pmed_id" id="pmed_id" >
+      <input type="text" name="pprice" id="pprice" >
+      <input type="text" name="phqty" id="phqty" >
+      <input type="text" name="remqty" id="premqty" placeholder="Quantity">
+      </div>
+    </form>
+  </tr>
+  {%endfor%}
+    </table>
+  </div>
+</div>
+
+<script>
+function calPoQty(){
+  var phqty=parseFloat($('#phqty').val());
+  var poqty=parseFloat($('#poqty').val());
+  if(poqty>phqty){
+    alert("You have "+phqty+" You Are Entering "+poqty);
+    return false;
+  }
+  else{
+      $('#premqty').val(phqty-poqty);
+  }
+}
+// GET DRUG NAMES BY AJAX FOR poison
+$(document).ready(function(){
+$(function(){
+  $("#injection").autocomplete({
+      source: function(request,response )
+        {
+          var injection=document.getElementById('injection').value;
+          //var injection=$("#injection").val(); using jquery and this will aslo work
+          var wardid=document.getElementById('wardid').value;
+          //var wardid=$("#wardid").val(); using jquery and this will also work
+            $.ajax({
+                type:"POST",
+                url:"getMedicineWardPoison",
+                data:{"injection":injection,"wardid":wardid},
+                success: function(data)
+                {
+                  if (data=="")
+                  $("#pmsg").text('Requested Poison Injection Is Not Issued To You Or Quantity Is Zero.');
+                  else
+                  {
+                    response(data);
+                    $("#pmsg").text(' ');
+                  }
+                }
+              });
+          },
+    });
+});
+});
+
+
+function showPoison(idval)
+{
+    var idval = idval.value;
+    console.log(idval);
+    var arr = idval.split(">");
+    $('#injection').val(arr[0]);
+    $('#pmed_id').val(arr[4]);
+    $('#pprice').val(arr[3]);
+    $('#phqty').val(arr[2]);
+}
+
+function resetPoison(poid)
+{
+  var poid = poid.id;
+  $("#"+poid).val('');
+  $("#pmsg").text('');
+}
+
+function getPoisonInjection(pinjection,k)
+{
+  val=pinjection.value;
+  poid="poid"+k;
+  $.ajax({
+    type: "POST",
+    url: "/getPoisonData",
+    data:"injection=" + val,
+    success: function(string){
+      var data = JSON.parse(string)['data'];
+      $("#"+poid).val(data[0]);
+    }
+  });
+};
+</script>
+</div>
+<!----------------------------------------- Poison Chart update Ends ----------------------------------------->
+
+
+<div id="tab-6" class="tab-content">
+<div>
+<table id="warddressing" border="1">
+  <tr>
+    <th>Action</th>
+    <th>Date</th>
+    <th>Dressing Type</th>
+    <th>Done By</th>
+  </tr>
+    {%for row in pdressing%}
+    <tr>
+      <input type="text" name="wrd_id" value="{{wmid}}" style="display:none">
+      <form action="updateWardPatientDressing" method="POST">
+      <input type="text" name="dressing_id" value="{{row[2]}}" style="display:none;">
+      <td><input type="submit" value="Update" id="dressingupdate"></td>
+      <td><input type="date" name="dressing_date" value="{{row[4]}}"></td>
+      <td>
+          <select  id="drsname{{loop.index}}" name="dname" onchange="getAllDressingName(this,{{loop.index}})" required>
+          <option style="font-weight:bold;" value="{{row[0]}}">{{row[1]}}</option>
+          <option value="">--Select--</option>
+          {%for dresstype in dresstype%}
+          <option value="{{dresstype[0]}}">{{dresstype[1]}}</option>
+          {%endfor%}
+        </select>
+      </td>
+      <td><input type="text" name="dressing_doneby" value="{{row[7]}}"></td>
+      <td style="display:none;"><input type="text" name="dressing_amount" id="amount{{loop.index}}" value="{{row[6]}}"></td>
+      </form>
+    </tr>
+      {%endfor%}
+      </table>
+      <br>
+      <p id="dressingack" style="font-weight:bold;color:green;display:inline;"></p>
+      <div style="width:100%;height:auto;line-height:1em;overflow:auto;"></div>
+</div>
+</div>
+<script>
+function getAllDressingName(drsname,s)
+{
+  val=drsname.value;
+  amount="amount"+s;
+  $.ajax({
+    type: "POST",
+    url: "/getDressing",
+    data:"dname=" + val,
+    success: function(string){
+      var data = JSON.parse(string)['data'];
+      $("#"+amount).val(data[0]);
+    }
+  });
+};
+</script>
+
+<div id="tab-7" class="tab-content">
+  <div>
+  <table id="warddressing" border="1">
+    <tr>
+      <th>Action</th>
+      <th>Date</th>
+      <th>Physiotherapy Type</th>
+    </tr>
+    {% for row in physio%}
+    <tr>
+      <input type="text" name="wrd_id" value="{{wmid}}" style="display:none">
+      <form action="updatePhysioData" method="POST">
+        <input type="text" name="physio_id" value="{{row[2]}}" style="display:none;">
+        <td><input type="submit" value="Update" id="phyupdate"></td>
+        <td><input type="date" name="phydate" value="{{row[4]}}"></td>
+        <td>
+            <select  id="phyname{{loop.index}}" name="physioname" onchange="getAllPhysioName(this,{{loop.index}})" required>
+            <option style="font-weight:bold;" value="{{row[0]}}">{{row[1]}}</option>
+            <option value="">-----Select-----</option>
+            {%for physiotype in physiotype%}
+            <option value="{{physiotype[0]}}">{{physiotype[1]}}</option>
+            {%endfor%}
+          </select>
+        </td>
+        <td style="display:none;"><input type="text" name="physio_amount" id="pamount{{loop.index}}" value="{{row[6]}}"></td>
+      </form>
+    </tr>
+    {%endfor%}
+<div style="width:100%;height:auto;line-height:1em;overflow:auto;"></div>
+<p id="physioack" style="font-weight:bold;color:green;display:inline;"></p>
+</div>
+</div>
+
+<script>
+function getAllPhysioName(phyname,k)
+{
+  val=phyname.value;
+  pamount="pamount"+k;
+  $.ajax({
+    type: "POST",
+    url: "/getPhysioAmount",
+    data:"physioname=" + val,
+    success: function(string){
+      var data = JSON.parse(string)['data'];
+      $("#"+pamount).val(data[0]);
+    }
+  });
+};
+</script>
+</div>
+</div>
+
+{%endblock%}

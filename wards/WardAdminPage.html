@@ -1,0 +1,17 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+<div class="col-12">
+  <div id="content">
+    <div class="titlebox"  align="center">-------Ward Admin Page-------</div>
+<div align="center">
+  <table style="width:60%;">
+  <tr>
+    <td><br><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('wardAdminRedir') }}"><b><input type="Submit" value="Edit Ward Name" style="width:60%;height:45px;font-size: 16px;color:red;"></a></p></td>
+    <td><br><p><a href="{{ url_for('GetWardBedNoRedir')}}"><b><input type="Submit" value="Edit Bed Number" style="width:65%;height:45px;font-size: 16px;color:green;"></a></p></td>
+  </tr>
+  </table>
+</div>
+</div>
+</div>
+{% endblock %}

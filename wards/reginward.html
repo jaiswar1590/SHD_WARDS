@@ -2,88 +2,134 @@
 {% block content %}
 
 <style>
-.subtitle
-{
-background-color:#F0E68C;
-width: 100%;
-}
-.spnhead
-{
-  font-size: 20px;
-  font-weight: bold;
-}
-.spndata{
-  font-size: 18px;
-  font-weight: bold;
-}
+    /* GENERAL CODE */
+    #chileDetail {
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    #chileDetail td, #chileDetail th {
+      padding: 5px;
+    }
+
+    #chileDetail td{
+      padding:5px;
+      font-size: 15px;
+    }
+    #chileDetail tr:nth-child(even){background-color: #f2f2f2;}
+
+    #chileDetail tr:hover {background-color: #ddd;}
+
+    #chileDetail thead,th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      color: white;
+      font-size: 17px;
+    }
+
+    /* GENERAL CODE */
 
 
-		.container{
-			width: 100%;
-      padding-right: 0px;
-      padding-left: 0px;
-      margin-right: auto;
-      margin-left: auto;
-		}
-
-		ul.tabs{
-			margin: 0px;
-			padding: 0px;
-			list-style: none;
-		}
-		ul.tabs li{
-			background: none;
-			display: inline-block;
-			padding: 8px 15px;
-      padding-right:100px;
-      cursor: pointer;
-      color: #222;
-      font-size: 18px;
-		}
-
-		ul.tabs li.current{
-			background: #F0FFFF;
-			color: #222;
-      font-weight: bold;
-		}
-
-		.tab-content{
-			display: none;
-			background: #F0FFFF;
-			padding: 15px;
-		}
-
-		.tab-content.current{
-			display: inherit;
-		}
+    /* SEPERATE CODE */
+    #chileDetail thead,th {
+      background-color:#778899;
+    }
 </style>
 
-<form action="patientregno" method="POST">
-<div class="col12">
-  <div id="content">
-    <div class="titlebox" align="center">General Ward</div>
-    <div class="row" style="padding-bottom:1px;"></div>
+<script>
+$(document).ready(function(){
+  $("#dischargeme").click(function(){
+    $.ajax({
+        type:"GET",
+        url: "requestForDischarge",
+        data:'wid='+this.value,
+        success:function(string){
+        var disdata = JSON.parse(string)['wdata'];
+        $("#dstatus").val(disdata[0][6]);
+        }
+    });
+  });
+});
+</script>
 
+<div class="col-12">
+  <div id="content">
+    <form action="patientregno" method="POST">
+    <div class="titlebox" align="center">{{wname}}
+      <div style="text-align:right;display:inline;border:2px solid #000080;padding:6px;border-radius:3px;"><a href="WardLogin" style="text-decoration:none;color:green;font-size:30px;color:#000080"><img src="static/icon4/home.svg" height="40px" width="40px"></a></div>
+    </div>
+    <div class="row" style="padding-bottom:1px;"></div>
+    <div class="row myrow">
       <div class="col-12"  align="center">
         <span class="texttule">Enter RegNo :</span>
-        <input type="text" value="regno">
+        <input type="text" name="regno" required>
+        <input type="text" name="wname" value="{{wname}}" style="display:none;">
+        <input type="text" name="wid" value="{{wid}}" style="display:none;">
         <input type="submit" value="Search">
       </div>
     </div>
-</form>
-    </div><!----------titlebox-------->
-  </div><!----------Content-------->
-</div><!----------COl-12-------->
-
-<table border="2" width="100%">
+    <div class="row myrow">
+      <div class="col-3"></div>
+      <div class="col-9">
+        <b><p style="display:inline;color:green">{{ack1}}</p><p style="display:inline;color:blue"> {{wn}}</p></b>
+      </div>
+    </div>
+    </form>
+  </div><!---Content-------->
+</div><!---COl-12-------->
+<table border="2" width="100%" id="chileDetail">
 <thead>
-  <td>Bed No.</td>
-  <td>Regno</td>
-  <td>Patient Name</td>
-  <td>Admission Date</td>
-  <td>Edit</td>
-  <td>Discharge</td>
+  <th>Bed No.</th>
+  <th>Patient Name</th>
+  <th>Regno</th>
+  <th>Admission Date</th>
+  <th>Charts</th>
+  <th>Edit Patient's Charts </th>
+  <th>Patient Transfer</th>
+  <th style="width:15%">Request For Discharge</th>
 </thead>
+{%for row in showdata%}
+<tr>
+<td>{{row[5]}}</td>
+<td>{{row[0]}}&nbsp;{{row[1]}}&nbsp;{{row[2]}}</td>
+<td>{{row[3]}}</td>
+<td>{{row[6].strftime('%d/%m/%Y')}}</td>
+
+{%if wid=='8'%}
+<td><a href="{{url_for('Nursery_Charts',wardid=wid,wmid=row[7],regno=row[3],wardname=wname)}}">Patient Charts Data</a>{{wid}}</td>
+<td><a href="{{url_for('Nursery_ViewUpdate_Redir',regno=row[3],wrd_id=row[7],wardid=wid)}}">Edit Patient's Chart Data</a></td>
+<td><a href="{{url_for('PatientTranferFromWard',regno=row[3],wrd_id=row[7],wid=wid,bid=row[10])}}">Transfer <b>{{row[5]}}</b></a></td>
+{%else%}
+  {%if row[8]=="0"%}
+    <td><a href="{{ url_for('charts',wardid=wid,wmid=row[7],regno=row[3],wardname=wname)}}">Patient Charts Data</a></td>
+    <td><a href="{{url_for('UpdateCharts',wardid=wid,wmid=row[7],regno=row[3],wardname=wname)}}">Charts Update</a></td>
+    <td><a href="{{url_for('PatientTranferFromWard',regno=row[3],wrd_id=row[7],wid=ward_id,bid=row[10])}}">Transfer <b>{{row[5]}}</b></a></td>
+  {%else%}
+  <td><a href="{{url_for('charts',wardid=wid,wmid=row[7],regno=row[3],wardname=wname)}}">Patient Charts Data</a></td>
+  <td><a href="{{url_for('UpdateCharts',wardid=wid,wmid=row[7],regno=row[3],wardname=wname)}}">Charts Update</a></td>
+  <td><a href="{{url_for('PatientTranferFromWard',regno=row[3],wrd_id=row[7],wid=ward_id,bid=row[10])}}">Transfer <b>{{row[5]}}</b></a></td>
+  {%endif%}
+{%endif%}
+<td>
+  {%if row[8]=="1" or row[8]=="2"%}
+  <form action="cancelRequestForDischarge" method="POST">
+    <input type="text" name="wname" value="{{wname}}" style="display:none;">
+    <input type="text" name="wid" value="{{wid}}" style="display:none;">
+    <img src='/static/icon4/correct.svg' style="height:30px;width:30px;">
+    <button name="wmid" value="{{row[7]}}">Cancel Discharge</button>
+  </form>
+  {%elif row[8]=="0"%}
+  <form action="requestForDischarge" method="POST">
+    <input type="text" name="wname" value="{{wname}}" style="display:none;">
+    <input type="text" name="wid" value="{{wid}}" style="display:none;">
+    <button name="wmid" value="{{row[7]}}">Discharge</button>
+  </form>
+  {%endif%}
+</td>
+</tr>
+{%endfor%}
 </table>
 
 {% endblock %}

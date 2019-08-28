@@ -1,0 +1,170 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+<style>
+.subtitle
+{
+background-color:#F0E68C;
+width: 100%;
+}
+
+.subtitlebox{
+  font-weight: bold;
+  font-size: 20px;
+  font-family: Times New Roman;
+  padding:5px;
+  background:#80DFFF;
+}
+
+.spnhead
+{
+  font-size: 20px;
+  font-weight: bold;
+}
+.spndata{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+		.container{
+			width: 100%;
+      padding-right: 0px;
+      padding-left: 0px;
+      margin-right: auto;
+      margin-left: auto;
+		}
+
+		ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			display: inline-block;
+			padding: 8px 15px;
+      padding-right:100px;
+      cursor: pointer;
+      color: #222;
+      font-size: 18px;
+		}
+
+		ul.tabs li.current{
+			background: #F0FFFF;
+			color: #222;
+      font-weight: bold;
+		}
+
+		.tab-content{
+			display: none;
+			background: #F0FFFF;
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
+</style>
+
+  <script type="text/javascript">
+  function getWardbeds()
+  {
+    var val = $("#wardname").val();
+    $.ajax({
+      type:"POST",
+      url:"/patientTransferWardBed",
+      data:"wid="+val,
+      success: function(string)
+      {
+        var data = JSON.parse(string)['data'];
+        $("#beds").html(htmlify(data));
+      }
+    });
+  };
+  function htmlify(val)
+{
+  var Data = "<option value=''>---------Select---------</option>";
+  for (var index = 0; index < val.length; ++index) {
+  var entry = val[index];
+  Data = Data + "<option value='"+entry[1]+"'>"+entry[0]+"</option>";
+};
+  return Data;
+};
+
+  </script>
+
+<div class="col12">
+  <div id="content">
+    <div class="titlebox"  align="center">------- Patient Transfer To Another Ward -------</div>
+    <div class="row" style="padding-bottom:1px;"></div>
+    <div class="col-12 subtitle">
+      {% for row in pdetails %}
+      <div class="col-3"><span class="spnhead">Regno:</span><span class="spndata">{{row[0]}}</span></div>
+      <div class="col-3"><span class="spnhead">Name:</span><span class="spndata">{{row[1]}} {{row[2]}} {{row[3]}}</span></div>
+      <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata">{{row[6]}}</span></div>
+      <div class="col-3"><span class="spnhead">Age:</span><span class="spndata">{{row[4]}} {{row[5]}}</span></div>
+      <div class="col-3"><span class="spnhead">Admission Date:</span><span class="spndata">{{row[7]}}</span></div>
+      <div class="col-3"><span class="spnhead">Ward Name:</span><span class="spndata">{{row[8]}}</span></div>
+      <div class="col-2"><span class="spnhead">Bed No:</span><span class="spndata">{{row[9]}}</span></div>
+      {% endfor %}
+    </div>
+    <div>
+    <form action="goTransferPatient" method="POST">
+      <div  style="display:none">
+      <input type="text" name="wrd_id" value="{{wrd_id}}">
+    <input type="text" name="wid" value="{{wid}}" style="display:block">
+    <input type="text" name="bid" value="{{bid}}" style="display:block">
+    <input type="text" name="wname" value="{{pdetails[0][8]}}" style="display:block">
+    </div>
+      <div class="row myrow">
+        <div class="col-2"></div>
+          <div class="col-2">
+            <span class="texttule">Select Ward To Transfer:</span>
+              <select name="wardname" id="wardname" onchange="getWardbeds()" style="width:180px;" required>
+              <option value="">------------Select------------</option>
+              {%for row in wd%}
+              <option value="{{row[0]}}">{{row[1]}}</option>
+              {% endfor%}
+            </select>
+          </div>
+          <div class="col-2">
+            <span class="texttule">Select Bed No:</span>
+              <select name="beds" id="beds" style="width:140px;" required>
+              <option value="">---------Select---------</option>
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="col-1">
+            <span class="texttule">Date:</span>
+            <input type="date" name="date" required>
+          </div>
+          <div class="col-1"></div>
+          <div class="col-1">
+            <span class="texttule">Time:</span>
+            <input type="time" name="time" required>
+          </div>
+      </div>
+      <div class="row myrow">
+        <div class="col-2"></div>
+        <div class="col-2">
+          <span class="texttule">Transfer Reason:</span>
+          <input type="text" name="treason" required>
+        </div>
+        <div class="col-2">
+          <span class="texttule">Transfer By:</span>
+          <input type="text" name="transferby" required>
+        </div>
+        <br>
+        <div class="col-1">
+          <input type="submit" name="Submit">
+        </div>
+        <div class="col-1">
+          {{ack}}
+        </div>
+    </div>
+    </form>
+    </div>
+</div>
+
+{% endblock %}

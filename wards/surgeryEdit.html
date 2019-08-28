@@ -1,5 +1,19 @@
 {% extends "Frame/framepage.html" %}
 {% block content %}
+<script type="text/javascript">
+  function getSpAmount(psurgery)
+  {
+    $.ajax({
+      type:"POST",
+      url:"getSurgeryProAmount",
+      data:"psurgery="+psurgery,
+      success:function(string){
+        var amount = JSON.parse(string)['adata'];
+        $('#spamount').val(amount[0][3]);
+      }
+    });
+  }
+</script>
 <style>
 .subtitle
 {
@@ -21,7 +35,7 @@ width: 100%;
 			width: 100%;
       padding-right: 0px;
       padding-left: 0px;
-      margin-right: auto;
+      margin-righgetSpAmountt: auto;
       margin-left: auto;
 		}
 
@@ -57,50 +71,47 @@ width: 100%;
 		}
 </style>
 
-
-
 <div class="col12">
   <div id="content">
     <div class="titlebox"  align="center">Surgery Details</div>
     <div class="row" style="padding-bottom:1px;"></div>
-    <form action="InsertSDetails" method="POST">
-    {%for row in surgerydetails%}
+    <form action="UpdaetSurgeryDetails" method="POST">
+    {%for row in getSpatient%}
     <div class="col-12 subtitle">
       <div class="col-3"><span class="spnhead">Regno:</span><span class="spndata">&nbsp;{{row[1]}}</span></div>
-      <div class="col-3"><span class="spnhead">Patient From:</span><span class="spndata">&nbsp;{{source}}</span></div>
-      <div class="col-3"><span class="spnhead">Name:</span><span class="spndata">&nbsp;{{row[2]}} {{row[3]}} {{row[4]}}</span></div>
-      <div class="col-3"><span class="spnhead">{{row[5]}}:</span><span class="spndata">&nbsp;{{row[6]}} {{row[7]}} {{row[8]}}</span></div>
-      <div class="col-3"><span class="spnhead">Age:</span><span class="spndata">&nbsp;{{row[11]}} {{row[12]}}</span></div>
-      <div class="col-3"><span class="spnhead">Sex:</span><span class="spndata">&nbsp;{{row[13]}} </span></div>
-      <div class="col-3"><span class="spnhead">Education:</span><span class="spndata">&nbsp;{{row[14]}}</span></div>
-      <div class="col-3"><span class="spnhead">Address:</span><span class="spndata">&nbsp;{{row[21]}}</span></div>
-      <div class="col-3"><span class="spnhead">Date of Visit:</span><span class="spndata">&nbsp;{{row[25]}}</span></div>
-      <div class="col-3"><span class="spnhead">Complaint:</span><span class="spndata">&nbsp;{{row[27]}}</span></div>
+      <div class="col-3"><span class="spnhead">Patient From:</span><span class="spndata">&nbsp;{{row[12]}}</span></div>
+      <div class="col-3"><span class="spnhead">Name:</span><span class="spndata">&nbsp;{{row[14]}} {{row[15]}} {{row[16]}}</span></div>
+      <div class="col-3"><span class="spnhead">{{row[17]}}:</span><span class="spndata">&nbsp;{{row[18]}} {{row[19]}} {{row[20]}}</span></div>
+      <div class="col-3"><span class="spnhead">Age:</span><span class="spndata">&nbsp;{{row[21]}} {{row[22]}}</span></div>
+      <div class="col-3"><span class="spnhead">Sex:</span><span class="spndata">&nbsp; {{row[23]}}</span></div>
+      <div class="col-3"><span class="spnhead">Education:</span><span class="spndata">&nbsp;{{row[24]}}</span></div>
+      <div class="col-3"><span class="spnhead">Address:</span><span class="spndata">&nbsp;{{row[25]}}</span></div>
+      <div class="col-3"><span class="spnhead">Date of Admission:</span><span class="spndata">&nbsp;{{row[27]}}</span></div>
+      <div class="col-3"><span class="spnhead">Complaint:</span><span class="spndata">&nbsp;{{row[28]}}</span></div>
       <div><input type="text" name="regno" id=regno value="{{row[1]}}" style="display:none"></div>
-      <div><input type="text" name="pfrom" value="{{source}}" style="display:none"></div>
-      <div><input type="text" name="wrd_id"  value="{{row[26]}}" style="display:none"></div>
-      {%endfor%}
+      <div><input type="text" name="sid" value="{{row[0]}}" style="display:none"></div>
       </div>
+
         <div class="row myrow">
             <div class="col-2"></div>
           <div class="col-2">
             <span class="texttule">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <input type="date" name="sdate" required>
+            <input type="date" name="sdate" value="{{row[2]}}">
           </div>
 
           <div class="col-2">
           <span class="texttule">Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <input type="time" name="stime" required>
+            <input type="time" name="stime" value="{{row[29]}}">
           </div>
 
           <div class="col-2">
             <span class="texttule">Surgen Name:</span>
-            <input type="text" class="alphaonly" name="surgeon" required>
+            <input type="text" class="alphaonly" name="surgeon" value="{{row[4]}}">
           </div>
 
           <div class="col-2">
             <span class="texttule">Anesthesiologist:</span>
-            <input type="text" class="alphaonly" name="anesthesiologist" required>
+            <input type="text" class="alphaonly" name="anesthesiologist" value="{{row[5]}}">
           </div>
         </div>
 
@@ -109,7 +120,8 @@ width: 100%;
           <div class="col-2">
             <span class="texttule">Kind of Surgery:</span>
             <select style="width:120px;" name="ksurgerytype" required>
-              <option value="">-----Select-----</option>
+              <option value="{{row[6]}}">{{row[6]}}</option>
+              <option value="" >-----Select-----</option>
               <option value="Major">Major</option>
               <option value="Minor">Minor</option>
             </select>
@@ -118,6 +130,7 @@ width: 100%;
           <div class="col-2">
             <span class="texttule">Surgery Type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <select style="width:120px;" name="stype" required>
+              <option value="{{row[7]}}">{{row[7]}}</option>
               <option value="">-----Select-----</option>
               <option value="General">General</option>
               <option value="Orthopedic">Orthopedic</option>
@@ -130,6 +143,7 @@ width: 100%;
           <div class="col-2">
             <span class="texttule">Anesthesia Type:</span>
             <select style="width:120px;" name="anstype" required>
+            <option value="{{row[8]}}">{{row[8]}}</option>
             <option value="">-----Select-----</option>
             <option value="General">General</option>
             <option value="Spinal">Spinal</option>
@@ -140,23 +154,25 @@ width: 100%;
           <div class="col-2">
             <span class="texttule">Procedure Of Surgery:</span>
             <select style="width:180px;" name="psurgery" id="psurgery" onchange="getSpAmount(this.value)" required>
-            <option value="">-----------Select-----------</option>
+            <option value="{{row[9]}}">{{row[30]}}</option>
+            <option value=" " >-----------Select-----------</option>
             {%for row in surgerylist%}
             <option value="{{row[0]}}">{{row[1]}}</option>
             {%endfor%}
           </select>
-          <input type="text" size=5 name="spamount" id="spamount" placeholder="Amount" style="display:none">
+          <input type="text" size=5 name="spamount" id="spamount" value="{{row[10]}}" style="display:none">
           </div>
         </div>
           <div class="col-2"></div>
           <div class="row myrow">
       		<div class="col-3">
       		<span class="texttule">Disease:</span>
-      		<p><textarea name="disease" class="spalphanum" cols="40"rows="8" required></textarea></p>
+      		<p><textarea name="disease" class="spalphanum" cols="40"rows="8" value="">{{row[11]}}</textarea></p>
         </div>
+        {%endfor%}
 
       <div class="col-3"><br><br><br>
-        <div><input type="submit" value="Submit"></div>
+        <div><input type="submit" value="Update"></div>
       </div>
     </div>
   </form>
@@ -164,20 +180,5 @@ width: 100%;
 </div><!----------COl-12-------->
 
 
-<script type="text/javascript">
-  function getSpAmount(psurgery)
-  {
-    $.ajax({
-      type:"POST",
-      url:"getSurgeryProAmount",
-      data:"psurgery="+psurgery,
-      success:function(string){
-        var amount = JSON.parse(string)['adata'];
-        $('#spamount').val(amount[0][3]);
-      }
-
-    });
-  }
-</script>
 
 {% endblock %}

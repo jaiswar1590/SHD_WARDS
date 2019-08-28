@@ -58,22 +58,106 @@ width: 100%;
 		}
 </style>
 
-<form action="Surgery" method="POST">
+<style>
+
+#chileDetail {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#chileDetail td, #chileDetail th {
+  padding: 5px;
+}
+
+#chileDetail td{
+  padding:5px;
+  font-size: 15px;
+}
+#chileDetail tr:nth-child(even){background-color: #f2f2f2;}
+
+#chileDetail tr:hover {background-color: #ddd;}
+
+#chileDetail thead,th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: white;
+  font-size: 17px;
+}
+
+/* GENERAL CODE */
+
+
+/* SEPERATE CODE */
+#chileDetail thead,th {
+  background-color:#778899;
+}
+</style>
+
 <div class="col12">
   <div id="content">
-    <div class="titlebox" align="center">Surgery Details</div>
-    <div class="row" style="padding-bottom:1px;"></div>
-
-      <div class="col-12"  align="center">
-        <span class="texttule">Enter RegNo :</span>
-        <input type="text" value="regno">
-        <input type="submit" value="Search">
-      </div>
+    <form action="Surgery" method="POST">
+    <div class="titlebox" align="center">Surgery Details &nbsp;<div style="text-align:right;display:inline;border:2px solid #000080;padding:6px;border-radius:3px;"><a href="SurgeryAdminRedir" style="text-decoration:none;color:green;font-size:30px;color:#000080"><img src="static/icon4/home.svg" height="40px" width="40px"></a></div>
     </div>
-</form>
-    </div><!----------titlebox-------->
-  </div><!----------Content-------->
-</div><!----------COl-12-------->
+    <div class="row" style="padding-bottom:1px;"></div>
+      <div class="row myrow">
+        <div class="col-3"></div>
+        <div class="col-7">
+          <span class="texttule">Enter RegNo :</span>
+          <input type="text" class="alphanumeric" placeholder="Enter Registration No" name="regno" required>
 
+          <span class="texttule">Patient From:</span>
+          <select name="source" style="width:120px;" required>
+            <option value="">------Select------</option>
+            <option value="INPATIENT">INPATIENT</option>
+            <option value="OUTPATIENT">OUTPATIENT</option>
+          </select>
+        <input type="submit" value="Search">
+        <b><p style="display:inline;color:green">{{ack}}</p></b>
+        <b><p style="display:inline;color:red">{{ack1}}</p></b>
+        <b><p style="display:inline;color:green">{{msg}}</p></b>
+        </div>
+    </div>
+  </form>
+
+</div><!----------COl-12-------->
+</div><!----------Content-------->
+<div class="row myrow">
+<div class="col-12"  style="width:100%;height:500px;line-height:1em;overflow:auto;">
+  <table id="chileDetail">
+    <thead>
+      <th>Edit</th>
+      <th>REG-NO</th>
+      <th>Patient From</th>
+      <th>Patient Name</th>
+      <th>Surgery Date</th>
+      <th>Surgery Procedure</th>
+      <th>Surgeon Name</th>
+      <th>Anesthesiologist</th>
+      <th>Kind of Surgery</th>
+      <th>Surgery Type</th>
+      <th>Anesthesia Type</th>
+      <th>Disease</th>
+    </thead>
+    {%for row in getTodayList%}
+    <tr>
+      <td><a href="{{ url_for('EditSurgeryDetails',sid=row[0],pfrom=row[12])}}"><button >Edit</button></a></td>
+      <td>{{row[1]}}</td>
+      <td>{{row[12]}}</td>
+      <td>{{row[14]}} {{row[15]}} {{row[16]}}</td>
+      <td>{{row[2]}}</td>
+      <td>{{row[17]}}</td>
+      <td>{{row[4]}}</td>
+      <td>{{row[5]}}</td>
+      <td>{{row[6]}}</td>
+      <td>{{row[7]}}</td>
+      <td>{{row[8]}}</td>
+      <td>{{row[11]}}</td>
+    </tr>
+    {%endfor%}
+  </table>
+</div>
+</div>
 
 {% endblock %}

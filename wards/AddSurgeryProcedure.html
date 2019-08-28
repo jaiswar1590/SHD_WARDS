@@ -1,0 +1,77 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+<div class="col-12">
+  <div id="content">
+    <div class="titlebox" align="center">Add Surgery Procedures Name &nbsp;<div style="text-align:right;display:inline;border:2px solid #000080;padding:6px;border-radius:3px;"><a href="SurgeryAdminRedir" style="text-decoration:none;color:green;font-size:30px;color:#000080"><img src="static/icon4/home.svg" height="40px" width="40px"></a></div>
+    </div>
+      <div  align="center">
+        <div class="row" style="padding-bottom:1px;"></div>
+        <div>
+          <form action="InsertSprocedure" method="POST">
+        <table width=50% border="2">
+        <tr>
+          <td style="text-align:center;"><b>ENTER SURGERY NAME :</td>
+          <td ><input type="text" class="alphaonly" name="sprocedure" style="width:100%;" ></td>
+          </tr>
+          <tr>
+          <td style="text-align:center;"><b>ENTER SURGERY AMOUNT :</td>
+          <td ><input type="text" class="numeric" name="spamount" style="width:100%;" ></td>
+          </tr>
+          <tr>
+            <td></td>
+          <td><b><input type="submit" value="SUBMIT"></b></td>
+        </tr>
+        <b><p style="display:inline;color:green">{{ack}}</p></b>
+        <b><p style="display:inline;color:green">{{ack1}}</p></b>
+        </table>
+        </form>
+        </div>
+
+<div align="center">
+<div class="col-11"  style="width:100%;height:350px;line-height:1em;overflow:auto;padding:0px;"><br>
+<table style="width:35%" border=2>
+<thead>
+  <th style="text-align:center;">SURGERY PROCEDURE</th>
+  <th style="text-align:center;">SURGERY AMOUNT</th>
+  <th style="text-align:center;">EDIT</th>
+</thead>
+
+
+{%for row in surgerylist%}
+<tr>
+  <td>{{row[1]}}</td>
+  <td style="text-align:center;">{{row[3]}}</td>
+  <td style="text-align:center;"><a href="{{ url_for('EditeSurgeryType',sid=row[0])}}"><b>Edit</b></a></td>
+</tr>
+{%endfor%}
+</table>
+</div>
+</div>
+
+{% if flag == 'edit'%}
+<table border=1 width="50%">
+  <tr>
+    <td><b>Surgery Procedure Type</b></td>
+    <td><b>Surgery Amount</td>
+    <td><b>UPDATE</b></td>
+  </tr>
+    {%for row in editspro%}
+    <tr>
+      <form action="/updateSprocedureType" method="POST">
+        <input type="text" name="sid" value="{{row[0]}}" style="display:none">
+        <td><input type="text" class="alphaonly" name="sprocedure" value="{{row[1]}}" required style="width:100%;height:30px"></td>
+        <td><input type="text" class="numeric" name="spamount" value="{{row[3]}}" required style="width:100%;height:30px"></td>
+        <td><b><input type="submit" value="Update" style="width:100%;height:30px"></td>
+    </form>
+  </tr>
+  {%endfor%}
+</table>
+
+{%endif%}
+
+</div><!----------Content-------->
+</div><!----------COl-12-------->
+
+
+{% endblock %}

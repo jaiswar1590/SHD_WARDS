@@ -1,0 +1,130 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+<script>
+  function getWardbeds() //this function getting all beds from selected ward.
+  {
+  $("#beddata").find("tr:gt(1)").remove();
+   var val = $("#wardname").val();
+   $("#beddata").find("tr:gt(0)").remove();
+   var tbdata=" ";
+   $.ajax({
+     type: "POST",
+     url: "/SearchBed",
+     data:"wid=" + val,
+     success: function(string)
+      {
+        var data = JSON.parse(string)['data'];
+        var len=data.length;//getting the length of data from admin_ward_bdname table
+
+          for(var i=0;i<len;i++){
+              tbdata = "<tr><td>"+data[i][0]+"</td><td style='display:none;'>"+data[i][1]+"</td><td><a href='Edit_Ward_Bed?wid="+data[i][1]+"'>Edit</a></td></tr>";
+              $("#beddata tbody").append(tbdata);
+            }
+
+      }
+
+    });
+  }
+</script>
+
+<style>
+/* GENERAL CODE */
+#beddata {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#beddata td, #beddata th {
+  padding: 8px;
+}
+
+#beddata td{
+  padding: 8px;
+  font-size: 15px;
+}
+#beddata tr:nth-child(even){background-color: #f2f2f2;}
+
+#beddata tr:hover {background-color: #ddd;}
+
+#beddata thead,th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: white;
+  font-size: 17px;
+}
+
+/* GENERAL CODE */
+
+
+/* SEPERATE CODE */
+#beddata thead,th {
+  background-color:#778899;
+}
+/* SEPERATE CODE */
+
+</style>
+
+
+  <div class="col-12">
+    <div id="content">
+      <div class="titlebox"  align="center"> Bed Admin &nbsp;<div style="text-align:right;display:inline;border:2px solid #000080;padding:6px;border-radius:3px;"><a href="GetWardAdminRedir" style="text-decoration:none;color:green;font-size:30px;color:#000080"><img src="static/icon4/home.svg" height="40px" width="40px"></a></div></div>
+      <form action="/InsertWardBeds" method="POST">
+        <div  align="center">
+        <table border=1 width="50%">
+          <thead>
+            <td><b>&nbsp;Ward Name :&nbsp;</td>
+              <td><select name="wid" id="wardname" style="width:100%" onchange="getWardbeds()" required>
+              <option value=" ">--Select Ward--</option>
+              {%for row in wd%}
+              <option value="{{row[0]}}">{{row[1]}}</option>
+              {%endfor%}
+                </select>
+            </td>
+            <td><b>&nbsp;Bed Name :&nbsp;</td>
+            <td><input type="text" name="bname" style="width:100%"></td>
+            <td><b><input type="submit" value="Save" style="width:100%"></td>
+          </thead>
+        </table>
+      </div>
+      </form>
+
+
+      <div align="center">
+      <table border=1 id="beddata">
+        <thead>
+          <th><b>Bed Number</b></th>
+          <th><b>Edit</b></th>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+      <br>
+      {% if flag == 'EditBed'%}
+      <div align="center">
+      <form action="/updateBedNo" method="POST">
+      <table border=1 width="50%">
+        <tr>
+          <td><b>Bed No</b></td>
+          <td><b>UPDATE</b></td>
+        </tr>
+          {%for ewn in wbd%}
+          <tr>
+          <input type="text" name="bid" value="{{ewn[1]}}" style="display:none;width:100%;height:350px">
+          <td><input type="text" name="bname" value="{{ewn[0]}}" required style="width:100%;height:30px"></td>
+          <td><b><input type="submit" value="Update" style="width:100%;height:30px"></td>
+        </tr>
+        {%endfor%}
+      </table>
+      </form>
+      </div>
+      {%endif%}
+    </div>
+    <p style="text-align:center;color:green;font-weight:bold"> {{ msg }}</p>
+  </div>
+</div>
+
+{% endblock %}

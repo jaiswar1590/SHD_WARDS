@@ -248,7 +248,6 @@ $(document).ready(function(){
 $(document).ready(function () {
 $('form').submit(function (e) {
   var formurl = $(this).attr('action');
-  alert("IN"+$(this).serialize());
         $.ajax({
             type: "POST",
             url: $(this).attr('action'), // url to post to, from the forms action
@@ -261,7 +260,7 @@ $('form').submit(function (e) {
                 document.getElementById('wmack').innerHTML = data['ack'];
                 $("#wmsave").attr("disabled", true);
               }
-              else if (formurl == 'InsertTPR' && data['ack']=='DATA SUCCESSFULLY STORED!'){
+              else if (formurl == 'InsertNurTPR' && data['ack']=='DATA SUCCESSFULLY STORED!'){
                 document.getElementById('tprack').innerHTML = data['ack'];
                 $("#tprSubmit").attr("disabled", true);
               }
@@ -282,17 +281,15 @@ $('form').submit(function (e) {
                 $("#sgivenby").val('');
                 document.getElementById('sack').innerHTML = data['ack'];
               }
-              else if(formurl == 'insertWardPoison' && data['ack']=='DATA SUCCESSFULLY STORED!'){
-                document.getElementById('pack').innerHTML = data['ack'];
-                $("#poisionSubmit").attr("disabled", true);
-              }
               else if(formurl == 'insertWardDressing' && data['ack']=='DATA SUCCESSFULLY STORED!'){
                 document.getElementById('dressingack').innerHTML = data['ack'];
-                $("#dressSubmit").attr("disabled", true);
+                $("#dressingsave").attr("disabled", true);
+
               }
-              else if(formurl == 'insertWardPhysiotherapy' && data['ack']=='DATA SUCCESSFULLY STORED!'){
-                document.getElementById('physiotherapyack').innerHTML = data['ack'];
-                $("#physioSubmit").attr("disabled", true);
+              else if(formurl == 'insertNurTherapy' && data['ack']=='DATA SUCCESSFULLY STORED!'){
+                document.getElementById('therapyack').innerHTML = data['ack'];
+                $("#therapysave").attr("disabled", true);
+
               }
             alert(data['ack']);
             }
@@ -304,7 +301,9 @@ $('form').submit(function (e) {
 
 <div class="col-12">
   <div id="content">
-    <div style="text-align:center" class="titlebox">{{wname}}</div>
+    <div style="text-align:center" class="titlebox">{{wname}}
+      <div style="text-align:right;display:inline;border:2px solid #000080;padding:6px;border-radius:3px;"><a href="WardLogin" style="text-decoration:none;color:green;font-size:30px;color:#000080"><img src="static/icon4/home.svg" height="40px" width="40px"></a></div>
+    </div>
     <div class="row" style="padding-bottom:1px;"></div>
     <div class="col-12 subtitle">
       {%for row in pdata%}
@@ -312,38 +311,37 @@ $('form').submit(function (e) {
       <div class="col-3"><span class="spnhead">Name:</span><span class="spndata"> {{row[1]}} {{row[2]}} {{row[3]}}</span></div>
       <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata"> {{row[6]}}</span></div>
       <div class="col-2"><span class="spnhead">Age:</span><span class="spndata"> {{row[4]}} {{row[5]}}</span></div>
-      <div class="col-3"><span class="spnhead">Admission Date:</span><span class="spndata"> {{row[7]}}</span></div>
-      <div class="col-2"><span class="spnhead">Complaint:</span><span class="spndata"> {{row[8]}}</span></div>
+      <div class="col-3"><span class="spnhead">Admission Date:</span><span class="spndata"> {{row[7].strftime('%d/%m/%Y')}}</span></div>
+      <div class="col-3"><span class="spnhead">Complaint:</span><span class="spndata"> {{row[8]}}</span></div>
       {%endfor%}
     </div>
 
     <div class="row" style="padding-bottom:2px;"></div>
     <div class="container">
     	<ul class="tabs">
-    		<li class="tab-link current" data-tab="tab-0">Medicine Chart</li>
+        <li class="tab-link current" data-tab="tab-0">Medicine Chart</li>
         <li class="tab-link" data-tab="tab-1">TPR Chart</li>
         <li class="tab-link" data-tab="tab-2">Intake Output Chart</li>
         <li class="tab-link" data-tab="tab-3">Consumable</li>
         <li class="tab-link" data-tab="tab-4">Sugar Chart</li>
-    		<li class="tab-link" data-tab="tab-5">Poison Chart</li>
-        <li class="tab-link" data-tab="tab-6">Dressing </li>
-        <li class="tab-link" data-tab="tab-7">Physiotherapy</li>
-    	</ul>
-</div>
+        <li class="tab-link" data-tab="tab-5">Dressing</li>
+        <li class="tab-link" data-tab="tab-6">Therapy</li>
+      </ul>
+    </div>
 
-<!--- Medicine Chart Start----------->
+<!---------------------- Medicine Chart Starts -------------------------------->
 
 <div id="tab-0" class="tab-content current">
   <form action="insertWardMedicine" method="POST">
     <div class="row myrow">
       <div class="col-2" ></div>
       <div class="col-2" >
-        &nbsp;<span class="texttule">Date :</span>
-        <input type="date" name="mdate" id='mdate'>
+        &nbsp;<span class="texttule">Date :</span><br>
+        <input type="date" name="mdate" id="mdate" required>
       </div>
       <div class="col-3">
-        <span class="texttule">Given By :</span>
-        <input type="text" class="alphaonly" name="givenby" placeholder="Given By" id='givenby'>
+        <span class="texttule">Given By :</span><br>
+        <input type="text" name="givenby" placeholder="Given By" id="givenby" class="alphaonly" required>
       </div>
     </div>
 
@@ -351,8 +349,8 @@ $('form').submit(function (e) {
 
     <div class="row myrow">
       <div class="col-2" ></div>
-      <div class="col-2"><span class="texttule">Drug Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <select name="ddrugtype" id="drugtype" onchange="showDose();">
+      <div class="col-2"><span class="texttule">Drug Type</span><br>
+        <select name="ddrugtype" id="drugtype" onchange="showDose();" required>
           <option value="">---Select---</option>
           <option value="Tablet">Tablet</option>
           <option value="Capsule">Capsule</option>
@@ -365,7 +363,7 @@ $('form').submit(function (e) {
       <div class="col-2">
         <div class="ui-widget">
           <span class="texttule">Drug Name</span>
-          <input type="text" class="alphaonly" name="drugname" id="drugname" placeholder="Medicine Name" onblur="showData(this);" onfocus="resetData();" >
+          <input type="text" name="drugname" id="drugname" placeholder="Medicine Name" onblur="showData(this);" onfocus="resetData();" >
           <p id="msg" style="color:red;font-weight:bold;"></p>
         </div>
       </div>
@@ -404,13 +402,13 @@ $('form').submit(function (e) {
       </div>
         <div class="row">
           <div class="col-12">
-              <div style="display:none">
-                WardId<input type="text" name="wardid" id="wardid" value="{{wardid}}">
-                WmId<input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}">
-                medid:<input type="text" name="dmeddet_id" id="meddet_id">
-                unitprice<input type="text" name="duprice" id="uprice">
-                HandQty<input type="text" name="dhqty" id="hqty">
-                schno<input type="text" name="dschno" id="schno">
+              <div style="display:none;">
+                <input type="text" name="wardid" id="wardid" value="{{wardid}}">
+                <input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}">
+                <input type="text" name="dmeddet_id" id="meddet_id">
+                <input type="text" name="duprice" id="uprice">
+                <input type="text" name="dhqty" id="hqty">
+                <input type="text" name="dschno" id="schno">
               </div>
               <div class="col-12">
               <table id="wardmedicine">
@@ -433,13 +431,13 @@ $('form').submit(function (e) {
         <div class="row">
           <div class="col-12">
             <div class="col-5"></div>
-            <input type="submit" value="Save" id='wmsave' style="width:100px;height:40px;">
+            <input type="submit" value="Save" id='wmsave' style="width:100px;height:40px;font-weight:bold;">
           </form>
           </div>
         </div>
         <div class="row">
           <div class="col-5"></div>
-          <div class="col-3"><p id="wmack"></p></div>
+          <div class="col-3"><p id="wmack" style="font-weight:bold;color:green;display:inline;"></p></div>
         </div>
   </div>
 
@@ -484,34 +482,21 @@ function showDose(){
   $("#doseunitdiv").empty();
   var dtype=$("#drugtype").val();
   var sel1="<select id='drugdose'><option value=''>Select</option>"
-
-  if(dtype=='Syrup' || dtype=='Injection'|| dtype=='Drop' || dtype=='Ointment')
-    var head="<span class='texttule'>Dose/Unit &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;QTY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
-  else
-    var head="<span class='texttule'>Dose/Unit &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
+  var head="<span class='texttule'>Dose/Unit &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>";
   for(var i=1;i<=2000;i++)
     sel1=sel1+"<option value="+i/2+">"+i/2+"</option>";
-  if(dtype=='Tablet'){
+  if(dtype=='Tablet')
     txtbox = "<input type='text' id='doseunit' size=3 value='TAB'>";
-    txtbox1="";
-  }
-  else if (dtype=='Capsule'){
+  else if (dtype=='Capsule')
     txtbox = "<input type='text' id='doseunit' size=3 value='CAP'>";
-    txtbox1="";
-  }
-  else if(dtype=='Syrup' || dtype=='Injection'|| dtype=='Drop'){
+  else if(dtype=='Syrup' || dtype=='Injection'|| dtype=='Drop')
     txtbox = "<input type='text' id='doseunit' size=3 value='ML'>";
-    txtbox1 = "<input type='text' class='numeric' id='mqty' size=5>";
-    }
-  else if(dtype=='Ointment'){
+  else if(dtype=='Ointment')
     txtbox = "<input type='text' id='doseunit' size=3 value='PC'>";
-    txtbox1 = "<input type='text' class='numeric' id='mqty' size=3 >";
-  }
     sel2=sel1+"</select>";
   $("#doseunitdiv").append(head);
   $("#doseunitdiv").append(sel2);
   $("#doseunitdiv").append(txtbox);
-  $("#doseunitdiv").append(txtbox1);
 }
 var c=0;
 $(document).ready(function(){
@@ -579,17 +564,7 @@ $(document).ready(function(){
           return false;
         }
       }
-      if(dtype=='Syrup' || dtype=='Injection'|| dtype=='Drop' || dtype=='Ointment')
-      {
-        totqty = parseFloat($("#mqty").val());
-        if(totqty>hqty){
-          alert("You Have Only "+hqty+" Capsule You Are Entering "+totqty);
-          return false;
-        }
-      }
-
       var remqty = hqty-totqty;
-      alert(remqty);
       var schno = $("#schno").val();
         mark = "";
         var chk = "<tr><td><input type='checkbox' name='record' style='width:30px;height:30px;'></td>";
@@ -658,173 +633,189 @@ function resetData(){
 }
 </script>
 
-<!--- Medicine Chart End----------->
+<!------------------------- Medicine Chart Ends ------------------------------->
+
+<!------------------------ TPR CHART STARTS ----------------------------------->
+
+<div id="tab-1" class="tab-content">
+  <form action="InsertNurTPR" method="POST">
+    <input type="text" name="wardid" id="wardid" value="{{wardid}}" style="display:none;">
+    <input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}" style="display:none;">
+
+  <div class="row myrow">
+    <div class="col-2" ></div>
+    <div class="col-2" >
+      <span class="texttule">Date :</span>
+      <input type="date" name="tpr_date" required>
+    </div>
+
+    <div class="col-3">
+      <span class="texttule">Registered By :</span>
+      <input type="text" name="tpr_givenby" placeholder="Registered By" class="alphaonly" required>
+    </div>
+  </div><!-- row -->
+  <br>
+  <div class="row myrow" >
+    <div class="col-1"></div>
+
+    <div class="col-1" >
+      <span class="texttule">Time :</span>
+      <input type="time" name="time" id="tpr_time">
+    </div>
+
+      <div class="col-1" style="margin-left:10px">
+        <span class="texttule">Temperature</span>
+        <input type="text" name="temp" id="tpr_temp" placeholder="Temperature" style="width:90px;" class="spalphanum">
+      </div>
+
+      <div class="col-1" style="margin-left:20px">
+
+        <span class="texttule">Respiration</span>
+        <input type="text" name="respiration" id="tpr_respiration" placeholder="Respiration" style="width:90px;" class="numeric">
+      </div>
 
 
-<!--#################################### TPR CHART START ####################################-->
+      <div class="col-2" style="margin-left:30px">
+        <span class="texttule">Urine Passed</span><br>
+        <select name="urine" id="tpr_urine">
+          <option value="">--Select--</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
 
-    	<div id="tab-1" class="tab-content">
-        <form action="InsertTPR" method="POST">
-          <input type="text" name="wrd_id" value="{{wmid}}" style="display:block">
-        <div class="row myrow">
-          <div class="col-3" ></div>
-          <div class="col-2" >
-            &nbsp;<span class="texttule">Date :</span>
-            <input type="date" name="tdate">
-          </div>
 
-          <div class="col-3">
-            <span class="texttule">Given By :</span>
-            <input type="text" name="tgivenby" placeholder="Given By">
-          </div>
+        <div class="col-2" style="margin-left:-80px">
+        <span class="texttule">Stool Passed</span><br>
+        <select name="stool" id="tpr_stool">
+          <option value="">--Select--</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+
+
+      <div class="col-2" style="margin-left:-80px">
+        <span class="texttule">SPO<sub>2</sub></span><br>
+        <input type="text" name="spo2" id="tpr_spo2" placeholder="SPO2" class="numeric" style="width:90px;">
+      </div>
+
+      <div class="col-2" style="margin-left:-80px;">
+        <span class="texttule">Weight</span><br>
+        <input type="text" name="weight" id="tpr_weight" placeholder="Weight" style="width:100px;" class="numeric">
+      </div>
+
+      <div class="col-1" style="text-align:center;margin-left:-130px;">
+        <span class="texttule" >ADD</span>
+        <div class="add-row" id="add-row-tpr" style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/plus.png" title="Insert"></div>
+      </div>
+
+      <div class="col-1" style="text-align:center;margin-left:-40px;">
+        <span class="texttule">Remove</span>
+        <div class="delete-row" id="delete-row-tpr" style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/minus.png" title="Remove"></div>
+      </div>
+  </div>
+
+  <div class="row"><div class="col-3" ></div></div>
+      <div class="row">
+        <div class="col-12">
+          <table id="wardtpr">
+            <thead>
+                <tr>
+                    <th style="width:5px;padding:0px;"></th>
+                    <th>Time</th>
+                    <th>Temperature</th>
+                    <th>Respiration</th>
+                    <th>Urine Passed</th>
+                    <th>Stool Passed</th>
+                    <th>SPO-2</th>
+                    <th>Weight</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
         </div>
-
-        <div class="row myrow">
-          <div class="col-1" ></div>
-          <div class="col-1" >
-            &nbsp;<span class="texttule">Time :</span>
-            <input type="time" id="ttime" name="tprtime">
-          </div>
-            <div class="col-1">
-              <span class="texttule">Temperature</span>
-              <input type="text" name="ttemp" id="temp" placeholder="Temperature" style="width:100px;">
-            </div>
-
-
-
-            <div class="col-1">
-              &nbsp;&nbsp;<span class="texttule">Pulse</span>
-              <input type="text" name="tpulse" id="pulse" placeholder="Pulse" style="width:100px;">
-            </div>
-
-            <div class="col-1">
-              <span class="texttule">BP-Systolic</span>
-              <input type="text" name="tsystolic" id="systolic" placeholder="BP-Systolic" style="width:100px;">
-            </div>
-
-            <div class="col-1">
-              <span class="texttule">BP-Diastolic</span>
-              <input type="text" name="tdiastolic" id="diastolic" placeholder="BP-Diastolic" style="width:100px;">
-            </div>
-
-            <div class="col-1">
-              <span class="texttule">Respiration</span>
-              <input type="text" name="trespiration" id="respiration" placeholder="Respiration" style="width:100px;">
-            </div>
-
-            <div class="col-1">
-              <span class="texttule">F.H.S.</span>
-              <input type="text" name="tfhs" id="fhs" placeholder="F.H.S." style="width:100px;">
-            </div>
-
-            <div class="col-1">
-              <span class="texttule">SPO<sub>2</sub> :</span>
-              <input type="text" name="tspo2" id="spo2" placeholder="SPO2" style="width:100px;">
-            </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="col-1" style="text-align:center;">
-              <span class="texttule" >ADD</span><br>
-              <div class="add-row" id="add-row-tpr"  style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/plus.png" title="Insert"></div>
-            </div>
-            &nbsp;&nbsp;
-            <div class="col-1" style="text-align:center;">
-              <span class="texttule">Remove</span><br>
-              <div class="delete-row" id="delete-row-tpr" style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/minus.png" title="Remove"></div>
-            </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="col-5"></div>
+          <input type="submit" value="Save" id="tprSubmit" style="width:100px;height:40px;font-weight:bold;">
         </div>
-
-        <div class="row"><div class="col-3" ></div></div>
-            <div class="row">
-              <div class="col-12">
-                <table id="wardtpr">
-                  <thead>
-                      <tr >
-                          <th style="width:5px;padding:0px;"></th>
-                          <th>Time</th>
-                          <th>Temperature</th>
-                          <th>Pulse</th>
-                          <th>Systolic/Diastolic</th>
-                          <th>Respiration</th>
-                          <th>F.H.S</th>
-                          <th>SPO-2</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <div class="col-5"></div>
-                <input type="submit" value="Save" id="tprSubmit" style="width:100px;height:40px;">
-              </div>
-              <p id="tprack"></p>
-            </div>
-        </form>
-    	</div>
+        <p id="tprack" style="font-weight:bold;color:green;display:inline;"></p>
+      </div>
+  </form>
+</div>
 
 <script>
 
-$(document).ready(function(){
-  $("#add-row-tpr").click(function(){
-            var time = $("#ttime").val();
-            var temp = $("#temp").val();
-            var pulse = $("#pulse").val();
-            var systolic = $("#systolic").val();
-            var diastolic = $("#diastolic").val();
-            var respiration = $("#respiration").val();
-            var fhs = $("#fhs").val();
-            var spo2 = $("#spo2").val();
-              mark = "";
-              var chk = "<tr><td><input type='checkbox' name='record' style='width:30px;height:30px;'></td>";
-              mark = mark + chk
-              var time = "<td><input type='time' name='tprtime' value='"+time+"'  readonly></td>";
-              mark = mark + time;
-              var temp = "<td><input type='text' name='temp' value='"+temp+"'  readonly></td>";
-              mark = mark + temp;
-              var pulse = "<td><input type='text' name='pulse' value='"+pulse+"' readonly></td>";
-              mark = mark + pulse;
-              var bp = "<td><input type='text' name='systolic' value='"+systolic+"' style='width:50px;' readonly> / <input type='text' name='diastolic' value='"+diastolic+"' style='width:50px;'  readonly></td>";
-              mark = mark + bp;
-              var respiration = "<td><input type='text' name='respiration' value='"+respiration+"'  readonly></td>";
-              mark = mark + respiration;
-              var fhs = "<td><input type='text' name='fhs' value='"+fhs+"'  readonly></td>";
-              mark = mark + fhs;
-              var spo2 = "<td><input type='text' name='spo2' value='"+spo2+"'  readonly></td>";
-              mark = mark + spo2;
+  $(document).ready(function(){
+    $("#add-row-tpr").click(function(){
+      var time = $("#tpr_time").val();
+      var temp = $("#tpr_temp").val();
+      var respiration = $("#tpr_respiration").val();
+      var urine = $("#tpr_urine").val();
+      var stool = $("#tpr_stool").val();
+      var spo2 = $("#tpr_spo2").val();
+      var weight = $("#tpr_weight").val();
 
-              $("#wardtpr tbody").append(mark);
-              $("#ttime").val(' ');
-              $("#temp").val(' ');
-              $("#pulse").val(' ');
-              $("#systolic").val(' ');
-              $("#diastolic").val(' ');
-              $("#respiration").val(' ');
-              $("#fhs").val(' ');
-              $("#spo2").val(' ');
-          });
+      mark = "";
 
-          // Find and remove selected table rows
-          $("#delete-row-tpr").click(function(){
-              $("#wardtpr tbody").find('input[name="record"]').each(function(){
-                if($(this).is(":checked")){
-                      $(this).parents("tr").remove();
-                  }
-              });
+      var chk = "<tr><td><input type='checkbox' name='record' style='width:30px;height:30px;'></td>";
+      mark = mark + chk;
+
+      var time = "<td><input type='time' name='tpr_time' value='"+time+"' style='max-width:100px' readonly></td>";
+      mark = mark + time;
+
+      var temp = "<td><input type='text' name='tpr_temp' value='"+temp+"' style='max-width:100px' readonly></td>";
+      mark = mark + temp;
+
+      var respiration = "<td><input type='text' name='tpr_respiration' value='"+respiration+"' style='max-width:100px' readonly></td>";
+      mark = mark + respiration;
+
+      var urine = "<td><input type='text' name='tpr_urine' value='"+urine+"' style='max-width:100px' readonly></td>";
+      mark = mark + urine;
+
+      var stool = "<td><input type='text' name='tpr_stool' value='"+stool+"'  style='max-width:100px' readonly></td>";
+      mark = mark + stool;
+
+      var spo2 = "<td><input type='text' name='tpr_spo2' value='"+spo2+"'  style='max-width:100px' readonly></td>";
+      mark = mark + spo2;
+
+      var weight = "<td><input type='text' name='tpr_weight' value='"+weight+"'  style='max-width:100px' readonly></td>";
+      mark = mark + weight;
+
+      $("#wardtpr tbody").append(mark);
+      $("#tpr_time").val(' ');
+      $("#tpr_temp").val(' ');
+      $("#tpr_respiration").val(' ');
+      $("#tpr_urine").val(' ');
+      $("#tpr_stool").val(' ');
+      $("#tpr_spo2").val(' ');
+      $("#tpr_weight").val(' ');
+    });
+
+// Find and remove selected table rows
+$("#delete-row-tpr").click(function(){
+  $("#wardtpr tbody").find('input[name="record"]').each(function(){
+    if($(this).is(":checked")){
+      $(this).parents("tr").remove();
+    }
   });
+});
 });
 
 </script>
-<!--- TPR Output Chart End---->
+
+<!------------------------ TPR Chart Ends ------------------------------------->
 
 
 
 
 
 
-<!--- Intake Output Chart Start------------>
+<!----------------------- Intake Output Chart Starts -------------------------->
 <script>
 // GET DRUG NAMES BY AJAX FOR IVF
 $(document).ready(function(){
@@ -857,7 +848,7 @@ function showIntake(idval)
 {
   var idval = idval.value;
   console.log(idval);
-  if(idval=="URINE COLLECTED" || idval=="DRAIN COLLECTED" || idval == "N.G.S. COLLECTED")
+  if(idval=="URINE COLLECTED" || idval=="DRAIN COLLECTED" || idval == "N.G.S. COLLECTED" || idval == "MILK")
   {
     $('#med_id').val(0);
     $('#iuprice').val(0);
@@ -877,24 +868,27 @@ function resetIntake(intakeid)
   $("#"+intakeid).val('');
   $("#imsg").text('');
 }
+
 </script>
+
 <div id="tab-2" class="tab-content" >
   <form action="InsertWardIntake" method="POST">
           <div class="row myrow">
             <div class="col-3"></div>
             <div class="col-2" >
               <span class="texttule">Date:  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-              <input type="date" name="idate" id="indate">
+              <input type="date" name="idate" id="indate" required>
             </div>
             <div class="col-2">
               <span class="texttule">Given By:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-              <input type="text" name="igivenby" placeholder="Given By">
+              <input type="text" name="igivenby" placeholder="Given By" class="alphaonly" required>
             </div>
             <div class="col-2">
               <span class="texttule">Select Intake:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
               <select name="iintakechart" id="intakechart" onchange="changeIntake()">
                 <option value=" ">--Select--</option>
                 <option value="IVF">I.V.F</option>
+                <option value="Milk">Milk</option>
                 <option value="Urine">Urine</option>
                 <option value="Drain">Drain</option>
                 <option value="NGS">N.G.S</option>
@@ -902,18 +896,18 @@ function resetIntake(intakeid)
             </div>
           </div>
 
-          <!---CHART--->
+          <!--- CHART FOR I.V.F --->
           <div class="row myrow" id="ivf" style="display:none;">
             <div class="col-3"></div>
             <div class="col-2">
-              <span class="texttule">Time:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <span class="texttule">Time:</span><br>
               <input type="time" name="itime" id="intime">
             </div>
 
             <div class="col-2" >
               <div class="ui-widget">
                 <span class="texttule" id="intakenamespn1" >Intake Name:</span><input type="hidden" size="5" id="intaketype">
-                <input type="text" name="dintakeout" id="intakename" onblur="showIntake(this);"onfocus="resetIntakeintakenamespn1(this)">
+                <input type="text" name="dintakeout" id="intakename">
                 <p id="imsg" style="color:red;font-weight:bold;"></p>
               </div>
             </div>
@@ -922,13 +916,13 @@ function resetIntake(intakeid)
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <select id="idose" >
                 <option value="">Select</option>
-                {%for i in range(5,2005,5)%}
+                {%for i in range(1,1001,1)%}
                   <option value="{{i}}">{{i}}</option>
                 {%endfor%}
               </select>
               <input type="text" id="unit" value="ML" size=2>
             </div>
-            <div id="InQTY" class="col-1" >
+            <div class="col-1">
               <span class="texttule">Quantity:</span>
               <input type="text"  id="Iqty" size=5 >
             </div>
@@ -942,13 +936,56 @@ function resetIntake(intakeid)
               <div class="delete-row" id="delete-row-inout"  style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/minus.png" title="Remove"></div>
             </div>
           </div>
-          <div style="display:block;">
+
+          <!---CHART END--->
+
+          <!--- CHART FOR MILK AND OTHERS --->
+          <div class="row myrow" id="milk" style="display:none;">
+            <div class="col-3"></div>
+            <div class="col-2">
+              <span class="texttule">Time:</span><br>
+              <input type="time" name="itime" id="intime1">
+            </div>
+
+            <div class="col-2" >
+              <div class="ui-widget">
+                <span class="texttule" id="intakenamespn2" >Intake Name:</span><input type="hidden" size="5" id="intaketype">
+                <input type="text" name="dintakeout" id="intakename" onblur="showIntake(this);"onfocus="resetIntakeintakenamespn2(this)">
+                <p id="imsg" style="color:red;font-weight:bold;"></p>
+              </div>
+            </div>
+            <div class="col-2" style="width:12%">
+              <span class="texttule">Dose/Unit:</span>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <select id="idose1" >
+                <option value="">Select</option>
+                {%for i in range(1,1001,1)%}
+                  <option value="{{i}}">{{i}}</option>
+                {%endfor%}
+              </select>
+              <input type="text" id="unit1" value="ML" size=2>
+            </div>
+
+            <div class="col-1" style="text-align:center;">
+              <span class="texttule" >ADD</span><br>
+              <div class="add-row" id="add-row-inout-milk"  style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/plus.png" title="Insert"></div>
+            </div>
+            &nbsp;&nbsp;
+            <div class="col-1" style="text-align:center;">
+              <span class="texttule">Remove</span><br>
+              <div class="delete-row" id="delete-row-inout-milk"  style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/minus.png" title="Remove"></div>
+            </div>
+          </div>
+
+          <!---CHART END--->
+
+          <div style="display:none;">
             WARD MAIN ID:<input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}">
             MEDDET_ID:<input type="text"  id="med_id">
             PRICE:<input type="text"  id="iuprice">
             HandQty:<input type="text"  id="Ihqty">
           </div>
-          <!---CHART END--->
+
           <div class="row"><div class="col-3" ></div></div>
           <div class="row">
             <div class="col-12">
@@ -973,11 +1010,11 @@ function resetIntake(intakeid)
           </div>
           <div class="row">
             <div class="col-5"></div>
-            <input type="submit" value="Save" id="insubmit" style="width:100px;height:40px;">
+            <input type="submit" value="Save" id="insubmit" style="width:100px;height:40px;font-weight:bold;">
           </div>
           <div class="row">
             <div class="col-5"></div>
-            <p id="inack"></p>
+            <p id="inack" style="font-weight:bold;color:green;display:inline;"></p>
           </div>
 </form>
 </div>
@@ -995,37 +1032,43 @@ function changeIntake()
     $("#intakenamespn").html("I.V.F.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
     $("#intakename").val('');
     $('#intaketype').val('I.V.F.');
-    $('#InQTY').css('display','block');
+    $("#milk").hide();
+  }
+  else if(intake=='Milk'){
+    $("#milk").show();
+    $("#intakenamespn").html("Milk:");
+    $("#intakename").val('Milk');
+    $('#intaketype').val('MILK');
+    $('#med_id').val(0);
+    $('#iuprice').val(0);
+    $("#ivf").hide();
   }
   else if(intake=='Urine'){
-    $("#ivf").show();
+    $("#milk").show();
     $("#intakenamespn").html("Urine:");
     $("#intakename").val("URINE COLLECTED");
     $('#intaketype').val('URINE');
     $('#med_id').val(0);
     $('#iuprice').val(0);
-    $('#InQTY').css('display','none');
-
+    $("#ivf").hide();
   }
   else if(intake=='Drain'){
-    $("#ivf").show();
+    $("#milk").show();
     $("#intakenamespn").html("Drain:");
     $("#intakename").val("DRAIN COLLECTED");
     $('#intaketype').val('DRAIN');
     $('#med_id').val(0);
     $('#iuprice').val(0);
-    $('#InQTY').css('display','none');
-
+    $("#ivf").hide();
   }
   else if(intake=='NGS'){
-    $("#ivf").show();
+    $("#milk").show();
     $("#intakenamespn").html("N.G.S:");
     $("#intakename").val("N.G.S. COLLECTED");
     $('#intaketype').val('N.G.S.');
     $('#med_id').val(0);
     $('#iuprice').val(0);
-    $('#InQTY').css('display','none');
-
+    $("#ivf").hide();
   }
 
 }
@@ -1040,9 +1083,7 @@ $(document).ready(function(){
     var iunit = $("#unit").val();
     var med_id = $("#med_id").val();
     var iuprice = $("#iuprice").val();
-    var remqty=0;
-    if (intaketype == "IVF")
-      remqty = parseFloat($("#Ihqty").val())-parseFloat($("#Iqty").val());
+    var remqty = parseFloat($("#Ihqty").val())-parseFloat($("#Iqty").val());
 
 
       mark = "";
@@ -1081,11 +1122,61 @@ $("#delete-row-inout").click(function(){
   });
 });
 
+$(document).ready(function(){
+  $("#add-row-inout-milk").click(function(){
+
+    var intime = $("#intime1").val();
+    var intaketype = $("#intaketype").val();
+    var intakename = $("#intakename").val();
+    var idose = $("#idose1").val();
+    var iunit = $("#unit1").val();
+    var med_id = $("#med_id").val();
+    var iuprice = $("#iuprice").val();
+    var remqty = parseFloat($("#Ihqty").val())-parseFloat($("#Iqty").val());
+
+
+      mark = "";
+      var chk = "<tr><td><input type='checkbox' name='record' style='width:30px;height:30px;'></td>";
+      mark = mark + chk
+
+      var intime = "<td><input type='time' name='intime' value='"+intime+"' readonly></td>";
+      mark = mark + intime;
+      var intaketype = "<td><input type='text' name='intaketype' value='"+intaketype+"'  readonly></td>";
+      mark = mark + intaketype;
+      var intakename = "<td><input type='text' name='intakename' value='"+intakename+"'  readonly></td>";
+      mark = mark + intakename;
+      var idose = "<td><input type='text' name='idose' value='"+idose+"' readonly></td>";
+      mark = mark + idose;
+      var iunit = "<td><input type='text' name='iunit' value='"+iunit+"'  readonly></td>";
+      mark = mark + iunit;
+      var med_id = "<td style='display:none;'><input type='text' name='med_id' value='"+med_id+"' size=3 readonly></td>";
+      mark = mark + med_id;
+      var iuprice = "<td style='display:none;'><input type='text' name='iamount' value='"+iuprice+"' size=4 readonly></td>";
+      mark = mark + iuprice;
+      var remqty = "<td style='display:none;'><input type='text' name='remqty' value='"+remqty+"' size=4 readonly></td></tr>";
+      mark = mark + remqty;
+
+      $("#intakeouputchart tbody").append(mark);
+      $("#intime").val(' ');
+      $("#intakename").val(' ');
+      $("#amnt").val(' ');
+  });
+
+$("#delete-row-inout-milk").click(function(){
+      $("#intakeouputchart tbody").find('input[name="record"]').each(function(){
+        if($(this).is(":checked")){
+              $(this).parents("tr").remove();
+          }
+      });
+  });
+});
+
+
 </script>
-<!--- Intake Output Chart End------------>
+<!--------------------- Intake Output Chart Ends ------------------------------>
 
 
-<!---Consumable charts start------------>
+<!---------------------- Consumable charts starts ----------------------------->
 <script>
 // GET DRUG NAMES BY AJAX FOR consume
 $(document).ready(function(){
@@ -1136,24 +1227,24 @@ function showConsume(idval)
 
 <div id="tab-3" class="tab-content">
   <form action="insertWardConsume" method="POST">
-    <input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}">
+    <input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}" style="display:none;">
   <div class="row myrow">
-    <div class="col-4"></div>
+    <div class="col-3"></div>
     <div class="col-2">
       <span class="texttule">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <input type="date" name="cdate" id="cdate" placeholder="Date">
+      <input type="date" name="cdate" id="cdate" placeholder="Date" required>
     </div>
 
     <div class="col-2">
       <span class="texttule">Given By :</span>
-      <input type="text" name="cgivenby"  placeholder="Given By">
+      <input type="text" name="cgivenby"  placeholder="Given By" class="alphaonly" required>
     </div>
   </div>
   <div class="row myrow">
     <div class="col-3"></div>
     <div class="col-1">
       <span class="texttule">Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <input type="time"  id="ctime" placeholder="Time">
+      <input type="time"  id="ctime" placeholder="Time" required>
     </div>
     <div class="col-2" >
       <div class="ui-widget">
@@ -1167,12 +1258,13 @@ function showConsume(idval)
       <span class="texttule">Quantity:</span>
       <input type="text"  id="cqty" size=5 >
     </div>
-
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <div class="col-1" style="text-align:center;">
-      <span class="texttule">ADD&nbsp;&nbsp;</span>
+      <span class="texttule">ADD</span>
       <div class="add-row" id="add-row-con"  style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/plus.png" title="Insert"></div>
     </div>
-
+    &nbsp;&nbsp;
     <div class="col-1" style="text-align:center;">
       <span class="texttule">Remove</span>
       <div class="delete-row" id="delete-row-con"  style="display:inline;border:1px solid black;padding:4px 25px 5px 25px;background-color:#8FBC8F;"><img src="../static/icon4/minus.png" title="Remove"></div>
@@ -1180,11 +1272,11 @@ function showConsume(idval)
   </div>
     <div class="row myrow">
       <div class="col-5"></div>
-      <div class="col-1"><p id="pack"></p></div>
+      <div class="col-1"><p id="pack" style="font-weight:bold;color:green;display:inline;"></p></div>
     </div>
-    <input type="text"  id="cmed_id" >
-    <input type="text"  id="cprice" >
-    <input type="text"  id="chqty" >
+    <input type="text"  id="cmed_id" style="display:none;">
+    <input type="text"  id="cprice" style="display:none;">
+    <input type="text"  id="chqty" style="display:none;">
 
     <div class="row"><div class="col-3" ></div></div>
     <div class="row">
@@ -1206,11 +1298,11 @@ function showConsume(idval)
     </div>
     <div class="row">
       <div class="col-5"></div>
-      <input type="submit" value="Save" id="csubmit" style="width:100px;height:40px;">
+      <input type="submit" value="Save" id="csubmit" style="width:100px;height:40px;font-weight:bold;">
     </div>
     <div class="row">
       <div class="col-5"></div>
-      <p id="cack"></p>
+      <p id="cack" style="font-weight:bold;color:green;display:inline;"></p>
     </div>
 </form>
 </div>
@@ -1266,21 +1358,21 @@ $("#delete-row-con").click(function(){
 
 </script>
 
-<!---Consumablecharts End-------------->
+<!-------------------- Consumable chart Ends ---------------------------------->
 
-<!--- Sugar Chart start------------------>
+<!--------------------- Sugar Chart starts ------------------------------------>
 <div id="tab-4" class="tab-content">
   <form action="insertWardSugar" method="POST">
     <div class="row myrow">
       <div class="col-2" ></div>
         <div class="col-2" >
           &nbsp;&nbsp;<span class="texttule">Sugar Level :</span>
-          <input type="text" name="sugarlevel" id="sugarlevel" placeholder="Sugar Level">
+          <input type="text" name="sugarlevel" id="sugarlevel" placeholder="Sugar Level" class="numeric" required>
         </div>
         <div class="col-2" >
           <div class="ui-widget">
-            <span class="texttule">Insulin:</span>
-            <input type="text" name="insuline" id="insuline" placeholder="Insuline" onblur="showSugar(this);"onfocus="resetSugar(this);">
+            <span class="texttule">Medicine Name:</span>
+            <input type="text" name="insuline" id="insuline" placeholder="Medicine Name" onblur="showSugar(this);"onfocus="resetSugar(this);">
             <p id="smsg" style="color:red;font-weight:bold;"></p>
           </div>
         </div>
@@ -1289,47 +1381,56 @@ $("#delete-row-con").click(function(){
             <span class="texttule">Dose/Unit:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <select name="sdose" id="sdose">
               <option value="">Select</option>
-              {%for i in range(5,2005,5)%}
+              {%for i in range(1,1001,1)%}
                 <option value="{{i}}">{{i}}</option>
               {%endfor%}
             </select>
             <input type="text" name="sunit" size=3 value="ML">
           </div>
+
           <div class="col-1" >
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Quantity:</span>
             <input type="text" id="suqty" onblur="calQty()">
         </div>
-      </div>
+      </div> <!-- row -->
+
       <div class="row myrow">
         <div class="col-2" ></div>
       <div class="col-2" >
         <span class="texttule">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <input type="date" name="sdate" id="sdate">
+        <input type="date" name="sdate" id="sdate" required>
       </div>
 
       <div class="col-1" >
         <span class="texttule">Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <input type="time" name="stime" id="stime">
+        <input type="time" name="stime" id="stime" required>
       </div>
-          <div class="col-2" >
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Given By :</span>
-            <input type="text" name="givenby" name="sgivenby" placeholder="Given By">
-        </div>
-        <input type="text" name="remqty" id="cremqty" >
-        <div class="col-1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <input type="submit" value="Save" id="ssave"></div>
+      <div class="col-2" >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Given By :</span>
+        <input type="text" name="givenby" name="sgivenby" placeholder="Given By" class="alphaonly" required>
       </div>
-      <input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}">
-      <input type="text" name="med_id" id="smed_id" >
-      <input type="text" name="sprice" id="sprice" >
-      <input type="text" name="hqty" id="hcqty" >
-    </form>
+    </div><!-- row -->
+    <br>
+
+      <input type="text" name="remqty" id="cremqty" style="display:none;">
+      <input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}" style="display:none;">
+      <input type="text" name="med_id" id="smed_id" style="display:none;">
+      <input type="text" name="sprice" id="sprice" style="display:none;">
+      <input type="text" name="hqty" id="hcqty" style="display:none;">
+
     <div class="row myrow">
-      <div class="col-5"></div>
-      <div class="col-1"><p id="sack"></p></div>
-    </div>
-  </div>
-<!--- Sugar Chart End--------------->
+      <div class="col-11"style="text-align:center;">
+        <input type="submit" value="Save" id="ssave" style="width:100px;height:40px;font-weight:bold;">
+      </div>
+      <br>
+      <br>
+      <div class="col-1"><p id="sack" style="font-weight:bold;color:green;display:inline;"></p>
+      </div>
+    </div><!-- row -->
+
+  </form>
+  </div> <!-- tab -->
+
 
 
 
@@ -1349,7 +1450,7 @@ $(function(){
                 success: function(data)
                 {
                   if (data=="")
-                    $("#smsg").text('Requested Insulin Is Not Issued To You Or Quantity Is Zero.');
+                    $("#smsg").text('Requested Medicine Is Not Issued To You Or Quantity Is Zero.');
                     else{
                       response(data);
                       $("#smsg").text('');
@@ -1392,174 +1493,52 @@ function showSugar(idval)
   }
 </script>
 
+<!------------------------- Sugar Chart Ends ---------------------------------->
 
 
-
-
-
-
-
-
-<!---Poision charts start------------>
+<!----------------------- DRESSING charts starts ------------------------------>
 <div id="tab-5" class="tab-content">
-  <form action="insertWardPoison" method="POST">
-  <div class="row myrow">
-    <div class="col-2">
-      <span class="texttule">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <input type="date" name="pdate" placeholder="Date">
-    </div>
-
-    <div class="col-1">
-      <span class="texttule">Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <input type="time" name="ptime" placeholder="Time">
-    </div>
-    <div class="col-2" >
-      <div class="ui-widget">
-        <span class="texttule">Injection:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <input type="text" name="pinjection" id="injection" placeholder="Injection" onblur="showPoison(this);" onfocus="resetPoison(this)">
-        <p id="pmsg" style="color:red;font-weight:bold;"></p>
-      </div>
-    </div>
-
-    <div class="col-2">
-      <span class="texttule">Dose/Unit:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <select name="pdose" id="pdose" >
-        <option value="">Select</option>
-        {%for i in range(5,2005,5)%}
-          <option value="{{i}}">{{i}}</option>
-        {%endfor%}
-      </select>
-      <input type="text" name="punit" size=3 value="ML">
-    </div>
-    <div class="col-2">
-      <span class="texttule">Quantity:</span>
-      <input type="text" name="qty" id="poqty" placeholder="Quantity" onblur="calPoQty()">
-    </div>
-
-    <div class="col-2">
-      <span class="texttule">Given By :</span>
-      <input type="text" name="pgivenby" placeholder="Given By">
-    </div>
-  </div>
-      <div class="row">
-        <div class="col-1">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="submit" value="Save" id="poisionSubmit">
-      </div>
-    </div>
-    <div class="row myrow">
-      <div class="col-5"></div>
-      <div class="col-1"><p id="pack"></p></div>
-    </div>
-    <input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}">
-    <input type="text" name="pmed_id" id="pmed_id" >
-    <input type="text" name="pprice" id="pprice" >
-    <input type="text" name="phqty" id="phqty" >
-    <input type="text" name="remqty" id="premqty" placeholder="Quantity">
-
-</form>
-</div>
-
-
-<script>
-function calPoQty(){
-  var phqty=parseFloat($('#phqty').val());
-  var poqty=parseFloat($('#poqty').val());
-  if(poqty>phqty){
-    alert("You have "+phqty+" You Are Entering "+poqty);
-    return false;
-  }
-  else{
-      $('#premqty').val(phqty-poqty);
-  }
-}
-// GET DRUG NAMES BY AJAX FOR poison
-$(document).ready(function(){
-$(function(){
-  $("#injection").autocomplete({
-      source: function(request,response )
-        {
-          var injection=document.getElementById('injection').value;
-          var wardid=$("#wardid").val();
-            $.ajax({
-                type:"POST",
-                url:"getMedicineWardPoison",
-                data:{"injection":injection,"wardid":wardid},
-                success: function(data)
-                {
-                  if (data=="")
-                  $("#pmsg").text('Requested Poison Injection Is Not Issued To You Or Quantity Is Zero.');
-                  else{
-                    response(data);
-                    $("#pmsg").text(' ');
-                  }
-                }
-              });
-          },
-    });
-});
-});
-
-
-function showPoison(idval)
-{
-  var idval = idval.value;
-  console.log(idval);
-    var arr = idval.split(">");
-    $('#injection').val(arr[0]);
-    $('#pmed_id').val(arr[4]);
-    $('#pprice').val(arr[3]);
-    $('#phqty').val(arr[2]);
-  }
-
-function resetPoison(poid)
-{
-  var poid = poid.id;
-  $("#"+poid).val('');
-  $("#pmsg").text('');
-}
-</script>
-
-
-
-<!---Poision charts End-------------->
-
-<!---DRESSING charts start------------>
-<div id="tab-6" class="tab-content">
 
   <form action="insertWardDressing" method="POST">
-    WardId<input type="text" name="wardid" id="wardid" value="{{wardid}}">
-    WmId<input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}">
+    <input type="text" name="wardid" id="wardid" value="{{wardid}}" style="display:none;">
+    <input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}" style="display:none;">
 
     <div class="row myrow">
-      <div class="col-2"></div>
+      <div class="col-3"></div>
       <div class="col-2"><span class="texttule">Date:</span><br>
-        <input type="date" name="dressing_date" style="max-width:68%">
+        <input type="date" name="dressing_date" style="max-width:68%" required>
       </div>
 
-      <div class="col-2" style="margin-left:-30px;"><span class="texttule">Type of Dressing:</span>
+      <div class="col-2" style="margin-left:-30px;"><span class="texttule">Type of Dressing:</span><br>
         <select  id='drsname' name="dname" onchange="getAllDressingName()" required>
-          <option value="">-----Select-----</option>
+          <option value="">--Select--</option>
           {%for row in ds2%}
           <option value="{{row[0]}}">{{row[1]}}</option>
           {%endfor%}
         </select>
       </div>
 
-      <div class="col-1"><span class="texttule">Amount:</span><br>
-        <input type="text" name="dressing_amount" style="max-width:60px" id="amount" placeholder="amount" readonly>
+      <div class="col-2" style="margin-left:-50px;"><span class="texttule">Done By:</span>
+        <input type="text" name="dressing_doneby" placeholder="Done By" class="alphaonly" required>
       </div>
+    </div><!-- row -->
 
-      <div class="col-2"><span class="texttule">Done By:</span>
-        <input type="text" name="dressing_doneby" placeholder="Done By" required>
+
+    <div class="row myrow" style="display:none;">
+      <div class="col-3"></div>
+      <div class="col-1"><span class="texttule">Amount:</span><br>
+        <input type="text" name="dressing_amount" style="max-width:60px" id="amount" readonly>
       </div>
     </div><!-- row -->
 
     <br>
     <div class="row myrow">
-      <div class="col-12" style="text-align:center;">
-        <input type="submit" value="Save" id="dressSubmit" style="width:100px;height:40px;"></div><br>
-        <p id="dressingack"></p>
+      <div class="col-11" style="text-align:center;">
+        <input type="submit" value="Save" id="dressingsave" style="width:100px;height:40px;font-weight:bold;">
+        <br>
+        <br>
+        <p id="dressingack" style="font-weight:bold;color:green;display:inline;"></p>
+      </div>
       </div><!-- row -->
     </form>
   </div><!-- tab -->
@@ -1583,63 +1562,143 @@ function getAllDressingName()
 
 
 
-<!--- DRESSING Chart Ends ---------------------------------->
+<!------------------------- DRESSING Chart Ends ------------------------------->
 
 
+<!----------------------- Therapy Starts -------------------------------------->
 
-<!--- Physiotherapy Starts -------------------------------->
-<div id="tab-7" class="tab-content">
-  <form action="insertWardPhysiotherapy" method="POST">
-    WardId<input type="text" name="wardid" id="wardid" value="{{wardid}}">
-    WmId<input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}">
+<script>
+function CalTime()
+{
+  var tim1=$("#therapy_starttime").val();
+  var tim2=$("#therapy_endtime").val();
+
+  var w= isNaN(tim1);
+  console.log(w);
+  var t= isNaN(tim2);
+  console.log(t);
+
+  if (w == true && t == true)
+  {
+    var ary1=tim1.split(':');
+    var ary2=tim2.split(':');
+    var minsdiff=parseInt(ary2[0],10)*60+parseInt(ary2[1],10)-parseInt(ary1[0],10)*60-parseInt(ary1[1],10);
+    var x = (String(100+Math.floor(minsdiff/60)).substr(1)+':'+String(100+minsdiff%60).substr(1));
+    var a = x.split(":");
+    var minut=(parseInt(a[0])*60)+parseInt(a[1]);
+    $("#therapy_duration").val(minut);
+  }
+}
+
+function getAllTherapyName()
+{
+  var val = $("#adm_therapyname").val();
+  $.ajax({
+    type: "POST",
+    url: "/getTherapy",
+    data:"tname=" + val,
+    success: function(string){
+      var data = JSON.parse(string)['data'];
+      $("#tamount").val(data[0]);
+    }
+  });
+};
+
+function CalcTotalAmount()
+{
+  var a = $("#tamount").val();
+  var b = $("#therapy_duration").val();
+  var c = a * b;
+  $("#therapy_amount").val(c);
+}
+</script>
+
+<div id="tab-6" class="tab-content">
+  <form action = "insertNurTherapy" method = "POST">
+
+    <input type="text" name="wardid" id="wardid" value="{{wardid}}" style="display:none;">
+
+    <input type="text" name="wrd_id" id="wrd_id" value="{{wmid}}" style="display:none;">
 
     <div class="row myrow">
+
       <div class="col-3"></div>
-      <div class="col-2"><span class="texttule">Date:</span><br>
-        <input type="date" name="physiotherapy_date" style="max-width:68%">
+
+      <div class = "col-2"><span class="texttule">Date:</span><br>
+        <input type="date" name="therapy_date" required>
       </div>
 
-      <div class="col-1" style="margin-left:-30px;"><span class="texttule">Physiotherapy:</span>
-        <select  id='phyname' name="pname" onchange="getAllPhysiotherapyName()" required>
-          <option value="">-----Select-----</option>
+      <div class = "col-2"><span class="texttule">Given By:</span>
+        <input type="text" name="therapy_givenby" placeholder="Given By" class="alphaonly" required>
+      </div>
+
+      </div><!-- row -->
+
+      <br>
+
+
+      <div class="row myrow">
+
+        <div class="col-3"></div>
+
+        <div class = "col-2"><span class="texttule">Therapy Name:</span>
+        <br>
+        <select  id='adm_therapyname' name="tname" onchange="getAllTherapyName()" required>
+          <option value="">--Select--</option>
           {%for row in ds3%}
           <option value="{{row[0]}}">{{row[1]}}</option>
           {%endfor%}
         </select>
       </div>
 
-      <div class="col-1" style="display:block"><span class="texttule">Amount:</span><br>
-        <input type="text" name="physiotherapy_amount" style="max-width:60px" id="phyamount" readonly>
+      <div class = "col-2" style="margin-left:-80px;">
+        <span class="texttule">Start Time:</span><br>
+        <input type="time" name="therapy_starttime" id="therapy_starttime" onblur="CalTime()">
       </div>
-      <br>
-      <div class="col-1" style="text-align:center;">
-      <input type="submit" value="Save" id="physioSubmit" style="width:100px;height:40px;"></div>
-    </div><!-- row -->
-    </form>
-    <p id="physiotherapyack"></p>
-  </div><!-- tab -->
+
+      <div class = "col-2" style="margin-left:-100px;">
+        <span class="texttule">End Time:</span><br>
+        <input type="time" name="therapy_endtime" id="therapy_endtime" onblur="CalTime()">
+      </div>
+
+      <div class = "col-2" style="margin-left:-100px;"><span class="texttule">Duration/Unit:</span><br>
+        <input type="text" name="therapy_duration" style="max-width:60px;" id="therapy_duration" onblur="CalcTotalAmount()" placeholder="Duration" readonly>
+        <input type="text" name="therapy_unit" size=4 value="Mins" style="font-weight:bold;" readonly>
+      </div>
+    </div> <!-- row -->
+
+    <div class="row myrow">
+
+      <div class="col-3"></div>
+
+      <div class = "col-2" style="display:none;"><span class="texttule">Amount (Rs/Mins):</span>
+        <br>
+        <input type="text" style="max-width:60px;" name="tamount" id="tamount" onblur="CalcTotalAmount()" readonly>
+      </div>
+      <div class = "col-2" style="display:none;"><span class="texttule">Total Amount (Rs/Hr):</span>
+        <br>
+        <input type="text" style="max-width:60px;"name="therapy_amount" id="therapy_amount" onblur="CalcTotalAmount()" readonly>
+        </div>
+    </div> <!-- row -->
 
 
-<script>
-function getAllPhysiotherapyName()
-  {
-    var val = $("#phyname").val();
-    $.ajax({
-      type: "POST",
-      url: "/getPhysiotherapy",
-      data:"pname=" + val,
-      success: function(string){
-        var data = JSON.parse(string)['data'];
-        $("#phyamount").val(data[0]);
-      }
-    });
-  };
-  </script>
+
+    <br>
+    <div class="row myrow">
+      <div class="col-11" style="text-align:center;">
+        <input type="submit" value="Save" id="therapysave" style="width:100px;height:40px;font-weight:bold;">
+        <br>
+        <br>
+        <p id="therapyack" style="font-weight:bold;color:green;display:inline;"></p>
+      </div>
+    </div> <!-- row -->
+
+  </form>
+</div> <!-- tab -->
 
 
-<!--- Physiotherapy Ends -------------------------------------->
 
-
+<!------------------------- Therapy Ends -------------------------------------->
 
     </div><!-- container -->
   </div> <!--- Content --->

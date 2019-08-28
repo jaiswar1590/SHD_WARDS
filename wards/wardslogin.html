@@ -3,30 +3,20 @@
 
 <div class="col12">
   <div id="content">
-    <div class="titlebox"  align="center">Login To Ward</div>
+    <div class="titlebox"  align="center">Select Your Ward</div>
     <br/>
     <div class="row myrow">
     <form action="reginward" method="POST">
+
       <div class="col-12"  align="center">
         <span class="texttule">Select Ward :</span>
-        <select required>
-          <option value="">-----Select-----</option>
-          <option value="Male Ward">Male Ward</option>
-          <option value="Female Ward">Female Ward</option>
-          <option value="General Ward">General Ward</option>
-          <option value="Surgical Ward">Surgical Ward</option>
-          <option value="Child Ward">Child Ward</option>
-          <option value="Delivery Ward">Delivery Ward</option>
-          <option value="K-2 Ward">K-2 Ward</option>
-          <option value="Nursery Ward">Nursery Ward</option>
-          <option value="Medicine Ward">Medicine Ward</option>
-          <option value="T.B. Ward">T.B. Ward</option>
-          <option value="Special Ward">Special Ward</option>
-          <option value="Counter-3 Ward">Counter-3 Ward</option>
-          <option value="Private Ward">Private Ward</option>
-          <option value="Ground Ward">Ground Ward</option>
+        <select name="wid" id="wid" onchange="keepWardId()" required>
+          <option value="">----------Select----------</option>
+          {% for row in wd%}  <!--getting wards name from database-->
+          <option value="{{row[0]}}">{{row[1]}}</option>
+          {%endfor%}
         </select>
-
+          <input type="text" name="wardname" id="wardname" style="display:none;">
           <input type="submit" value="Submit">
         </div>
       </form>
@@ -35,7 +25,11 @@
   </div> <!--- Content --->
 </div><!--- col-12 --->
 <br>
-
-
+<script>
+function keepWardId()
+{
+  $('#wardname').val($("#wid option:selected").html());
+}
+</script>
 
 {% endblock %}

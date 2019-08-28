@@ -1,0 +1,244 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+<style>
+.subtitle
+{
+background-color:#F0E68C;
+width: 100%;
+}
+.spnhead
+{
+  font-size: 20px;
+  font-weight: bold;
+}
+.spndata{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+		.container{
+			width: 100%;
+      padding-right: 0px;
+      padding-left: 0px;
+      margin-right: auto;
+      margin-left: auto;
+		}
+
+		ul.tabs{
+			margin: 0px;
+			padding: 0px;
+			list-style: none;
+		}
+		ul.tabs li{
+			background: none;
+			display: inline-block;
+			padding: 8px 15px;
+      padding-right:100px;
+      cursor: pointer;
+      color: #222;
+      font-size: 18px;
+		}
+
+		ul.tabs li.current{
+			background: #F0FFFF;
+			color: #222;
+      font-weight: bold;
+		}
+
+		.tab-content{
+			display: none;
+			background: #F0FFFF;
+			padding: 15px;
+		}
+
+		.tab-content.current{
+			display: inherit;
+		}
+</style>
+<style>
+
+#chileDetail {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#chileDetail td, #chileDetail th {
+  padding: 5px;
+}
+
+#chileDetail td{
+  padding:5px;
+  font-size: 15px;
+}
+#chileDetail tr:nth-child(even){background-color: #f2f2f2;}
+
+#chileDetail tr:hover {background-color: #ddd;}
+
+#chileDetail thead,th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: white;
+  font-size: 17px;
+}
+
+/* GENERAL CODE */
+
+
+/* SEPERATE CODE */
+#chileDetail thead,th {
+  background-color:#778899;
+}
+</style>
+
+<div class="col-12">
+<div id="content">
+<div class="row" style="padding-bottom:1px;"></div>
+<div class="titlebox" align="center">View And Edit Patient Details &nbsp;<div style="text-align:right;display:inline;border:2px solid #000080;padding:6px;border-radius:3px;"><a href="SurgeryAdminRedir" style="text-decoration:none;color:green;font-size:30px;color:#000080"><img src="static/icon4/home.svg" height="40px" width="40px"></a></div>
+</div>
+
+<form action="ShowSurgeryPatientRedir" method="POST">
+  <div class="row myrow">
+    <div class="col-2">
+    <span class="texttule">From Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <input type="date" name="fdate" id="fdate" required>
+  </div>
+
+    <div class="col-2">
+      <span class="texttule">To Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <input type="date" name="tdate" id="tdate" required>
+    </div>
+
+  <div class="col-1">
+    <span class="texttule">Patient From:</span>
+      <select style="width:120px;" name="pfrom">
+        <option value="">-----Select-----</option>
+        <option value="OUTPATIENT">OUTPATIENT</option>
+        <option value="INPATIENT">INPATIENT</option>
+      </select>
+  </div><br>
+
+    <div class="col-3">
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Search">
+      {%if msg == 'Excel Sheet Generated Successfully'%}
+      <a href="static/SurgeryUploads/surgery.xlsx" download>
+      <img src="static/icon4/excel6.png" width="40px" height="40px"></a>
+      {%endif%}
+    </div>
+    </div>
+</form>
+</div>
+<br>
+
+<form action="ShowSurgeryPatientByTypes" method="POST">
+<div class="row myrow">
+    <div class="col-2">
+      <span class="texttule">From Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <input type="date" name="fdate" id="fdate" required>
+    </div>
+
+    <div class="col-2">
+      <span class="texttule">To Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <input type="date" name="tdate" id="tdate" required>
+    </div>
+
+    <div class="col-2">
+      <span class="texttule">Kind of Surgery:</span>
+        <select style="width:120px;" name="ksurgerytype">
+          <option value="" >-----Select-----</option>
+          <option value="Major">Major</option>
+          <option value="Minor">Minor</option>
+        </select>
+    </div>
+
+  <div class="col-2">
+      <span class="texttule">Surgery Type:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <select style="width:120px;" name="stype">
+          <option value="">-----Select-----</option>
+          <option value="General">General</option>
+          <option value="Orthopedic">Orthopedic</option>
+          <option value="Gynaecology">Gynaecology</option>
+          <option value="Urology">Urology</option>
+          <option value="ENT">ENT</option>
+        </select>
+  </div>
+
+  <div class="col-2">
+      <span class="texttule">Anesthesia Type:</span>
+        <select style="width:120px;" name="anstype">
+          <option value="">-----Select-----</option>
+          <option value="General">General</option>
+          <option value="Spinal">Spinal</option>
+          <option value="Local">Local</option>
+        </select>
+
+  </div>
+
+  <div class="col-2">
+      <span class="texttule">Procedure Of Surgery:</span>
+        <select style="width:180px;" name="psurgery">
+          <option value="" >-----------Select-----------</option>
+          {%for row in sprocedure%}
+          <option value="{{row[0]}}">{{row[1]}}</option>
+          {%endfor%}
+        </select>
+  </div>
+  <div class="col-2"></div>
+  <div class="col-2"></div>
+  <div class="col-1"></div>
+  <div class="col-2">
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Search">
+      {%if msg2 == 'Excel Sheet Generated Successfully'%}
+      <a href="static/SurgeryUploads/surgeryExcel.xlsx" download>
+      <img src="static/icon4/excel6.png" width="40px" height="40px"></a>
+      {%endif%}
+    </div>
+  </div>
+  </div><!--End row myrow-->
+</form>
+</div>
+<div class="col-12" style="text-align: center;color:green;"><span class="texttule">{{msg}}</span></div>
+<div class="col-12" style="text-align: center;color:red;"><span class="texttule">{{msg1}}</span></div>
+<div class="col-12" style="text-align: center;color:green;"><span class="texttule">{{msg2}}</span></div>
+
+<div class="row myrow">
+<div class="col-12"  style="width:100%;height:500px;line-height:1em;overflow:auto;">
+  <table id="chileDetail">
+    <thead>
+      <th>EDIT</th>
+      <th>Reg-No</th>
+      <th>Patient From</th>
+      <th>Patient Name</th>
+      <th>Surgery Date</th>
+      <th>Surgery Procedure</th>
+      <th>Surgeon Name</th>
+      <th>Anesthesiologist</th>
+      <th>Kind of Surgery</th>
+      <th>Surgery Type</th>
+      <th>Anesthesia Type</th>
+      <th>Disease</th>
+    </thead>
+    {%for row in bydate%}
+    <tr>
+      <td><a href="{{ url_for('EditSurgeryDetails',sid=row[13],pfrom=row[1])}}"><button >Edit</button></a></td>
+      <td>{{row[0]}}</td>
+      <td>{{row[1]}}</td>
+      <td>{{row[2]}} {{row[3]}} {{row[4]}}</td>
+      <td>{{row[5]}}</td>
+      <td>{{row[6]}}</td>
+      <td>{{row[7]}}</td>
+      <td>{{row[8]}}</td>
+      <td>{{row[9]}}</td>
+      <td>{{row[10]}}</td>
+      <td>{{row[11]}}</td>
+      <td>{{row[12]}}</td>
+    </tr>
+    {%endfor%}
+  </table>
+</div>
+</div>
+
+{% endblock %}

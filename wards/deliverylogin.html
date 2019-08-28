@@ -58,22 +58,45 @@ width: 100%;
 		}
 </style>
 
-<form action="delivery" method="POST">
 <div class="col12">
   <div id="content">
-    <div class="titlebox" align="center">Delivery Ward</div>
-    <div class="row" style="padding-bottom:1px;"></div>
-
-      <div class="col-12"  align="center">
-        <span class="texttule">Enter RegNo :</span>
-        <input type="text" value="regno">
-        <input type="submit" value="Search">
+    {%if flag1==1%}
+    <form action="delivery" method="POST">
+      <div class="titlebox" style="text-align:center">
+        <span style="text-align:center">Delivery Ward</span>
+        <div style="text-align:right;display:inline;border:2px solid #000080;padding:6px;border-radius:3px;"><a href="GetdeliveryRedir" style="text-decoration:none;color:green;font-size:30px;color:#000080"><img src="static/icon4/home.svg" height="40px" width="40px"></a></div>
       </div>
-    </div>
-</form>
-    </div><!----------titlebox-------->
-  </div><!----------Content-------->
-</div><!----------COl-12-------->
+      <div class="row" style="padding-bottom:1px;"></div>
+      <div class="row myrow">
+        <div class="col-12">
+          <div align="center">
+          <span class="texttule">Enter RegNo :</span>
+          <input type="text" name="regno" class="alphanumeric">
+          <input type="submit" value="Search">
+          <p style="display:inline;color:green;"><b>{{ack1}}</b></p>
+        </div>
+        </div>
+      </div>
+    </form>
+    {%endif%}
+
+
+{%if flag2==1%}
+{%for row in ds1%}
+    <form action="deliveryPrintPage" method="POST">
+      <div class="row myrow">
+        <div class="col-12">
+          <div align="center">
+            <input type="submit" value="Print" style="height:40px;width:100px;background-color:#A9A9A9;font-weight:bold">
+            <input type="text" name="delivery_id" value="{{row[0]}}"  style="display:none;">
+          </div>
+        </div>
+      </div>
+    </form>
+    {%endfor%}
+    {%endif%}
+  </div>
+</div>
 
 
 {% endblock %}

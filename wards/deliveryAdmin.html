@@ -1,0 +1,119 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+<div class="col-12">
+  <div id="content">
+    <div class="titlebox"  align="center">Welcome To Delivery Page</div>
+    <div class="row" style="padding-bottom:3px;"></div>
+
+    <!--Current Month Delivery & Total Child------->
+
+    <div class="row myrow">
+      <div class="col-2"></div>
+        <div class="col-3">
+
+        {% for row in ds2%}
+        <span class="texttule" style="color:#191970;"><span>{{row[1]}}'s</span> Total Delivery:</span>&nbsp;
+        <input type="text" name="counteightteen" value="{{row[0]}}" readonly style="width:90px;background-color:green;color:white;text-align:center;font-size:20px;">
+
+      </div>
+
+      <div class="col-2">
+
+        <span class="texttule" style="color:#191970;">Male Child:</span>
+        <input type="text" name="countmale" value="{{row[2]}}" readonly style="width:90px;background-color:DodgerBlue;color:white;text-align:center;font-size:20px;">
+      </div>
+
+
+      <div class="col-2">
+      <span class="texttule" style="color:#191970;">Female Child:</span>
+
+      <input type="text" name="regno" value="{{row[3]}}" readonly style="width:90px;background-color:#884EA0;color:white;text-align:center;font-size:20px;">
+      </div>
+
+      <div class="col-3">
+        <span class="texttule" style="color:#191970;">Transgender Child:</span>
+        <input type="text" name="regno" value="{{row[4]}}" readonly style="width:90px;background-color:#186A3B;color:white;text-align:center;font-size:20px;">
+        {%endfor%}
+      </div>
+    </div>
+
+<!--Current Year Delivery & Total Child------->
+<div class="row myrow">
+<div class="col-2"></div>
+  <div class="col-3">
+
+  {% for row in ds3%}
+  <span class="texttule" style="color:#191970;"><span>{{row[1]}}'s</span> Total Delivery:</span>
+  <input type="text" name="counteightteen" value="{{row[0]}}" readonly style="width:90px;background-color:#5B2C6F;color:white;text-align:center;font-size:20px;">
+</div>
+
+<div class="col-2">
+  <span class="texttule" style="color:#191970;">Male Child:</span>
+  <input type="text" name="countmale" value="{{row[2]}}" readonly style="width:90px;background-color:tomato;color:white;text-align:center;font-size:20px;">
+</div>
+
+
+<div class="col-2">
+<span class="texttule" style="color:#191970;">Female Child:</span>
+
+<input type="text" name="regno" value="{{row[3]}}" readonly style="width:90px;background-color:#873600;color:white;text-align:center;font-size:20px;">
+</div>
+
+<div class="col-3">
+  <span class="texttule" style="color:#191970;">Transgender Child:</span>
+  <input type="text" name="regno" value="{{row[4]}}" readonly style="width:90px;background-color:#1B4F72;color:white;text-align:center;font-size:20px;">
+  {%endfor%}
+</div>
+</div>
+
+
+<!--Previous Year Delivery & Total Child------->
+<div class="row myrow">
+<div class="col-2"></div>
+  <div class="col-3">
+
+  {% for row in ds4%}
+  <span class="texttule" style="color:#191970;"><span>{{row[1]}}'s</span> Total Delivery:</span>
+  <input type="text" name="counteightteen" value="{{row[0]}}" readonly style="width:90px;background-color:#C0392B;color:white;text-align:center;font-size:20px;">
+</div>
+
+<div class="col-2">
+  <span class="texttule" style="color:#191970;">Male Child:</span>
+  <input type="text" name="countmale" value="{{row[2]}}" readonly style="width:90px;background-color:#239B56;color:white;text-align:center;font-size:20px;">
+</div>
+
+
+<div class="col-2">
+<span class="texttule" style="color:#191970;">Female Child:</span>
+
+<input type="text" name="regno" value="{{row[3]}}" readonly style="width:90px;background-color:Violet;color:white;text-align:center;font-size:20px;">
+</div>
+
+<div class="col-3">
+  <span class="texttule" style="color:#191970;">Transgender Child:</span>
+  <input type="text" name="regno" value="{{row[4]}}" readonly style="width:90px;background-color:#2C3E50;color:white;text-align:center;font-size:20px;">
+  {%endfor%}
+</div>
+</div>
+
+<div class="col-2"></div>
+  <div align="center">
+      <table style="width:70%;">
+        <tr>
+          <td><br><p><a href="{{ url_for('deliverylogin') }}"><b><input type="Submit" value="New Record" style="width:80%;height:45px; font-size: 16px;color:#008080"></a></p></td>
+
+          <td><br><p><a href="{{ url_for('deliveryUpdate')}}"><b><input type="Submit" value="Edit Record" style="width:80%;height:45px;font-size: 16px;color:black"></a></p></td>
+
+          <td><br><p><a href="{{ url_for('deliveryViewDetail')}}"><b><input type="Submit" value="Search Record" style="width:70%;height:46px;font-size: 16px;color:green"></a></p></td>
+
+          <td><br><p><a href="{{ url_for('deliverytype')}}"><b><input type="Submit" value="Delivery Administration" style="width:65%;height:46px;font-size: 16px;color:red"></a></p></td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+
+{% endblock %}

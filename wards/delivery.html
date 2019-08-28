@@ -16,461 +16,373 @@ width: 100%;
   font-weight: bold;
 }
 
+/* GENERAL CODE */
+#chileDetail {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
 
-		.container{
-			width: 100%;
-      padding-right: 0px;
-      padding-left: 0px;
-      margin-right: auto;
-      margin-left: auto;
-		}
+#chileDetail td, #chileDetail th {
+  padding: 5px;
+}
+
+#chileDetail td{
+  padding:5px;
+  font-size: 15px;
+}
+#chileDetail tr:nth-child(even){background-color: #f2f2f2;}
+
+#chileDetail tr:hover {background-color: #ddd;}
+
+#chileDetail thead,th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: white;
+  font-size: 17px;
+}
+
+/* GENERAL CODE */
 
 
+/* SEPERATE CODE */
+#chileDetail thead,th {
+  background-color:#778899;
+}
+/* SEPERATE CODE */
 
-		ul.tabs{
-			margin: 0px;
-			padding: 0px;
-			list-style: none;
-		}
-		ul.tabs li{
-			background: none;
-			display: inline-block;
-			padding: 8px 15px;
-      padding-right:100px;
-      cursor: pointer;
-      color: #222;
-      font-size: 18px;
-		}
 
-		ul.tabs li.current{
-			background: #F0FFFF;
-			color: #222;
-      font-weight: bold;
-		}
-
-		.tab-content{
-			display: none;
-			background: #F0FFFF;
-			padding: 15px;
-		}
-
-		.tab-content.current{
-			display: inherit;
-		}
 </style>
-
-
-<div class="col-12">
-  <form action="delivery" method="POST">
-  <div id="content">
-    <div class="titlebox" align="center">Delivery Ward</div>
-    <div class="col-12 subtitle">
-      <div class="col-2"><span class="spnhead">Regno:</span><span class="spndata">2019SHD123</span></div>
-      <div class="col-2"><span class="spnhead">Name:</span><span class="spndata">KUSUM BAI</span></div>
-      <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata">FEMALE</span></div>
-      <div class="col-2"><span class="spnhead">Age:</span><span class="spndata">28 year</span></div>
-    </div>
-    <div class="row" style="padding-bottom:1px;"></div>
-      <div class="row myrow">
-        <div class="col-3">
-          <span class="texttule">Mothe Education:</span>
-          <input type="text" name="m_edu">
-        </div>
-
-        <div class="col-3" >
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Father Education:</span>
-          <input type="text" name="f_edu">
-        </div>
-
-        <div class="col-3">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Gravida:</span>
-          <input type="text" name="gravida">
-        </div>
-
-        <div class="col-3">
-          <span class="texttule">No of Live Childs:</span>
-          <input type="text" name="livechild">
-        </div>
-      </div>
-
-      <div class="row myrow">
-        <div class="col-3">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">UT Height:</span>
-          <input type="text" name="ut_height">
-        </div>
-
-        <div class="col-3">
-          <span class="texttule">Mother Death Reason:</span>
-          <input type="text" name="bcaredby">
-        </div>
-
-        <div class="col-3">
-          <span class="texttule">Type of Delivery:</span>
-          <select>
-        		<option value="">--Select--</option>
-        		<option value="Normal">Normal</option>
-        		<option value="Tear Normal">Tear Normal</option>
-        		<option value="Episiotomy">Episiotomy</option>
-        		<option value="Episiotomy,forcep">Episiotomy,forcep</option>
-        		<option value="forcep">forcep</option>
-        		<option value="lscs">lscs</option>
-        		<option value="premature">premature</option>
-        	</select>
-        </div>
-
-        <div class="col-3">
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Baby Cared By:</span>
-          <input type="text" name="bcaredby">
-        </div>
-
-        <div class="col-3">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Sister Name:</span>
-          <input type="text" name="sistername">
-        </div>
-
-        <div class="col-3">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Doctor Name:</span>
-          <input type="text" name="doctorname">
-        </div>
-
-        <div class="col-3">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">Enter By:</span>
-          <input type="text" name="enterby">
-        </div>
-
-        <div class="col-3">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="texttule">No of Baby:</span>
-          <input type="text" name="no_of_baby" onkeyup="insertRow(this.value);" onkeydown="insertRow(this.value);">
-        </div>
-      </div>
-
-        <div class="row"><div class="col-1"></div></div>
-        <div style="width:100%;height:auto;line-height:2em;overflow:auto;">
-        <table border=1 id="myTable" style="width:140%;">
-        	<tr>
-        		<th style="width:1%;text-align:center;">SN</th>
-        		<th style="text-align:center;width:1%;">Born Date</th>
-        		<th style="text-align:center;width:1%;">Born Time</th>
-        		<th style="text-align:center;width:1%;">Child sex</th>
-        		<th style="text-align:center;width:2%;">Child Weight</th>
-        		<th style="text-align:center;width:2%;">Status of Child</th>
-        		<th style="text-align:center;width:2%;">Live Child</th>
-        		<th style="text-align:center;width:2%;">Child Death Reason</th>
-        		<th style="text-align:center;width:2%;">Presenting Part</th>
-        		<th style="text-align:center;width:5%;">APGAR Scores</th>
-        	</tr>
-        </table>
-        <br/>
-
-        <div class="col-3">
-          <input type="submit" value="Submit" style="font-size:13px;font-family: Arial;letter-spacing: 0.008em;color:#5d5656;margin-top:20px;width:120px;height:40px;font-weight:bold">
-        </div>
-    </div>
-
-
-  </div>
-
-
-  </div><!----------CONTENT END------------>
-</form>
-</div><!------------COL12 END------------>
 <script>
-function insertRow(e){
-    var table=document.getElementById("myTable");
-    var r =  table.rows.length;
-    while(r > 1) {
-        table.deleteRow(r-1);
-        r--;
+function motherAliveDeath()
+{
+  var motherstatus=$("#motherstatus").val();
+  if(motherstatus =='Death')
+    $("#motherdeathreason").show();
+  else
+    $("#motherdeathreason").hide();
+}
+
+function pphstatus()
+{
+  var pphstatus=$("#pph").val();
+  if(pphstatus =='Yes')
+    $("#pphtype").show();
+  else
+    $("#pphtype").hide();
+}
+
+function livedead(status,count)
+{
+  var livechild ="livechild"+count;
+
+  var cdtime ="cdtime"+count;
+  var cddate ="cddate"+count;
+  var cdreason ="cdreason"+count;
+  if(status !=' '){
+    if (status == 'Alive'){
+      $("#"+livechild).css("display","block");
+
+      $("#"+livechild).prop( "required", true );
+      $("#"+cdtime).css("display","none");
+      $("#"+cddate).css("display","none");
+      $("#"+cdreason).css("display","none");
+
     }
+    else if(status == 'Dead'){
+      $("#"+livechild).css("display","none");
+      $("#"+cdtime).css("display","block");
+      $("#"+cddate).css("display","block");
+      $("#"+cdreason).css("display","block");
 
-    for(var i=1;i<=e;i++)
-    {
-        var count = 0;
-        var row=table.insertRow(table.rows.length);
-            var cell=row.insertCell(count);
-            var t=document.createElement("input");
-                t.id = "r"+i+"d"+(count);
-                t.name= "r"+i+"d"+(count);
-                t.value = i;
-                t.style = "width:90%;text-align:center;";
-                t.setAttribute("readonly", "true");
-                cell.appendChild(t);
-
-                count++;
-            var cell=row.insertCell(count);
-            var t=document.createElement("input");
-            	t.setAttribute("type","date");
-                t.id = "r"+i+"d"+(count);
-                t.name= "r"+i+"d"+(count);
-				t.required = true;
-                cell.appendChild(t);
-
-                count++;
-            var cell=row.insertCell(count);
-            var t=document.createElement("input");
-				t.setAttribute("type","time");
-                t.id = "r"+i+"d"+(count);
-                t.name= "r"+i+"d"+(count);
-                t.required = true;
-                cell.appendChild(t);
-
-                count++;
-            var cell=row.insertCell(count);
-            var t=document.createElement("SELECT");
-                t.id = "r"+i+"d"+(count);
-                t.name= "r"+i+"d"+(count);
-                t.required = true;
-                var z = document.createElement("option");
-				z.setAttribute("value","");
-				var opt = document.createTextNode("");
-                z.appendChild(opt);
-                t.appendChild(z);
-				var z = document.createElement("option");
-				z.setAttribute("value","male");
-				var opt = document.createTextNode("Male");
-                z.appendChild(opt);
-                t.appendChild(z);
-                var z = document.createElement("option");
-                z.setAttribute("value","female");
-				var opt = document.createTextNode("Female");
-                z.appendChild(opt);
-                t.appendChild(z);
-                var z = document.createElement("option");
-				z.setAttribute("value","Interminate");
-				var opt = document.createTextNode("Interminate");
-                z.appendChild(opt);
-                t.appendChild(z);
-                cell.appendChild(t);
-
-                count++;
-            var cell=row.insertCell(count);
-            var t=document.createElement("input");
-                t.id = "r"+i+"d"+(count);
-                t.name= "r"+i+"d"+(count);
-                t.style.width="50px";
-				t.required = true;
-                cell.appendChild(t);
+      $("#"+cdtime).prop( "required", true );
+      $("#"+cddate).prop( "required", true );
+      $("#"+cdreason).prop( "required", true );
 
 
-                count++;
-            var cell=row.insertCell(count);
-            var t=document.createElement("SELECT");
-                t.id = "r"+i+"d"+(count);
-                t.name= "r"+i+"d"+(count);
-                t.required = true;
-                var z = document.createElement("option");
-				z.setAttribute("value","");
-				var opt = document.createTextNode(" ");
-                z.appendChild(opt);
-                t.appendChild(z);
+    }
+    }
+    else{
+          $("#"+livechild).css("display","block");
+          $("#"+cdtime).css("display","block");
+          $("#"+cddate).css("display","block");
+          $("#"+cdreason).css("display","block");
 
-				var z = document.createElement("option");
-				z.setAttribute("value","live");
-				var opt = document.createTextNode("Live");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-                var z = document.createElement("option");
-                z.setAttribute("value","death");
-				var opt = document.createTextNode("Death");
-                z.appendChild(opt);
-                t.appendChild(z);
-                cell.appendChild(t);
-
-				count++;
-            	var cell=row.insertCell(count);
-            	var t=document.createElement("SELECT");
-                t.id = "r"+i+"d"+(count);
-                t.name= "r"+i+"d"+(count);
-
-
-                var z = document.createElement("option");
-				z.setAttribute("value","Normal");
-				var opt = document.createTextNode("Normal");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-
-                var z = document.createElement("option");
-				z.setAttribute("value","premature");
-				var opt = document.createTextNode("Premature");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-
-                var z = document.createElement("option");
-				z.setAttribute("value","LBW	");
-				var opt = document.createTextNode("LBW");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-				var z = document.createElement("option");
-				z.setAttribute("value","Asphyxialed");
-				var opt = document.createTextNode("Asphyxialed");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-                var z = document.createElement("option");
-                z.setAttribute("value","Meconium Stained");
-				var opt = document.createTextNode("Meconium Stained");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-               var z = document.createElement("option");
-				z.setAttribute("value","Thin Meconium");
-				var opt = document.createTextNode("Thin Meconium");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-                var z = document.createElement("option");
-				z.setAttribute("value","Thick Meconium");
-				var opt = document.createTextNode("Thick Meconium");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-                var z = document.createElement("option");
-				z.setAttribute("value","Deep Meconium");
-				var opt = document.createTextNode("Deep Meconium");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-                var z = document.createElement("option");
-				z.setAttribute("value","Light Meconium");
-				var opt = document.createTextNode("Light Meconium");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-
-				var z = document.createElement("option");
-                z.setAttribute("value","Conjental Abnormality");
-				var opt = document.createTextNode("Conjental Abnormality");
-                z.appendChild(opt);
-                t.appendChild(z);
-                cell.appendChild(t);
-
-
-
-                count++;
-            var cell=row.insertCell(count);
-            var t=document.createElement("input");
-                t.id = "r"+i+"d"+(count);
-                t.name= "r"+i+"d"+(count);
-
-                cell.appendChild(t);
-
-                //Presenting part
-
-                count++;
-
-            	var cell=row.insertCell(count);
-            	var t=document.createElement("SELECT");
-                t.id = "r"+i+"d"+(count);
-                t.name= "r"+i+"d"+(count);
-
-
-                var z = document.createElement("option");
-				z.setAttribute("value","Part Vertex");
-				var opt = document.createTextNode("Part Vertex");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-
-                var z = document.createElement("option");
-				z.setAttribute("value","Brow");
-				var opt = document.createTextNode("Brow");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-
-                var z = document.createElement("option");
-				z.setAttribute("value","Face");
-				var opt = document.createTextNode("Face");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-				var z = document.createElement("option");
-				z.setAttribute("value","Chin");
-				var opt = document.createTextNode("Chin");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-                var z = document.createElement("option");
-                z.setAttribute("value","Breech");
-				var opt = document.createTextNode("Breech");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-               var z = document.createElement("option");
-				z.setAttribute("value","Shoulder");
-				var opt = document.createTextNode("Shoulder");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-                var z = document.createElement("option");
-				z.setAttribute("value","Compound Presentation");
-				var opt = document.createTextNode("Compound Presentation");
-                z.appendChild(opt);
-                t.appendChild(z);
-
-				cell.appendChild(t);
-
-
-                count++;
-				var cell=row.insertCell(count);
-
-				var p=document.createElement("p");
-				p = document.createTextNode("0 Min. 1 Min. 5 Min.");
-				cell.appendChild(p);
-
-				var t=document.createElement("SELECT");
-                t.id = "r"+i+"d"+(count);
-                t.name= "r"+i+"d"+(count);
-
-               for(a=0;a<=10;a++){
-				var z = document.createElement("option");
-				z.setAttribute("value",a);
-				var opt = document.createTextNode(a);
-                z.appendChild(opt);
-                t.appendChild(z);
-               }
-               t.appendChild(z);
-               cell.appendChild(t);
-
-				count++;
-               var t=document.createElement("SELECT");
-                t.id = "r"+i+"d"+(count);
-                t.name= "r"+i+"d"+(count);
-
-
-               for(a=0;a<=10;a++){
-				var z = document.createElement("option");
-				z.setAttribute("value",a);
-				var opt = document.createTextNode(a);
-                z.appendChild(opt);
-                t.appendChild(z);
-               }
-               t.appendChild(z);
-               cell.appendChild(t);
-
-               count++;
-
-               var t=document.createElement("SELECT");
-                t.id = "r"+i+"d"+(count);
-                t.name= "r"+i+"d"+(count);
-
-               for(a=0;a<=10;a++){
-				var z = document.createElement("option");
-				z.setAttribute("value",a);
-				var opt = document.createTextNode(a);
-                z.appendChild(opt);
-                t.appendChild(z);
-               }
-
-                t.appendChild(z);
-                cell.appendChild(t);
+          $("#"+livechild).prop( "required", true );
+          $("#"+cdtime).prop( "required", true );
+          $("#"+cddate).prop( "required", true );
+          $("#"+cdreason).prop( "required", true );
 
     }
 }
+
+function conabnormal(cab,count){
+  var cabnormal ="cabnormal"+count;
+  if(cab=="Congenital Anomalies"){
+    $("#"+cabnormal).show();
+  }
+  else
+    $("#"+cabnormal).hide();
+}
+function getDeliveryAmount(amt)
+{
+  $.ajax({
+    type:"POST",
+    url:"getDeliveryAmount",
+    data:"amount="+amt,
+    success:function(string){
+      var amount = JSON.parse(string)['adata'];
+      //alert(amount[0][2]);
+      $('#damount').val(amount[0][2]);
+    }
+
+  });
+}
 </script>
+<div class="col-12">
+  <div id="content">
+    <div class="titlebox" align="center">Insert Delivery Details</div>
+    {% for ds1 in ds1%}
+    <div class="col-12 subtitle">
+      <div class="col-2"><span class="spnhead">Regno:</span><span class="spndata">{{ds1[0]}}</span></div>
+      <div class="col-3"><span class="spnhead">Name:</span><span class="spndata">{{ds1[1]}}{{ds1[2]}}{{ds1[3]}}</span></div>
+      <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata">{{ds1[4]}}</span></div>
+      <div class="col-2"><span class="spnhead">Age:</span><span class="spndata">{{ds1[5]}}{{ds1[9]}}</span></div>
+      <div class="col-3"><span class="spnhead">Date of Admission:</span><span class="spndata">{{ds1[6]}}</span></div>
+
+    </div>
+    <form action="insertdeliverydetails" method="POST">
+      <input type="text" name="wrd_id" value="{{ds1[7]}}" style="display:none;">
+      <input type="text" name="regno" value="{{ds1[0]}}" style="display:none;">
+      <div class="row" style="padding-bottom:1px;"></div>
+      {%endfor%}
+
+      <div class="row myrow">
+        <div class="col-5"></div>
+        {% for row in ds2%}
+        <div class="col-3">
+          <span class="texttule" style="color:#191970;"><span style="font-size:20px;">{{row[1]}}'s</span> Delivery Count</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" name="deliverycount" value="{{row[0]}}" readonly style="width:90px;background-color:DodgerBlue;color:white;text-align:center;font-size:20px;">
+        </div>
+        {%endfor%}
+      </div>
+
+      <div class="row myrow">
+        <div class="col-2"></div>
+        <div class="col-2">
+          <span class="texttule">Delivery Date:</span>
+          <br>
+          <input type="date" name="deliverydate" required>
+        </div>
+        {% for ds1 in ds1%}
+
+        <div class="col-2">
+          <span class="texttule">Mother's Education:</span>
+          <input type="text" name="m_edu" value="{{ds1[10]}}" readonly>
+        </div>
+        {%endfor%}
+
+
+
+        <div class="col-2" >
+          <span class="texttule">Father's Education:</span>
+          <input type="text" class="alphanumeric" name="f_edu">
+        </div>
+
+        <div class="col-2">
+          <span class="texttule">Gravida:</span>
+          <input type="text" class="numeric" name="gravida">
+        </div>
+
+      </div>
+      <br>
+      <div class="row myrow">
+        <div class="col-2"></div>
+        <div class="col-2">
+          <span class="texttule">No of Live Childs:</span>
+          <input type="text" class="numeric" name="noflivechild">
+        </div>
+        <div class="col-2">
+          <span class="texttule">UT Height:</span>
+          <br>
+          <input type="text" name="ut_height" class="spalphanum" >
+        </div>
+        <div class="col-2">
+          <span class="texttule">Type of Delivery:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <select name="dtype" id="dtype" onchange="getDeliveryAmount(this.value)" required>
+            <option value=" ">--Select--</option>
+            {%for row in tydata%}
+            <option value="{{row[0]}}">{{row[1]}}</option>
+            {%endfor%}
+          </select>
+          <input type="hidden" size=5 name="damount" id="damount" readonly>
+        </div>
+
+        <div class="col-2">
+          <span class="texttule">Mother's Status:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <select id="motherstatus" name="mstatus" onchange="motherAliveDeath()">
+            <option value=" ">--Select--</option>
+            <option value="Alive">Alive</option>
+            <option value="Death">Death</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="row myrow"><div class="col-2"></div></div>
+
+      <div class="row myrow" id="motherdeathreason" style="display:none;">
+
+        <div class="col-2"></div>
+        <div class="col-2" >
+          <span class="texttule">Mother Death Reason:</span>
+          <input type="text" name="dreason" class="spalphanum" >
+        </div>
+        <div class="col-2">
+          <span class="texttule">Mother Death Time:&nbsp;</span>
+          <input type="time" name="deathtime">
+        </div>
+        <div class="col-2">
+          <span class="texttule">Mother Death Date:</span>
+          <input type="date" name="ddate">
+        </div>
+      </div>
+
+      <br>
+      <div class="row myrow">
+        <div class="col-2"></div>
+        <div class="col-2">
+        <span class="texttule">Placenta Delivered:</span>
+        <select name="placenta_delivered">
+          <option value=" ">--Select--</option>
+          <option value="Normal">Normal</option>
+          <option value="Manual">Manual</option>
+        </select>
+      </div>
+      <div class="col-2">
+      <span class="texttule">PPH:</span><br>
+      <select name="pph" id="pph" onchange="pphstatus()">
+        <option value=" ">--Select--</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+    <div class="col-2" id="pphtype" style="display:none;">
+    <span class="texttule">PPH Status:</span><br>
+    <select name="pstatus">
+      <option value=" ">--Select--</option>
+      <option value="Mild">Mild</option>
+      <option value="Moderate">Moderate</option>
+      <option value="Severe">Severe</option>
+
+    </select>
+  </div>
+    </div>
+
+      <br>
+      <div class="row myrow">
+        <div class="col-2"></div>
+        <div class="col-2">
+          <span class="texttule">Doctor Name:</span>
+          <input type="text" name="doctorname" class="alphaonly">
+        </div>
+        <div class="col-2">
+          <span class="texttule">Sister Name:</span>
+          <input type="text" name="sistername" class="alphaonly">
+        </div>
+        <div class="col-2">
+          <span class="texttule">Baby Cared By:</span>
+          <input type="text" name="bcareby" class="alphaonly">
+        </div>
+        <div class="col-2">
+          <span class="texttule">Enter By:</span>
+          <input type="text" name="enterby" class="alphaonly">
+        </div>
+      </div>
+      <br>
+      <div class="row myrow">
+        <div class="col-5"></div>
+        <div class="col-2" style="text-align:center;">
+          <span class="texttule" >No of Baby:</span><br>
+          <input type="text" class="numeric" name="nofbaby" style="width:90px;text-align:center;font-weight:bold" onkeyup="insertRow(this.value);" >
+        </div>
+
+      </div>
+      <div class="row"><div class="col-1"></div></div>
+      <div class="col-12" style="width:100%;height:auto;line-height:2em;overflow:auto;">
+        <table border=0  id="chileDetail" style="width:140%;">
+          <tr>
+            <input type="text" name="delivery_id"  style="display:none;">
+
+            <th style="width:5%;">Born Date</th>
+            <th style="width:6%;">Born Time</th>
+            <th style="width:5%;">Baby sex</th>
+          	<th style="width:7%;">Baby Weight</th>
+          	<th style="width:6%;">Live/Dead</th>
+          	<th style="width:6%;">Live Baby Status</th>
+            <th style="width:10%;">Baby Death Reason</th>
+            <th style="width:6%;">Congenital Anomalies </th>
+            <th style="width:10%;">Baby Death Time</th>
+            <th style="width:10%;">Baby Death Date</th>
+            <th style="width:10%;">Presenting Part</th>
+          	<th style="width:10%;">APGAR<br>0min 1min 5min</th>
+          </tr>
+          <tbody id="chileDetailBody">
+          </tbody>
+        </table>
+      </div>
+      <div class="row myrow">
+        <div class="col-5"></div>
+        <div class="col-3">
+          <input type="submit" value="Submit" style="font-size:13px;font-family: Arial;letter-spacing: 0.008em;color:#5d5656;margin-top:20px;width:120px;height:40px;font-weight:bold">
+          <p style="display:inline;">{{ack1}}</p>
+        </div>
+      </div>
+    </form>
+  </div><!----------CONTENT END------------>
+</div><!------------COL12 END------------>
+<script>
+function insertRow(e){
+    var c=0;
+    $("#chileDetailBody").empty();
+    var opt='';
+    for(var i=0;i<=10;i++)
+      opt=opt+"<option value="+i+">"+i+"</option>";
+
+    for(var i=1;i<=e;i++)
+    {
+      date="<td><input type='date' name='born_date'></td>";
+
+      time="<td><input type='time' name='born_time'></td>";
+
+      childsex="<td><select name='child_sex'><option value=' '>--Select--</option><option value='Male'>Male</option><option value='Female'>Female</option><option value='Transgender'>Transgender</option></select></td>";
+
+      childweight="<td><input type='text' style='width:70px' class='spalphanum' name='child_weight'></td>";
+
+      childstatus="<td><select name='child_status' id='cstatus' onchange='livedead(this.value,"+c+")'><option value=' '>--Select--</option><option value='Alive'>Alive</option><option value='Dead'>Dead</option></select></td>";
+
+      livechild="<td><select name='live_child' id='livechild"+c+"' onchange='conabnormal(this.value,"+c+");'><option value=' '>--Select--</option><option value='Normal'>Normal</option><option value='Pre-Term'>Pre-Term</option><option value='Post-Term'>Post-Term</option><option value='Late Cry'>Late Cry</option><option value='Asphyxiated'>Asphyxiated</option><option value='Premature'>Premature</option><option value='Thin Meconium'>Thin Meconium</option><option value='Thick Meconium'>Thick Meconium</option><option value='Deep Meconium'>Deep Meconium</option><option value='Light Meconium'>Light Meconium</option><option value='LBW'>LBW</option><option value='Congenital Anomalies'>Congenital Anomalies</option><option value='CordAround'>CordAround</option></select></td>";
+
+      cdreason="<td><select name='cdreason' id='cdreason"+c+"' onchange='conabnormal(this.value,"+c+");'><option value=' '>--Select--</option><option value='BP(PIH)'>BP(PIH)</option><option value='IUD'>IUD </option><option value='Macerated'>Macerated</option><option value='Diabetes'>Diabetes</option><option value='Still Born'>Still Born</option><option value='APH'>APH</option><option value='Congenital Anomalies'>Congenital Anomalies</option><option value='Others'>Others</option></select></td>";
+
+      cabnormal="<td><select name='cabnormal' id='cabnormal"+c+"' style='display:none;'><option value=' '>--Select--</option><option value='Cleft Lip'>Cleft Lip</option><option value='Cleft Palate '>Cleft Palate </option><option value='Musculoskeletal'>Musculoskeletal</option><option value='Spina Bifida'>Spina Bifida</option><option value='Cardiovascular'>Cardiovascular</option><option value='Respiratory'>Respiratory</option><option value=' Imperforate Anus'> Imperforate Anus</option><option value='Others'>Others</option></select></td>";
+
+      cdeathtime="<td><input type='time' id='cdtime"+c+"' name='cdtime'></td>";
+
+      cddate="<td><input type='date' id='cddate"+c+"' name='cddate'></td>";
+
+      ppart="<td><select name='presenting_part' id='ppart"+c+"'><option value=' '>--Select--</option><option value='Part Vertex'>Part Vertex</option><option value='Brow'>Brow</option><option value='Face'>Face</option><option value='Shoulder'>Shoulder</option><option value='Chin'>Chin</option><option value='Footling Breech'>Footling Breech</option><option value='Frank Breech'>Frank Breech</option><option value='Complete Breech'>Complete Breech</option><option value='Cord Presentation'>Cord</option><option value=' Compound Presentation'> Compound</option></select></td>";
+
+
+      apgar="<td><select name='apgar_score1'>"+opt+"</select><select name='apgar_score2'>"+opt+"</select><select name='apgar_score3'>"+opt+"</select></td>";
+      row="<tr>"+date+time+childsex+childweight+childstatus+livechild+cdreason+cabnormal+cdeathtime+cddate+ppart+apgar+"</tr>";
+      $("#chileDetailBody").append(row);
+      c=c+1;
+    }
+  }
+  </script>
+
+
 
 {% endblock %}

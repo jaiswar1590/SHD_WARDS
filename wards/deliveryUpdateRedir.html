@@ -1,0 +1,132 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+<style>
+/* GENERAL CODE */
+#mainTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#mainTable td, #mainTable th {
+  padding: 8px;
+}
+
+#mainTable td{
+  padding: 8px;
+  font-size: 15px;
+}
+#mainTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#mainTable tr:hover {background-color: #ddd;}
+
+#mainTable thead,th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: white;
+  font-size: 17px;
+}
+
+/* GENERAL CODE */
+
+
+/* SEPERATE CODE */
+#mainTable thead,th {
+  background-color:#778899;
+}
+/* SEPERATE CODE */
+
+</style>
+
+
+<div class="col12">
+  <div id="content">
+    <div class="titlebox">
+      <span style="text-align:center">Edit Delivery Details</span>
+      <div style="text-align:right;display:inline;border:2px solid #000080;padding:6px;border-radius:3px;"><a href="GetdeliveryRedir" style="text-decoration:none;color:green;font-size:30px;color:#000080"><img src="static/icon4/home.svg" height="40px" width="40px"></a></div>
+    </div>
+
+    <div class="row myrow">
+    <form action="deliveryviewregno" method="POST">
+      <div class="col-2">
+        <span class="texttule">RegNo:</span>
+        <input type="text" name="regno" class="alphanumeric" style="width:100px;" required>
+        <input type="submit" value="Search">
+      </div>
+    </form>
+    <form action="deliveryviewfname" method="POST">
+      <div class="col-3">
+        <span class="texttule">First Name:</span>
+        <input type="text" name="pfname" class="alphaonly" style="width:100px;" required>
+        <input type="submit" value="Search">
+      </div>
+    </form>
+    <form action="deliveryviewdate" method="POST">
+      <div class="col-3">
+        <span class="texttule">Date:</span>
+        <input type="date" name="deliverydate" required>
+        <input type="submit" value="Search">
+      </div>
+    </form>
+    <form action="deliveryviewbwdate" method="POST">
+      <div class="col-4">
+        <span class="texttule">From:</span>
+        <input type="date" name="fdate" required>
+        <span class="texttule">To:</span>
+        <input type="date" name="tdate" required>
+        <input type="submit" value="Search">
+      </div>
+    </form>
+    <p style="display:inline;color:green;"><b>{{ack1}}<b></p>
+  </div>
+  <div class="row myrow">
+  <div class="col-9" style="width:100%;height:500px;overflow:scroll;">
+    <table  id="mainTable">
+    <thead>
+      <th>Edit</th>
+      <th>Print</th>
+      <th>Regno</th>
+      <th>Patient Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>Ward Name</th>
+      <th>Delivery Date</th>
+      <th>Mother Education</th>
+      <th>Father Education</th>
+      <th>No. Of Live Child</th>
+      <th>Mother Status</th>
+      <th>No. of Baby</th>
+    </thead>
+    {%for row in ds1%}
+    <tr>
+      <td><a href="{{ url_for('EditDeliveryDetails', delivery_id=row[0],regno=row[1])}}"><button >Edit</button></a></td>
+      <td>
+        <form action="deliveryPrintPage" method="post">
+          <button name="delivery_id" value="{{row[0]}}">Print</button>
+
+        </form>
+      </td>
+
+    <td>{{row[1]}}</td>
+    <td>{{row[2]}} {{row[3]}} {{row[4]}}</td>
+    <td>{{row[5]}} </td>
+    <td>{{row[6]}}</td>
+    <td>{{row[7]}}</td>
+    <td>{{row[8].strftime('%d/%m/%Y')}}</td>
+    <td>{{row[9]}}</td>
+    <td>{{row[10]}}</td>
+    <td>{{row[11]}}</td>
+    <td>{{row[12]}}</td>
+    <td>{{row[13]}}</td>
+  </tr>
+  {%endfor%}
+</table>
+</div>
+</div>
+
+</div> <!--- Content --->
+</div><!--- col-12 --->
+
+{% endblock %}

@@ -1,0 +1,570 @@
+{% extends "Frame/framepage.html" %}
+{% block content %}
+
+<style>
+.subtitle
+{
+background-color:#F0E68C;
+width: 100%;
+}
+.spnhead{
+  font-size: 20px;
+  font-weight: bold;
+}
+.spndata{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* GENERAL CODE */
+#chileDetail {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#chileDetail td, #chileDetail th {
+  padding: 5px;
+}
+
+#chileDetail td{
+  padding:5px;
+  font-size: 15px;
+}
+#chileDetail tr:nth-child(even){background-color: #f2f2f2;}
+
+#chileDetail tr:hover {background-color: #ddd;}
+
+#chileDetail thead,th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: white;
+  font-size: 17px;
+}
+
+/* GENERAL CODE */
+
+
+/* SEPERATE CODE */
+#chileDetail thead,th {
+  background-color:#778899;
+}
+/* SEPERATE CODE */
+
+
+</style>
+<script>
+
+function motherAliveDeath()
+{
+  var motherstatus=$("#motherstatus").val();
+  if(motherstatus =='Death')
+    $("#motherdeathreason").show();
+  else
+    $("#motherdeathreason").hide();
+}
+
+function pphstatus()
+{
+  var pphstatus=$("#pph").val();
+  if(pphstatus =='Yes')
+    $("#pphtype").show();
+  else
+    $("#pphtype").hide();
+}
+//status script
+
+function livedead(status,count)
+{
+  var livechild ="livechild"+count;
+
+  var cdtime ="cdtime"+count;
+  var cddate ="cddate"+count;
+  var cdreason ="cdreason"+count;
+  if(status !=' '){
+    if (status == 'Alive'){
+      $("#"+livechild).css("display","block");
+
+      $("#"+livechild).prop( "required", true );
+      $("#"+cdtime).css("display","none");
+      $("#"+cddate).css("display","none");
+      $("#"+cdreason).css("display","none");
+      $("#"+cdtime).prop( "required", false );
+      $("#"+cddate).prop( "required", false );
+      $("#"+cdreason).prop( "required", false );
+
+    }
+    else if(status == 'Dead'){
+      $("#"+livechild).css("display","none");
+      $("#"+livechild).prop( "required", false );
+      $("#"+cdtime).css("display","block");
+      $("#"+cddate).css("display","block");
+      $("#"+cdreason).css("display","block");
+      $("#"+cdtime).prop( "required", true );
+      $("#"+cddate).prop( "required", true );
+      $("#"+cdreason).prop( "required", true );
+
+
+    }
+    }
+    else{
+
+          $("#"+livechild).css("display","block");
+          $("#"+cdtime).css("display","block");
+          $("#"+cddate).css("display","block");
+          $("#"+cdreason).css("display","block");
+
+          $("#"+livechild).prop( "required", true );
+          $("#"+cdtime).prop( "required", true );
+          $("#"+cddate).prop( "required", true );
+          $("#"+cdreason).prop( "required", true );
+
+    }
+}
+
+function conabnormal(cab,count){
+  var cabnormal ="cabnormal"+count;
+  alert(cabnormal);
+  if(cab=="Congenital Anomalies"){
+
+    $("#"+cabnormal).css("display","block");
+  }
+  else{
+
+    $("#"+cabnormal).css("display","none");
+  }
+}
+
+//script for auto amount//
+function getDeliveryAmount(amt)
+{
+  $.ajax({
+    type:"POST",
+    url:"getDeliveryAmount",
+    data:"amount="+amt,
+    success:function(string){
+      var amount = JSON.parse(string)['adata'];
+      //alert(amount[0][2]);
+      $('#damount').val(amount[0][2]);
+    }
+
+  });
+}
+</script>
+<div class="col-12">
+  <div id="content">
+    <div class="titlebox" align="center">Delivery Ward</div>
+    {% for ds1 in ds1%}
+    <div class="col-12 subtitle">
+      <div class="col-2"><span class="spnhead">Regno:</span><span class="spndata">{{ds1[0]}}</span></div>
+      <div class="col-3"><span class="spnhead">Name:</span><span class="spndata">{{ds1[1]}}{{ds1[2]}}{{ds1[3]}}</span></div>
+      <div class="col-2"><span class="spnhead">Sex:</span><span class="spndata">{{ds1[4]}}</span></div>
+      <div class="col-2"><span class="spnhead">Age:</span><span class="spndata">{{ds1[5]}}{{ds1[9]}}</span></div>
+      <div class="col-3"><span class="spnhead">Date of Admission:</span><span class="spndata">{{ds1[6]}}</span></div>
+
+    </div>
+    {%endfor%}
+    <form action="updateDeliveryData" method="POST">
+      {% for ds2 in ds2 %}
+      <input type="text" name="delivery_id" value="{{ds2[0]}}" style="display:none;">
+      <input type="text" name="wrd_id" value="{{ds2[1]}}" style="display:none;">
+      <input type="text" name="regno" value="{{ds2[2]}}" style="display:none;">
+
+      <div class="row" style="padding-bottom:1px;"></div>
+      <div class="row myrow">
+        <div class="col-2"></div>
+        <div class="col-2">
+          <span class="texttule">Delivery Date:</span>
+          <br>
+          <input type="date" name="deliverydate" value="{{ds2[3]}}">
+        </div>
+        <div class="col-2">
+          <span class="texttule">Mother's Education:</span>
+          <input type="text" name="m_edu" value="{{ds2[4]}}" readonly>
+        </div>
+
+        <div class="col-2" >
+          <span class="texttule">Father's Education:</span>
+          <input type="text" name="f_edu" value="{{ds2[5]}}">
+        </div>
+
+        <div class="col-2">
+          <span class="texttule">Gravida:</span>
+          <input type="text" name="gravida" value="{{ds2[6]}}">
+        </div>
+
+      </div>
+      <br>
+      <div class="row myrow">
+        <div class="col-2"></div>
+        <div class="col-2">
+          <span class="texttule">No of Live Childs:</span>
+          <input type="text" name="noflivechild" value="{{ds2[7]}}">
+        </div>
+        <div class="col-2">
+          <span class="texttule">UT Height:</span>
+          <br>
+          <input type="text" name="ut_height" value="{{ds2[8]}}">
+        </div>
+        <div class="col-2">
+          <span class="texttule">Type of Delivery:</span><br>
+          <select name="dtype" id="dtype" onchange="getDeliveryAmount(this.value)" required>
+            <option style="font-weight:bold;" value="{{ds2[9]}}">{{ds2[20]}}</option>
+            <option value=" ">--Select--</option>
+            {%for row in tydata%}
+            <option value="{{row[0]}}">{{row[1]}}</option>
+            {%endfor%}
+          </select>
+          <input type="text" size=5 name="damount" id="damount" value="{{ds2[19]}}">
+        </div>
+        <div class="col-2">
+            <span class="texttule">Mother's Status: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <select id="motherstatus" name="mstatus" onchange="motherAliveDeath()">
+              <option style="font-weight:bold;" value="{{ds2[10]}}">{{ds2[10]}}</option>
+        		  <option value=" ">--Select--</option>
+        		  <option value="Alive">Alive</option>
+        		  <option value="Death">Death</option>
+          </select>
+        </div>
+      </div>
+      <br>
+      {%if ds2[10]=='Death'%}
+        <div class="row myrow">
+          <div class="col-2"></div>
+          <div class="col-2">
+            <span class="texttule">Mother Death Reason:</span>
+            <input type="text" name="dreason" value="{{ds2[11]}}">
+          </div>
+          <div class="col-2">
+            <span class="texttule">Mother Death Time:</span>
+            <input type="time" name="deathtime" value="{{ds2[12]}}">
+          </div>
+          <div class="col-2">
+            <span class="texttule">Mother Death Date:</span>
+            <input type="date" name="ddate" value="{{ds2[13]}}">
+          </div>
+        </div>
+        {%endif%}
+        <div class="row myrow" id="motherdeathreason" style="display:none;">
+          <div class="col-2"></div>
+          <div class="col-2">
+            <span class="texttule">Mother Death Reason:</span>
+            <input type="text" name="dreason" value="{{ds2[11]}}">
+          </div>
+          <div class="col-2">
+            <span class="texttule">Mother Death Time:<br></span>
+            <input type="time" name="deathtime" value="{{ds2[12]}}">
+          </div>
+          <div class="col-2">
+            <span class="texttule">Mother Death Date:</span>
+            <input type="date" name="ddate" value="{{ds2[13]}}">
+          </div>
+        </div>
+        <br>
+        <div class="row myrow">
+          <div class="col-2"></div>
+          <div class="col-2">
+          <span class="texttule">Placenta Delivered:</span>
+          <select name="placenta_delivered">
+            <option style="font-weight:bold;" value="{{ds2[20]}}">{{ds2[20]}}</option>
+            <option value=" ">--Select--</option>
+            <option value="Normal">Normal</option>
+            <option value="Manual">Manual</option>
+          </select>
+        </div>
+
+        <div class="col-2">
+        <span class="texttule">PPH:</span><br>
+        <select name="pph" id="pph" onchange="pphstatus()">
+          <option style="font-weight:bold;" value="{{ds2[21]}}">{{ds2[21]}}</option>
+          <option value=" ">--Select--</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+      {%if ds2[21]=='Yes'%}
+      <div class="col-2" id="pphtype">
+      <span class="texttule">PPH Status:</span><br>
+      <select name="pstatus">
+        <option style="font-weight:bold;" value="{{ds2[22]}}">{{ds2[22]}}</option>
+        <option value=" ">--Select--</option>
+        <option value="Mild">Mild</option>
+        <option value="Moderate">Moderate</option>
+        <option value="Severe">Severe</option>
+
+      </select>
+    </div>
+    {%endif%}
+      <div class="col-2" id="pphtype" style="display:none;">
+
+        <span class="texttule">PPH Status:</span><br>
+        <select name="pstatus">
+          <option style="font-weight:bold;" value="{{ds2[22]}}">{{ds2[22]}}</option>
+          <option value=" ">--Select--</option>
+          <option value="Mild">Mild</option>
+          <option value="Moderate">Moderate</option>
+          <option value="Severe">Severe</option>
+        </select>
+      </div>
+    </div>
+      <br>
+      <div class="row myrow">
+        <div class="col-2"></div>
+        <div class="col-2">
+          <span class="texttule">Doctor Name:</span>
+          <input type="text" name="doctorname" value="{{ds2[14]}}">
+        </div>
+        <div class="col-2">
+          <span class="texttule">Sister Name:</span>
+          <input type="text" name="sistername" value="{{ds2[15]}}">
+        </div>
+        <div class="col-2">
+          <span class="texttule">Baby Cared By:</span>
+          <input type="text" name="bcareby" value="{{ds2[16]}}">
+        </div>
+        <div class="col-2">
+          <span class="texttule">Enter By:</span>
+          <input type="text" name="enterby" value="{{ds2[17]}}">
+        </div>
+      </div>
+      <br>
+      <div class="row myrow">
+        <div class="col-5"></div>
+        <div class="col-2">
+          <span class="texttule">No of Baby:</span>
+          <input type="text" name="nofbaby" value="{{ds2[18]}}" readonly>
+        </div>
+      </div>
+
+      {% endfor %}
+      <div class="col-12">
+        <div style="width:100%;height:auto;line-height:1em;overflow:auto;">
+          <table border=1 align="center" id="myTable">
+            <tr>
+              <th style="width:5%;">Born Date</th>
+              <th style="width:6%;">Born Time</th>
+              <th style="width:5%;">Baby sex</th>
+            	<th style="width:7%;">Baby Weight</th>
+            	<th style="width:6%;">Live/Dead</th>
+            	<th style="width:6%;">Live Baby Status</th>
+              <th style="width:10%;">Baby Death Reason</th>
+              <th style="width:6%;">Congenital Anamolies </th>
+              <th style="width:10%;">Baby Death Time</th>
+              <th style="width:10%;">Baby Death Date</th>
+              <th style="width:50%;">Presenting Part</th>
+            	<th style="width:10%;">APGAR(0,1,5)min</th>
+
+
+
+
+            </tr>
+            <tbody>
+            </tbody>
+            <tr>
+                {% for row in ds3 %}
+              <input type="text" name="child_id" value="{{row[14]}}" style="display:none;">
+              <td><input type="date" name="born_date" value="{{row[1]}}"></td>
+              <td><input type="time" name="born_time" value="{{row[2]}}"></td>
+              <td>
+                <select name="child_sex">
+                  <option style="font-weight:bold;" value="{{row[3]}}">{{row[3]}}</option>
+                  <option value=" ">--Select--</option>
+          		    <option value="Male">Male</option>
+          		    <option value="Female">Female</option>
+                  <option value="Transgender">Transgender</option>
+                </select>
+              </td>
+              <td><input type="text" name="child_weight" value="{{row[4]}}" style='width:70px'></td>
+              <td>
+                <select name="child_status" id="cstatus{{loop.index}}" onchange="livedead(this.value,{{loop.index}})">
+                  <option style="font-weight:bold;" value="{{row[5]}}">{{row[5]}}</option>
+                  <option value=" ">--Select--</option>
+                  <option value="Alive">Alive</option>
+                  <option value="Dead">Dead</option>
+                </select>
+              </td>
+              {%if row[5]=="Alive"%}
+              <td>
+                <select name="live_child" id="livechild{{loop.index}}" onchange="conabnormal(this.value,{{loop.index}});">
+                  <option style="font-weight:bold;" value="{{row[6]}}">{{row[6]}}</option>
+                  <option value=" ">--Select--</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Pre-Term">Pre-Term</option>
+                  <option value="Post-Term">Post-Term</option>
+                  <option value="Late Cry">Late Cry</option>
+                  <option value="Asphyxiated">Asphyxiated</option>
+                  <option value="premature">Premature</option>
+                  <option value="Thin Meconium">Thin Meconium</option>
+                  <option value="Thick Meconium">Thick Meconium</option>
+                  <option value="Deep Meconium">Deep Meconium</option>
+                  <option value="Light Meconium">Light Meconium</option>
+                  <option value="LBW">LBW</option>
+                  <option value="Congenital Anomalies">Congenital Anomalies</option>
+                  <option value="CordAround">CordAround</option>
+
+                </select>
+              </td>
+              {%else%}
+              <td>
+                <select name="live_child" id="livechild{{loop.index}}" onchange="conabnormal(this.value,{{loop.index}});" style="display:none;">
+                  <option value=" ">--Select--</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Pre-Term">Pre-Term</option>
+                  <option value="Post-Term">Post-Term</option>
+                  <option value="Late Cry">Late Cry</option>
+                  <option value="Asphyxiated">Asphyxiated</option>
+                  <option value="premature">Premature</option>
+                  <option value="Thin Meconium">Thin Meconium</option>
+                  <option value="Thick Meconium">Thick Meconium</option>
+                  <option value="Deep Meconium">Deep Meconium</option>
+                  <option value="Light Meconium">Light Meconium</option>
+                  <option value="LBW">LBW</option>
+                  <option value="Congenital Anomalies">Congenital Anomalies</option>
+                  <option value="CordAround">CordAround</option>
+
+                </select>
+              </td>
+              {%endif%}
+
+              {%if row[5]=='Dead'%}
+              <td>
+                <select name="cdreason" id="cdreason{{loop.index}}" onchange="conabnormal(this.value,{{loop.index}});">
+                  <option style="font-weight:bold;" value="{{row[9]}}">{{row[9]}}</option>
+                  <option value=" ">--Select--</option>
+                  <option value="BP(PIH)">BP(PIH)</option>
+                  <option value="IUD">IUD</option>
+                  <option value="Macerated">Macerated</option>
+                  <option value="Diabetes">Diabetes</option>
+                  <option value="Still Born">Still Born</option>
+                  <option value="APH">APH</option>
+                  <option value="Congenital Anomalies">Congenital Anomalies</option>
+                  <option value="Others">Others</option>
+                </select>
+              </td>
+              {%else%}
+              <td>
+                <select name="cdreason" id="cdreason{{loop.index}}" onchange="conabnormal(this.value,{{loop.index}});" style="display:none;">
+                  <option value=" ">--Select--</option>
+                  <option value="BP(PIH)">BP(PIH)</option>
+                  <option value="IUD">IUD</option>
+                  <option value="Macerated">Macerated</option>
+                  <option value="Diabetes">Diabetes</option>
+                  <option value="Still Born">Still Born</option>
+                  <option value="APH">APH</option>
+                  <option value="Congenital Anomalies">Congenital Anomalies</option>
+                  <option value="Others">Others</option>
+                </select>
+              </td>
+              {%endif%}
+
+
+
+              {%if row[6]=='Congenital Anomalies' or row[9]=='Congenital Anomalies' %}
+              <td>
+                <select name="cabnormal" id="cabnormal{{loop.index}}">
+                  <option style="font-weight:bold;" value="{{row[15]}}">{{row[15]}}</option>
+                  <option style="font-weight:bold;"
+                  <option value=" ">--Select--</option>
+                  <option value="Cleft Lip">Cleft Lip</option>
+                  <option value="Cleft Palate">Cleft Palate</option>
+                  <option value="Musculoskeletal">Musculoskeletal</option>
+                  <option value="Spina Bifida">Spina Bifida</option>
+                  <option value="Cardiovascular">Cardiovascular</option>
+                  <option value="Respiratory">Respiratory</option>
+                  <option value="Imperforate Anus">Imperforate Anus</option>
+                  <option value="Others">Others</option>
+                </select>
+              </td>
+              {%else%}
+              <td>
+                <select name="cabnormal" id="cabnormal{{loop.index}}" style="display:none;">
+                  <option style="font-weight:bold;"
+                  <option value=" ">--Select--</option>
+                  <option value="Cleft Lip">Cleft Lip</option>
+                  <option value="Cleft Palate">Cleft Palate</option>
+                  <option value="Musculoskeletal">Musculoskeletal</option>
+                  <option value="Spina Bifida">Spina Bifida</option>
+                  <option value="Cardiovascular">Cardiovascular</option>
+                  <option value="Respiratory">Respiratory</option>
+                  <option value="Imperforate Anus">Imperforate Anus</option>
+                  <option value="Others">Others</option>
+                </select>
+              </td>
+              {%endif%}
+
+              {%if row[5]=='Alive'%}
+                <td><input type="time" name="cdtime" id="cdtime{{loop.index}}"  style="display:none;"></td>
+                <td><input type="date" name="cddate" id="cddate{{loop.index}}" style="display:none;"></td>
+              {%else%}
+                <td><input type="time" name="cdtime" id="cdtime{{loop.index}}" value="{{row[7]}}" ></td>
+                <td><input type="date" name="cddate" value="{{row[8]}}" id="cddate{{loop.index}}" ></td>
+              {%endif%}
+              <td>
+                <select name="presenting_part">
+                    <option style="font-weight:bold;" value="{{row[10]}}">{{row[10]}}</option>
+                  <option value=" ">--Select--</option>
+                  <option value="Part Vertex">Part Vertex</option>
+                  <option value="Brow">Brow</option>
+                  <option value="Face">Face</option>
+                  <option value="Chin">Chin</option>
+                  <option value="Footling Breech">Footling Breech</option>
+                  <option value="Frank Breech">Frank Breech</option>
+                  <option value="Complete Breech">Complete Breech</option>
+                  <option value="Shoulder">Shoulder</option>
+                  <option value="Cord Presentation">Cord</option>
+                  <option value="Compound Presentation">Compound</option>
+                </select>
+              </td>
+              <td>
+                <select name="apgar_score1" style='width:44px'>
+                  <option style="font-weight:bold;" value="{{row[11]}}">{{row[11]}}</option>
+
+                  <option value=" ">--Select--</option>
+                  {% for i in range(11) %}
+          		    <option value="{{i}}">{{i}}</option>
+                  {%endfor%}
+
+                    </select>
+
+                <select name="apgar_score2" style='width:44px'>
+                  <option style="font-weight:bold;" value="{{row[12]}}">{{row[12]}}</option>
+
+                  <option value=" ">--Select--</option>
+                  {% for i in range(11) %}
+          		    <option value="{{i}}">{{i}}</option>
+                  {%endfor%}
+
+                    </select>
+
+                <select name="apgar_score3" style='width:44px'>
+                  <option style="font-weight:bold;" value="{{row[13]}}">{{row[13]}}</option>
+
+                  <option value=" ">--Select--</option>
+                  {% for i in range(11) %}
+          		    <option value="{{i}}">{{i}}</option>
+                  {%endfor%}
+
+                    </select>
+              </td>
+            </tr>
+              {% endfor %}
+          </table>
+        </div>
+      </div>
+<div class="row myrow">
+        <div class="col-5"></div>
+        <div class="col-3">
+          <input type="submit" value="Update" style="font-size:13px;font-family: Arial;letter-spacing: 0.008em;color:#5d5656;margin-top:20px;width:120px;height:40px;font-weight:bold">
+          <p style="display:inline;">{{ack1}}</p>
+        </div>
+      </div>
+
+    </form>
+    </div>
+
+  </div><!----------CONTENT END------------>
+</div><!------------COL12 END------------>
+
+
+{% endblock %}
